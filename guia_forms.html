@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia — Montagem do Google Forms PDI</title>
+<style>
+  :root {
+    --azul-900: #042C53;
+    --azul-800: #0C447C;
+    --azul-700: #185FA5;
+    --azul-600: #2272C3;
+    --azul-400: #378ADD;
+    --azul-100: #B5D4F4;
+    --azul-50:  #E6F1FB;
+    --cinza-900: #1a1a2e;
+    --cinza-700: #3d3d5c;
+    --cinza-400: #7c7c9a;
+    --cinza-200: #c8c8dc;
+    --cinza-100: #e8e8f0;
+    --cinza-50:  #f4f4f8;
+    --branco: #ffffff;
+    --verde: #1D9E75;
+    --verde-50: #E1F5EE;
+    --amber: #BA7517;
+    --amber-50: #FAEEDA;
+    --purple: #534AB7;
+    --purple-50: #EEEDFE;
+    --font: 'Segoe UI', system-ui, sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(4,44,83,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--cinza-50); color: var(--cinza-900); }
+
+  .header {
+    background: linear-gradient(135deg, var(--azul-900) 0%, var(--azul-800) 60%, var(--azul-700) 100%);
+    padding: 28px 40px;
+    color: white;
+  }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header p { font-size: 14px; color: var(--azul-100); margin-top: 6px; }
+
+  .progress-bar {
+    background: var(--branco);
+    border-bottom: 1.5px solid var(--cinza-100);
+    padding: 0 40px;
+    display: flex;
+    overflow-x: auto;
+  }
+  .progress-step {
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--cinza-400);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .progress-step.active { color: var(--azul-700); border-bottom-color: var(--azul-600); font-weight: 600; }
+  .progress-step.done { color: var(--verde); }
+  .step-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--cinza-100);
+    color: var(--cinza-400);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .progress-step.active .step-num { background: var(--azul-600); color: white; }
+  .progress-step.done .step-num { background: var(--verde); color: white; }
+
+  .main { padding: 32px 40px; max-width: 860px; margin: 0 auto; }
+
+  .step-view { display: none; }
+  .step-view.active { display: block; }
+
+  /* Seção de instrução */
+  .instrucao-card {
+    background: var(--branco);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .instrucao-header {
+    background: var(--azul-800);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .instrucao-header .icone {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .instrucao-header h2 { font-size: 16px; font-weight: 600; }
+  .instrucao-header p { font-size: 12px; color: var(--azul-100); margin-top: 2px; }
+  .instrucao-body { padding: 24px; }
+
+  /* Steps numerados */
+  .steps-lista { display: flex; flex-direction: column; gap: 16px; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num-grande {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--azul-600);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-texto { flex: 1; }
+  .step-texto strong { font-size: 14px; color: var(--cinza-900); display: block; margin-bottom: 4px; }
+  .step-texto span { font-size: 13px; color: var(--cinza-700); line-height: 1.5; }
+
+  /* Dica */
+  .dica {
+    background: var(--amber-50);
+    border-left: 4px solid var(--amber);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--cinza-700);
+    line-height: 1.5;
+  }
+  .dica strong { color: var(--amber); }
+
+  .nota-positiva {
+    background: var(--verde-50);
+    border-left: 4px solid var(--verde);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--cinza-700);
+  }
+  .nota-positiva strong { color: var(--verde); }
+
+  /* Tabela de perguntas */
+  .tabela-perguntas { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  .tabela-perguntas th {
+    background: var(--azul-50);
+    color: var(--azul-900);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid var(--azul-100);
+  }
+  .tabela-perguntas td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--cinza-100);
+    vertical-align: top;
+    line-height: 1.4;
+    color: var(--cinza-700);
+  }
+  .tabela-perguntas tr:last-child td { border-bottom: none; }
+  .tabela-perguntas tr:hover td { background: var(--cinza-50); }
+
+  .tipo-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tipo-escala    { background: var(--purple-50); color: var(--purple); }
+  .tipo-multipla  { background: var(--azul-50); color: var(--azul-800); }
+  .tipo-aberta    { background: var(--amber-50); color: var(--amber); }
+  .tipo-selecao   { background: var(--verde-50); color: var(--verde); }
+  .tipo-curto     { background: var(--cinza-100); color: var(--cinza-700); }
+
+  /* Seção header */
+  .secao-titulo {
+    background: var(--azul-900);
+    color: white;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    margin-top: 20px;
+  }
+  .secao-titulo:first-child { margin-top: 0; }
+
+  /* Config card */
+  .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .config-card {
+    background: var(--branco);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--azul-600);
+  }
+  .config-card h4 { font-size: 13px; font-weight: 700; color: var(--azul-800); margin-bottom: 10px; }
+  .config-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .config-card li { font-size: 13px; color: var(--cinza-700); display: flex; gap: 8px; align-items: flex-start; line-height: 1.4; }
+  .config-card li::before { content: '✓'; color: var(--verde); font-weight: 700; flex-shrink: 0; }
+
+  /* Botões nav */
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cinza-100);
+  }
+  .btn {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--azul-700); color: white; }
+  .btn-primary:hover { background: var(--azul-800); }
+  .btn-secondary { background: var(--cinza-100); color: var(--cinza-700); }
+  .btn-secondary:hover { background: var(--cinza-200); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  @media (max-width: 700px) {
+    .main { padding: 20px; }
+    .header { padding: 20px; }
+    .progress-bar { padding: 0 20px; }
+    .config-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 Guia de Montagem — Google Forms PDI</h1>
+  <p>Passo a passo completo para criar o formulário e vinculá-lo ao Google Sheets</p>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-step active" onclick="irPara(0)"><span class="step-num">1</span> Criar o Forms</div>
+  <div class="progress-step" onclick="irPara(1)"><span class="step-num">2</span> Configurações iniciais</div>
+  <div class="progress-step" onclick="irPara(2)"><span class="step-num">3</span> Texto de abertura</div>
+  <div class="progress-step" onclick="irPara(3)"><span class="step-num">4</span> Montar as seções</div>
+  <div class="progress-step" onclick="irPara(4)"><span class="step-num">5</span> Todas as perguntas</div>
+  <div class="progress-step" onclick="irPara(5)"><span class="step-num">6</span> Vincular ao Sheets</div>
+  <div class="progress-step" onclick="irPara(6)"><span class="step-num">7</span> Enviar para a equipe</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step-view active" id="step-0">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">🚀</div>
+        <div>
+          <h2>Passo 1 — Criar o formulário no Google Forms</h2>
+          <p>Acesse o Google Forms e inicie um novo formulário</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div class="steps-lista">
+          <div class="step-item">
+            <div class="step-num-grande">1</div>
+            <div class="step-texto">
+              <strong>Acesse forms.google.com</strong>
+              <span>Faça login com a conta Google que você usa no trabalho. Clique em <b>"Em branco"</b> (o ícone com o +) para criar um novo formulário.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">2</div>
+            <div class="step-texto">
+              <strong>Nomeie o formulário</strong>
+              <span>Clique em "Formulário sem título" no topo e digite:<br><b>Diagnóstico de Desenvolvimento Individual — Equipe Contábil e Fiscal</b></span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">3</div>
+            <div class="step-texto">
+              <strong>Adicione um subtítulo</strong>
+              <span>Clique em "Descrição do formulário" logo abaixo do título e adicione:<br><b>Grupo Paraná · Ciclo 2025–2026</b></span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">4</div>
+            <div class="step-texto">
+              <strong>Escolha um tema visual</strong>
+              <span>Clique no ícone de paleta 🎨 no topo. Em "Cor do cabeçalho", escolha um tom de azul escuro (o mais próximo de <b>#0C447C</b>). Isso mantém a identidade visual do Grupo Paraná.</span>
+            </div>
+          </div>
+        </div>
+        <div class="dica"><strong>Dica:</strong> Salve na pasta correta do Google Drive antes de começar. Crie uma pasta chamada "PDI Equipe 2025–2026" e mova o Forms para lá — o Sheets vinculado vai ficar na mesma pasta automaticamente.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" disabled>← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(1)">Próximo: Configurações →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-view" id="step-1">
+    <div class="config-grid">
+      <div class="config-card">
+        <h4>⚙️ Configurações que você deve ativar</h4>
+        <ul>
+          <li>Coletar endereços de e-mail — <em>desativado</em> (identificação só pela pergunta 1.1)</li>
+          <li>Permitir apenas 1 resposta por pessoa — <em>ativado</em></li>
+          <li>Mostrar barra de progresso — <em>ativado</em></li>
+          <li>Embaralhar ordem das perguntas — <em>desativado</em></li>
+          <li>Confirmar recebimento após envio — <em>ativado</em></li>
+        </ul>
+      </div>
+      <div class="config-card">
+        <h4>🔒 Configurações de acesso</h4>
+        <ul>
+          <li>Restringir a usuários do domínio — <em>opcional</em> (ativar se todas usam e-mail corporativo)</li>
+          <li>Editar resposta após envio — <em>desativado</em></li>
+          <li>Ver resumo das respostas — <em>desativado</em> (só você acessa)</li>
+          <li>Link de compartilhamento — enviar individualmente, não publicar em grupo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">⚙️</div>
+        <div>
+          <h2>Passo 2 — Configurações iniciais</h2>
+          <p>Clique no ícone de engrenagem ⚙️ no canto superior direito do Forms</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div class="steps-lista">
+          <div class="step-item">
+            <div class="step-num-grande">1</div>
+            <div class="step-texto">
+              <strong>Aba "Geral"</strong>
+              <span>Desative "Coletar endereços de e-mail". Ative "Limitar a 1 resposta".</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">2</div>
+            <div class="step-texto">
+              <strong>Aba "Apresentação"</strong>
+              <span>Ative "Mostrar barra de progresso". Em mensagem de confirmação, escreva:<br><em>"Obrigada por dedicar esse tempo! Em breve entraremos em contato para agendar nossa conversa 1:1."</em></span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">3</div>
+            <div class="step-texto">
+              <strong>Aba "Questionários"</strong>
+              <span>Deixe desativado — este não é um quiz com pontuação automática.</span>
+            </div>
+          </div>
+        </div>
+        <div class="nota-positiva"><strong>Importante:</strong> A barra de progresso reduz a taxa de abandono em formulários longos. Como o questionário tem 40 perguntas, isso faz diferença.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(0)">← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(2)">Próximo: Texto de abertura →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-view" id="step-2">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">✍️</div>
+        <div>
+          <h2>Passo 3 — Texto de abertura</h2>
+          <p>Cole este texto na descrição do formulário (campo logo abaixo do título)</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div style="background:var(--cinza-50);border:1.5px solid var(--cinza-200);border-radius:var(--radius-sm);padding:20px;font-size:14px;line-height:1.7;color:var(--cinza-700);margin-bottom:16px;">
+          <p><strong>Olá! 💙</strong></p>
+          <br>
+          <p>Este formulário não é uma avaliação de desempenho. Ele existe para que eu possa conhecer melhor cada uma de vocês: o que gostam de fazer, o que desejam para a carreira, o que as motiva e onde eu posso ajudar no crescimento de cada uma.</p>
+          <br>
+          <p>A partir das respostas, vamos construir juntas um Plano de Desenvolvimento Individual (PDI) de 6 meses, feito sob medida para você.</p>
+          <br>
+          <p>Não existem respostas certas ou erradas. Quanto mais sincera você for, mais o plano vai fazer sentido para a sua realidade. Suas respostas serão tratadas com confidencialidade e usadas exclusivamente para o seu desenvolvimento.</p>
+          <br>
+          <p><strong>Tempo estimado: 25 a 35 minutos.</strong> Reserve um momento tranquilo para responder com calma. ☕</p>
+        </div>
+        <div class="dica"><strong>Como inserir:</strong> No Google Forms, clique na área de descrição logo abaixo do título principal do formulário (antes da primeira pergunta) e cole o texto acima.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(1)">← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(3)">Próximo: Criar seções →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-view" id="step-3">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">📂</div>
+        <div>
+          <h2>Passo 4 — Criar as 8 seções</h2>
+          <p>No Forms, seções organizam o questionário em páginas separadas</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div class="steps-lista">
+          <div class="step-item">
+            <div class="step-num-grande">1</div>
+            <div class="step-texto">
+              <strong>Como adicionar uma seção</strong>
+              <span>Clique no ícone <b>"="</b> (adicionar seção) na barra lateral direita de ferramentas do Forms. Uma seção cria uma nova "página" no formulário.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">2</div>
+            <div class="step-texto">
+              <strong>Crie as 8 seções nesta ordem:</strong>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+          ${[
+            ['Seção 1', 'Sobre você', 'Quero te conhecer além das rotinas e prazos. Conte um pouco sobre quem você é.'],
+            ['Seção 2', 'Motivadores profissionais', 'Cada pessoa se motiva de um jeito. Quero entender o que faz os seus olhos brilharem.'],
+            ['Seção 3', 'Conhecimentos e habilidades', 'Aqui não existe nota boa ou ruim — é só um mapa para eu saber onde investir em treinamento e em quê você já pode brilhar mais.'],
+            ['Seção 4', 'Comunicação e trabalho em equipe', 'Como você se conecta com as pessoas diz muito sobre onde você pode ir.'],
+            ['Seção 5', 'Desenvolvimento profissional', 'Agora vamos falar do que eu mais quero saber: como posso te ajudar a crescer.'],
+            ['Seção 6', 'Liderança', 'Liderança não é só cargo — é influência, exemplo e cuidado. Quero entender como você se vê nesse tema.'],
+            ['Seção 7', 'Objetivos de carreira', 'Sonhar faz parte do plano. Aqui, quanto mais ambiciosa a resposta, melhor.'],
+            ['Seção 8', 'Reflexão final', 'Últimas perguntas — e talvez as mais importantes. Este é o seu espaço.'],
+          ].map(([num, titulo, desc]) => `
+            <div style="display:grid;grid-template-columns:80px 1fr;gap:12px;align-items:start;padding:12px 14px;background:var(--branco);border-radius:var(--radius-sm);border:1px solid var(--cinza-100);">
+              <span style="font-size:11px;font-weight:700;color:var(--azul-700);background:var(--azul-50);padding:3px 8px;border-radius:10px;text-align:center;">${num}</span>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--cinza-900);margin-bottom:2px;">${titulo}</div>
+                <div style="font-size:12px;color:var(--cinza-400);line-height:1.4;">${desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="dica" style="margin-top:16px;"><strong>Dica:</strong> Ao criar cada seção, coloque o título da seção em negrito e a descrição em texto normal logo abaixo. O Forms tem campos separados para isso.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(2)">← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(4)">Próximo: Todas as perguntas →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5 — PERGUNTAS -->
+  <div class="step-view" id="step-4">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">❓</div>
+        <div>
+          <h2>Passo 5 — Inserir todas as perguntas</h2>
+          <p>40 perguntas organizadas por seção com tipo e configuração exata</p>
+        </div>
+      </div>
+      <div class="instrucao-body" style="padding:0;">
+
+        <div style="padding:12px 24px;background:var(--cinza-50);border-bottom:1px solid var(--cinza-100);display:flex;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:12px;"><span class="tipo-badge tipo-escala">Escala 1–5</span> Grade linear</span>
+          <span style="font-size:12px;"><span class="tipo-badge tipo-multipla">Múltipla escolha</span> Escolha única</span>
+          <span style="font-size:12px;"><span class="tipo-badge tipo-selecao">Caixas de seleção</span> Múltiplas escolhas</span>
+          <span style="font-size:12px;"><span class="tipo-badge tipo-aberta">Parágrafo</span> Texto longo</span>
+          <span style="font-size:12px;"><span class="tipo-badge tipo-curto">Texto curto</span> Resposta breve</span>
+        </div>
+
+        <table class="tabela-perguntas">
+          <thead><tr><th>#</th><th>Pergunta</th><th>Tipo no Forms</th><th>Obrigatória?</th></tr></thead>
+          <tbody>
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 1 — Sobre você</div></td></tr>
+            <tr><td>1.1</td><td>Qual é o seu nome?</td><td><span class="tipo-badge tipo-curto">Texto curto</span></td><td>Sim</td></tr>
+            <tr><td>1.2</td><td>Se você pudesse descrever o seu trabalho ideal em uma frase, qual seria?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>1.3</td><td>O que te trouxe para a área contábil/fiscal?<br><small style="color:var(--cinza-400)">Opções: Escolha planejada / Comecei por oportunidade / Comecei por necessidade / Quero migrar / Outro</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+            <tr><td>1.4</td><td>Fora do trabalho, quais atividades te dão mais energia?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>1.5</td><td>Qual conquista (pessoal ou profissional) te deixou mais orgulhosa até hoje?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>1.6</td><td>Como você prefere começar o seu dia de trabalho?<br><small style="color:var(--cinza-400)">Opções: Com lista clara / Resolvendo o difícil primeiro / Conversando com a equipe / Com flexibilidade</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 2 — Motivadores profissionais</div></td></tr>
+            <tr><td>2.1</td><td>O que mais te motiva no trabalho? <b>Escolha até 3.</b><br><small style="color:var(--cinza-400)">Aprender coisas novas / Reconhecimento / Estabilidade / Crescer de cargo / Resolver problemas difíceis / Ajudar e ensinar / Autonomia / Impacto no resultado / Bom relacionamento</small></td><td><span class="tipo-badge tipo-selecao">Caixas de seleção</span></td><td>Sim</td></tr>
+            <tr><td>2.2</td><td>Pense em uma semana em que você terminou se sentindo realizada. O que aconteceu nessa semana?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>2.3</td><td>E o contrário: o que mais te desanima ou drena sua energia no dia a dia?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>2.4</td><td>De 1 a 5, quanto você sente que seu trabalho atual usa o melhor de você?<br><small style="color:var(--cinza-400)">1 = quase nada · 5 = totalmente</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>2.5</td><td>O que te faria dizer daqui a 1 ano: "esse foi o melhor ano da minha carreira"?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 3 — Conhecimentos e habilidades</div></td></tr>
+            <tr><td>3.1</td><td>Como você avalia seu domínio atual em cada área?<br><small style="color:var(--cinza-400)">1 = estou começando · 5 = domino e consigo ensinar<br>Linhas: Escrituração / Conciliações / Fechamento contábil / IRPJ-CSLL / ICMS-PIS-COFINS-ISS / Obrigações acessórias / Reforma Tributária / Excel / Sistemas ERP / Legislação e pesquisa</small></td><td><span class="tipo-badge tipo-escala">Grade de escala</span></td><td>Sim</td></tr>
+            <tr><td>3.2</td><td>Qual atividade técnica você faz com mais facilidade — aquela que "flui" para você?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>3.3</td><td>Qual atividade você evita ou adia quando possível?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>3.4</td><td>Quando recebe uma tarefa totalmente nova, qual é sua reação mais comum?<br><small style="color:var(--cinza-400)">Pesquiso sozinha / Peço orientação primeiro / Tento e vou ajustando / Prefiro fazer com alguém da 1ª vez</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+            <tr><td>3.5</td><td>Você nota que o saldo de uma conta está estranho, mas o sistema não aponta erro. O que você faz?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>3.6</td><td>Você tem algum conhecimento ou habilidade que quase ninguém no trabalho sabe que você tem?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Não</td></tr>
+            <tr><td>3.7</td><td>De 1 a 5, quanto você se sente confortável aprendendo ferramentas novas (sistemas, IA, automações)?<br><small style="color:var(--cinza-400)">1 = pouco confortável · 5 = muito confortável</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 4 — Comunicação e trabalho em equipe</div></td></tr>
+            <tr><td>4.1</td><td>Como você prefere se comunicar no trabalho?<br><small style="color:var(--cinza-400)">Por escrito / Pessoalmente / Depende do assunto</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+            <tr><td>4.2</td><td>De 1 a 5, quanto você se sente à vontade para expor sua opinião em reuniões, mesmo quando é diferente da maioria?<br><small style="color:var(--cinza-400)">1 = muito desconfortável · 5 = totalmente à vontade</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>4.3</td><td>Quando há conflito na equipe, qual costuma ser o seu papel?<br><small style="color:var(--cinza-400)">Mediadora / Defendo meu ponto / Me afasto / Cedo para manter harmonia / Observo e só me posiciono se necessário</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+            <tr><td>4.4</td><td>Você já explicou algum assunto técnico para um colega ou cliente? Como foi essa experiência?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>4.5</td><td>De 1 a 5, quanto você gosta de trabalhar em atividades em grupo comparado às individuais?<br><small style="color:var(--cinza-400)">1 = prefiro muito o individual · 5 = prefiro muito o grupo</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>4.6</td><td>Pense em alguém que você considera um ótimo exemplo de comunicação no trabalho. O que essa pessoa faz que você admira?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 5 — Desenvolvimento profissional</div></td></tr>
+            <tr><td>5.1</td><td>Quais temas você tem mais interesse em aprender nos próximos meses? <b>Escolha até 4.</b><br><small style="color:var(--cinza-400)">Reforma Tributária / Fechamento contábil / Tributos / Análise de dados / Automações e IA / Comunicação e oratória / Gestão de pessoas / Gestão de projetos / Atendimento a clientes internos / Outro</small></td><td><span class="tipo-badge tipo-selecao">Caixas de seleção</span></td><td>Sim</td></tr>
+            <tr><td>5.2</td><td>Como você aprende melhor?<br><small style="color:var(--cinza-400)">Vendo alguém fazer / Lendo materiais / Vídeos e cursos online / Fazendo na prática / Discutindo com outras pessoas</small></td><td><span class="tipo-badge tipo-selecao">Caixas de seleção</span></td><td>Sim</td></tr>
+            <tr><td>5.3</td><td>De 1 a 5, quanto tempo e energia você consegue dedicar hoje ao seu desenvolvimento, fora das demandas do dia a dia?<br><small style="color:var(--cinza-400)">1 = quase nenhum · 5 = bastante</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>5.4</td><td>Existe algo que você já tentou aprender e não conseguiu avançar? O que te travou?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Não</td></tr>
+            <tr><td>5.5</td><td>Se a empresa pudesse investir em UM curso ou experiência de desenvolvimento para você agora, qual seria?</td><td><span class="tipo-badge tipo-curto">Texto curto</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 6 — Liderança</div></td></tr>
+            <tr><td>6.1</td><td>Você já se imaginou liderando uma equipe ou sendo referência de uma área?<br><small style="color:var(--cinza-400)">Sim, objetivo claro / Sim, mas tenho dúvidas / Nunca pensei, mas não descarto / Prefiro crescer como especialista / Não tenho interesse</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+            <tr><td>6.2</td><td>Pense numa situação em que você ajudou a equipe a resolver um problema. Conte como foi.</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>6.3</td><td>Na sua opinião, o que NÃO pode faltar em uma boa líder?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>6.4</td><td>De 1 a 5, quanto você se sente confortável em assumir a frente quando algo precisa ser decidido e não há ninguém responsável por perto?<br><small style="color:var(--cinza-400)">1 = muito desconfortável · 5 = muito confortável</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>6.5</td><td>Se amanhã você precisasse treinar uma pessoa nova na sua função, como se sentiria?<br><small style="color:var(--cinza-400)">Animada — adoraria ensinar / Tranquila — sei que daria conta / Um pouco insegura, mas toparia / Preferiria que outra pessoa fizesse</small></td><td><span class="tipo-badge tipo-multipla">Múltipla escolha</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 7 — Objetivos de carreira</div></td></tr>
+            <tr><td>7.1</td><td>Onde você se vê profissionalmente daqui a 2 anos? E daqui a 5?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>7.2</td><td>O que você considera mais importante conquistar na carreira? <b>Escolha os 2 principais.</b><br><small style="color:var(--cinza-400)">Crescer de cargo / Ser referência especialista / Equilíbrio trabalho-vida / Aumentar remuneração / Liderar uma equipe / Empreender / Segurança e estabilidade</small></td><td><span class="tipo-badge tipo-selecao">Caixas de seleção</span></td><td>Sim</td></tr>
+            <tr><td>7.3</td><td>Existe alguma função ou área (dentro ou fora da contabilidade) que desperta sua curiosidade?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Não</td></tr>
+            <tr><td>7.4</td><td>De 1 a 5, quanto você sente que existe espaço para você crescer aqui no grupo?<br><small style="color:var(--cinza-400)">1 = não vejo espaço · 5 = vejo muito espaço</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+            <tr><td>7.5</td><td>O que precisaria acontecer nos próximos 6 meses para você sentir que está evoluindo de verdade?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+
+            <tr><td colspan="4" style="padding:0;"><div class="secao-titulo">Seção 8 — Reflexão final</div></td></tr>
+            <tr><td>8.1</td><td>Qual é hoje o seu maior desafio ou insegurança no trabalho?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>8.2</td><td>O que você espera de mim como líder neste processo de desenvolvimento?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Sim</td></tr>
+            <tr><td>8.3</td><td>Existe algo que você gostaria de me contar e que nenhuma pergunta abordou?</td><td><span class="tipo-badge tipo-aberta">Parágrafo</span></td><td>Não</td></tr>
+            <tr><td>8.4</td><td>De 1 a 5, como você se sentiu respondendo este formulário?<br><small style="color:var(--cinza-400)">1 = desconfortável · 5 = muito bem, me senti ouvida</small></td><td><span class="tipo-badge tipo-escala">Escala 1–5</span></td><td>Sim</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(3)">← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(5)">Próximo: Vincular ao Sheets →</button>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-view" id="step-5">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">🔗</div>
+        <div>
+          <h2>Passo 6 — Vincular o Forms ao Google Sheets</h2>
+          <p>Este é o elo central do projeto — cada resposta vira automaticamente uma linha na planilha</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div class="steps-lista">
+          <div class="step-item">
+            <div class="step-num-grande">1</div>
+            <div class="step-texto">
+              <strong>Acesse a aba "Respostas" no Forms</strong>
+              <span>No topo do seu formulário, clique na aba <b>"Respostas"</b> (ao lado de "Perguntas").</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">2</div>
+            <div class="step-texto">
+              <strong>Clique no ícone do Google Sheets</strong>
+              <span>Você verá um ícone verde de planilha no canto superior direito da aba Respostas. Clique nele.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">3</div>
+            <div class="step-texto">
+              <strong>Escolha "Criar uma nova planilha"</strong>
+              <span>Na janela que abrir, selecione <b>"Criar uma nova planilha"</b> e nomeie como:<br><b>PDI Equipe 2025–2026 — Respostas</b></span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">4</div>
+            <div class="step-texto">
+              <strong>Pronto! O vínculo está feito</strong>
+              <span>A planilha abrirá automaticamente com uma aba chamada <b>"Respostas ao formulário 1"</b>. Cada coluna corresponde a uma pergunta. A partir de agora, toda resposta enviada aparece instantaneamente como uma nova linha.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">5</div>
+            <div class="step-texto">
+              <strong>Salve o ID da planilha</strong>
+              <span>Copie o URL da planilha. O ID é o trecho entre <b>/d/</b> e <b>/edit</b>.<br>Exemplo: <code style="background:var(--cinza-100);padding:2px 6px;border-radius:4px;font-size:12px;">docs.google.com/spreadsheets/d/<b>1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms</b>/edit</code><br>Você vai precisar deste ID na Fase 3 (Apps Script).</span>
+            </div>
+          </div>
+        </div>
+        <div class="nota-positiva"><strong>O que acontece a seguir:</strong> Na próxima fase vamos adicionar abas de cálculo nessa mesma planilha — Perfis, PDI e Export. O Apps Script que construiremos lerá a aba de Respostas e publicará os dados para o painel HTML atualizar automaticamente.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(4)">← Anterior</button>
+      <button class="btn btn-primary" onclick="irPara(6)">Próximo: Enviar para a equipe →</button>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step-view" id="step-6">
+    <div class="instrucao-card">
+      <div class="instrucao-header">
+        <div class="icone">📨</div>
+        <div>
+          <h2>Passo 7 — Enviar o formulário para a equipe</h2>
+          <p>Como apresentar e distribuir o questionário para gerar confiança e sinceridade</p>
+        </div>
+      </div>
+      <div class="instrucao-body">
+        <div class="steps-lista">
+          <div class="step-item">
+            <div class="step-num-grande">1</div>
+            <div class="step-texto">
+              <strong>Apresente antes de enviar o link</strong>
+              <span>Reúna a equipe (presencial ou online) por 10 minutos para apresentar o formulário verbalmente antes de mandar o link. Explique o propósito, que não é avaliação, e que as respostas constroem o PDI individual de cada uma. Isso aumenta muito a sinceridade das respostas.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">2</div>
+            <div class="step-texto">
+              <strong>Obtenha o link de compartilhamento</strong>
+              <span>No Forms, clique em <b>"Enviar"</b> (botão roxo no canto superior direito). Na aba com ícone de link 🔗, clique em <b>"Copiar"</b>. Você pode encurtar o link marcando a opção disponível.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">3</div>
+            <div class="step-texto">
+              <strong>Envie individualmente</strong>
+              <span>Envie o link por WhatsApp ou e-mail individualmente para cada colaboradora — não em grupo. Isso reforça que é um processo individual e confidencial.</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">4</div>
+            <div class="step-texto">
+              <strong>Prazo sugerido: 5 dias úteis</strong>
+              <span>Oriente a reservar 30–35 minutos sem interrupções para responder. Evite prazos muito curtos (pressão) ou muito longos (procrastinação).</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num-grande">5</div>
+            <div class="step-texto">
+              <strong>Atenção especial à Laisa</strong>
+              <span>Como ela está em integração, o questionário completo pode ser aplicado somente após os primeiros 30 dias. Nos primeiros 30 dias, aplique uma versão simplificada com foco em ambientação.</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding:20px;background:var(--azul-50);border-radius:var(--radius-sm);border:1.5px solid var(--azul-100);">
+          <div style="font-size:12px;font-weight:700;color:var(--azul-800);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Mensagem sugerida para envio individual</div>
+          <div style="font-size:13px;color:var(--cinza-700);line-height:1.7;">
+            <em>"Oi [nome]! Como conversamos, estou estruturando o Plano de Desenvolvimento Individual para cada uma da equipe. Aqui está o link do questionário que vai nos ajudar a construir esse plano juntas. Leva em torno de 30 minutos — reserve um momento tranquilo. Não existe resposta certa ou errada, quanto mais sincera você for, mais o plano vai fazer sentido para você. Prazo: [data]. Qualquer dúvida, me chama! 💙"</em>
+          </div>
+        </div>
+        <div class="nota-positiva" style="margin-top:16px;"><strong>Próximo passo após receber as respostas:</strong> Fases 2 e 3 do projeto — estruturar o Google Sheets com fórmulas de cálculo de perfil e o Apps Script que vai alimentar o painel HTML automaticamente.</div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-secondary" onclick="irPara(5)">← Anterior</button>
+      <button class="btn btn-primary" disabled style="background:var(--verde)">✓ Guia completo!</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let stepAtual = 0;
+const totalSteps = 7;
+
+function irPara(n) {
+  document.getElementById('step-' + stepAtual).classList.remove('active');
+  document.querySelectorAll('.progress-step')[stepAtual].classList.remove('active');
+  if (n > stepAtual) document.querySelectorAll('.progress-step')[stepAtual].classList.add('done');
+
+  stepAtual = n;
+  document.getElementById('step-' + stepAtual).classList.add('active');
+  document.querySelectorAll('.progress-step')[stepAtual].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
