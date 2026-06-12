@@ -1700,15 +1700,15 @@ const discEquipe = [
   },
   {
     colabId: 4,
-    estilo: null,
-    estiloLabel: "Perfil DISC não disponível",
-    estiloDesc: "O perfil DISC de Karen não está disponível no sistema. Os dados desta aba foram gerados com base nos demais instrumentos.",
-    natural:    null,
-    adaptativo: null,
-    valores:    null,
-    tracos: [],
-    comunicar: "Perfil DISC não disponível. Consulte as observações comportamentais da aba de Equipe.",
-    motivadores: "—"
+    estilo: "SI",
+    estiloLabel: "Estável-Influente",
+    estiloDesc: "Karen é uma profissional de alto S — estável, paciente e confiável. Preza por consistência, harmonia no ambiente e execução precisa. Sob pressão, suprime a expressividade natural, podendo parecer mais contida. Motivada por resultados concretos e reconhecimento de competência.",
+    natural:    { D: 42, I: 53, S: 88, C: 53 },
+    adaptativo: { D: 35, I: 53, S: 53, C: 53 },
+    valores:    { EST: 46, ECO: 83, IND: 28, POL: 48, ALT: 50, REG: 56, TEO: 51 },
+    tracos: ["Paciente", "Consistente", "Confiável", "Precisa", "Estabilizadora", "Orientada a resultados"],
+    comunicar: "Quebre o gelo com comentário pessoal antes de ir ao ponto. Apresente ideias de forma não-ameaçadora. Liste prós e contras. Deixe claro quais são as responsabilidades de cada um. Evite tom dominador ou apressado. Valorize a competência e o esforço demonstrado.",
+    motivadores: "Econômico (83), Regulador (56), Altruísta (50)"
   },
   {
     colabId: 5,
@@ -1951,4 +1951,805 @@ function renderDiscNoPerfil(id) {
           <span style="font-size:12px;font-weight:700;color:${high?'#7C3AED':'var(--cinza-400)'};">${score}</span>
         </div>
         <div style="height:6px;background:var(--cinza-100);border-radius:3px;">
-          <div style="height:100%;width:${score}%;background:${high?'#7C3AED':'#9ca3af'};opacity:${high?'0.9':'0.4'};borde
+          <div style="height:100%;width:${score}%;background:${high?'#7C3AED':'#9ca3af'};opacity:${high?'0.9':'0.4'};border-radius:3px;transition:width .5s;"></div>
+        </div>
+      </div>`;
+  }).join('') : '<p style="font-size:12px;color:var(--cinza-400)">Values Index não disponível.</p>';
+
+  const tracos = (disc.tracos || []).map(t => `<span class="traco-tag">${t}</span>`).join('');
+  const savedMark = localStorage.getItem('disc_' + id) ? ' <span style="font-size:11px;font-weight:500;background:var(--verde-50);color:var(--verde);padding:2px 7px;border-radius:10px;margin-left:6px;">✓ Atualizado manualmente</span>' : '';
+
+  section.innerHTML = `
+    <div class="ind-disc-section">
+      <h3>🧠 Perfil DISC${savedMark}</h3>
+      <div style="margin-bottom:16px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--azul-50);padding:6px 14px;border-radius:20px;margin-bottom:8px;">
+          <span style="font-size:14px;font-weight:700;color:var(--azul-900)">${disc.estilo} · ${disc.estiloLabel}</span>
+        </div>
+        <p style="font-size:13px;color:var(--cinza-700);line-height:1.5;">${disc.estiloDesc}</p>
+        ${tracos ? `<div class="disc-tracos" style="margin-top:8px;">${tracos}</div>` : ''}
+      </div>
+      <div class="disc-ind-grid">
+        <div>
+          <div class="disc-ind-col-title">D · I · S · C — Natural &amp; Adaptativo</div>
+          ${discBars}
+          <div class="disc-bar-legend" style="margin-top:4px;">
+            <span><span class="legend-dot" style="background:#555;opacity:1;"></span>Natural</span>
+            <span><span class="legend-dot" style="background:#555;opacity:0.45;"></span>Adaptativo</span>
+          </div>
+        </div>
+        <div>
+          <div class="disc-ind-col-title">Values Index — Motivadores</div>
+          ${valBars}
+        </div>
+      </div>
+      ${disc.comunicar ? `
+      <div style="margin-top:18px;padding:14px 18px;background:var(--azul-50);border-left:3px solid var(--azul-600);border-radius:var(--radius-sm);">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--azul-700);margin-bottom:5px;">💬 Como comunicar com esta colaboradora</div>
+        <p style="font-size:13px;color:var(--azul-900);line-height:1.6;">${disc.comunicar}</p>
+      </div>` : ''}
+    </div>`;
+}
+
+// ── MODAL DISC ──
+let _modalDiscId = null;
+
+function abrirModalDisc(id) {
+  _modalDiscId = id;
+  const c = colaboradoras[id];
+  document.getElementById('modal-disc-title').textContent = `Atualizar DISC — ${c.nome}`;
+  document.getElementById('modal-disc-subtitle').textContent = `${c.cargo}`;
+
+  const disc = getDiscData(id);
+  if (disc && disc.estilo) {
+    document.getElementById('m-estilo').value = disc.estilo || '';
+    document.getElementById('m-estilo-label').value = disc.estiloLabel || '';
+    document.getElementById('m-desc').value = disc.estiloDesc || '';
+    document.getElementById('m-tracos').value = (disc.tracos || []).join(', ');
+    document.getElementById('m-comunicar').value = disc.comunicar || '';
+    document.getElementById('m-motivadores').value = disc.motivadores || '';
+    if (disc.natural) {
+      document.getElementById('m-dn-d').value = disc.natural.D || '';
+      document.getElementById('m-dn-i').value = disc.natural.I || '';
+      document.getElementById('m-dn-s').value = disc.natural.S || '';
+      document.getElementById('m-dn-c').value = disc.natural.C || '';
+    }
+    if (disc.adaptativo) {
+      document.getElementById('m-da-d').value = disc.adaptativo.D || '';
+      document.getElementById('m-da-i').value = disc.adaptativo.I || '';
+      document.getElementById('m-da-s').value = disc.adaptativo.S || '';
+      document.getElementById('m-da-c').value = disc.adaptativo.C || '';
+    }
+    if (disc.valores) {
+      document.getElementById('m-v-est').value = disc.valores.EST || '';
+      document.getElementById('m-v-eco').value = disc.valores.ECO || '';
+      document.getElementById('m-v-ind').value = disc.valores.IND || '';
+      document.getElementById('m-v-pol').value = disc.valores.POL || '';
+      document.getElementById('m-v-alt').value = disc.valores.ALT || '';
+      document.getElementById('m-v-reg').value = disc.valores.REG || '';
+      document.getElementById('m-v-teo').value = disc.valores.TEO || '';
+    }
+  }
+  document.getElementById('modal-disc').classList.add('open');
+}
+
+function fecharModalDisc() {
+  document.getElementById('modal-disc').classList.remove('open');
+  _modalDiscId = null;
+}
+
+function salvarDiscModal() {
+  if (_modalDiscId === null) return;
+  const id = _modalDiscId;
+
+  const estilo = document.getElementById('m-estilo').value.trim().toUpperCase();
+  if (!estilo) { alert('Informe o Estilo DISC (ex: DC, IS…)'); return; }
+
+  const data = {
+    colabId: id,
+    estilo,
+    estiloLabel: document.getElementById('m-estilo-label').value.trim(),
+    estiloDesc: document.getElementById('m-desc').value.trim(),
+    tracos: document.getElementById('m-tracos').value.split(',').map(t => t.trim()).filter(Boolean),
+    comunicar: document.getElementById('m-comunicar').value.trim(),
+    motivadores: document.getElementById('m-motivadores').value.trim(),
+    natural: {
+      D: parseInt(document.getElementById('m-dn-d').value) || 0,
+      I: parseInt(document.getElementById('m-dn-i').value) || 0,
+      S: parseInt(document.getElementById('m-dn-s').value) || 0,
+      C: parseInt(document.getElementById('m-dn-c').value) || 0,
+    },
+    adaptativo: {
+      D: parseInt(document.getElementById('m-da-d').value) || 0,
+      I: parseInt(document.getElementById('m-da-i').value) || 0,
+      S: parseInt(document.getElementById('m-da-s').value) || 0,
+      C: parseInt(document.getElementById('m-da-c').value) || 0,
+    },
+    valores: {
+      EST: parseInt(document.getElementById('m-v-est').value) || 0,
+      ECO: parseInt(document.getElementById('m-v-eco').value) || 0,
+      IND: parseInt(document.getElementById('m-v-ind').value) || 0,
+      POL: parseInt(document.getElementById('m-v-pol').value) || 0,
+      ALT: parseInt(document.getElementById('m-v-alt').value) || 0,
+      REG: parseInt(document.getElementById('m-v-reg').value) || 0,
+      TEO: parseInt(document.getElementById('m-v-teo').value) || 0,
+    }
+  };
+
+  localStorage.setItem('disc_' + id, JSON.stringify(data));
+  fecharModalDisc();
+  renderDiscNoPerfil(id);
+  renderEquipe();
+}
+
+// ── DESLIGAMENTO ──
+function registrarDesligamento(id) {
+  const c = colaboradoras[id];
+  if (!confirm(`Registrar desligamento de ${c.nome}?\n\nEsta ação marca a colaboradora como desligada no painel. Os dados ficam preservados e podem ser reativados.`)) return;
+  localStorage.setItem('desligada_' + id, '1');
+  renderEquipe();
+  abrirIndividual(id);
+}
+
+function reativarColaboradora(id) {
+  const c = colaboradoras[id];
+  if (!confirm(`Reativar ${c.nome} no painel?`)) return;
+  localStorage.removeItem('desligada_' + id);
+  renderEquipe();
+  abrirIndividual(id);
+}
+
+let radarDiscEquipeChart = null;
+function initRadarDiscEquipe() {
+  if (radarDiscEquipeChart) radarDiscEquipeChart.destroy();
+  const dims = ['D','I','S','C'];
+  const dimLabels = ['Dominante','Influente','Estabilidade','Conformidade'];
+  const datasets = colaboradoras.map(c => {
+    const disc = getDiscData(c.id);
+    if (!disc || !disc.natural) return null;
+    return {
+      label: c.nome,
+      data: dims.map(d => disc.natural[d]),
+      backgroundColor: c.cor + '18',
+      borderColor: c.cor,
+      borderWidth: 1.5,
+      pointBackgroundColor: c.cor,
+      pointRadius: 3
+    };
+  }).filter(Boolean);
+  if (!datasets.length) {
+    const canvas = document.getElementById('radarDiscEquipe');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = '#9aa0b2';
+    ctx.textAlign = 'center';
+    ctx.fillText('Nenhum dado DISC disponível ainda.', canvas.width/2, canvas.height/2);
+    return;
+  }
+  radarDiscEquipeChart = new Chart(document.getElementById('radarDiscEquipe'), {
+    type: 'radar',
+    data: { labels: dimLabels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 10 } }, pointLabels: { font: { size: 12, weight: '600' } } } },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 16, usePointStyle: true } } }
+    }
+  });
+}
+
+function initRadarEquipe() {
+  if (radarEquipeChart) radarEquipeChart.destroy();
+  radarEquipeChart = new Chart(document.getElementById('radarEquipe'), {
+    type: 'radar',
+    data: {
+      labels: labelsRadar,
+      datasets: colaboradoras.map(c => ({
+        label: c.nome, data: c.competencias,
+        backgroundColor: c.cor + '18', borderColor: c.cor, borderWidth: 1.5,
+        pointBackgroundColor: c.cor, pointRadius: 3
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, font: { size: 10 } }, pointLabels: { font: { size: 11 } } } },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 16, usePointStyle: true } } }
+    }
+  });
+}
+
+// ── DISC TAB ──
+let discSelectedId = -1; // -1 = nenhum selecionado (mostra só comparativo)
+
+const discDimColors = {
+  D: { bg: '#D93025', light: '#FDE8E6' },
+  I: { bg: '#E37400', light: '#FEF3E2' },
+  S: { bg: '#1E8E3E', light: '#E6F4EA' },
+  C: { bg: '#1967D2', light: '#E8F0FE' }
+};
+
+function renderDiscPills() {
+  const container = document.getElementById('disc-pills');
+  const pessoas = [discLider, ...discEquipe.map((d,i) => ({
+    ...d, nome: colaboradoras[d.colabId].nome, iniciais: colaboradoras[d.colabId].iniciais, cor: colaboradoras[d.colabId].cor, corLight: colaboradoras[d.colabId].corLight, _idx: i
+  }))];
+
+  container.innerHTML = pessoas.map((p, idx) => {
+    const isLider = idx === 0;
+    const id = isLider ? 'lider' : p._idx;
+    return `<button class="disc-pill ${discSelectedId === id ? 'active' : ''}"
+      onclick="selectDiscPerson('${id}')"
+      style="${discSelectedId === id ? '' : `color:${p.cor};border-color:${p.cor}30`}">
+      <span class="pill-avatar" style="background:${p.corLight};color:${p.cor}">${p.iniciais}</span>
+      ${p.nome}${isLider ? ' (Líder)' : ''}${p.estilo ? ` · ${p.estilo}` : ''}
+    </button>`;
+  }).join('');
+}
+
+function selectDiscPerson(id) {
+  discSelectedId = id;
+  renderDiscPills();
+  renderDiscIndividual(id);
+}
+
+function renderDiscIndividual(id) {
+  const section = document.getElementById('disc-individual-section');
+  let pessoa, colab;
+  if (id === 'lider') {
+    pessoa = discLider;
+    colab = { nome: 'Ananda', cargo: discLider.cargo, iniciais: discLider.iniciais, cor: discLider.cor, corLight: discLider.corLight };
+  } else {
+    const idx = parseInt(id);
+    const d = discEquipe[idx];
+    const c = colaboradoras[d.colabId];
+    pessoa = d;
+    colab = c;
+  }
+
+  if (!pessoa.estilo) {
+    section.innerHTML = `
+      <div class="disc-no-data">
+        <div class="icon">📋</div>
+        <p><strong>${colab.nome}</strong> — Perfil DISC não disponível no sistema.</p>
+        <p style="margin-top:6px;font-size:12px;">Os demais instrumentos (competências, PDI) estão disponíveis na aba Equipe.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const nat = pessoa.natural;
+  const ada = pessoa.adaptativo;
+  const val = pessoa.valores;
+  const dims = ['D', 'I', 'S', 'C'];
+  const dimNames = { D: 'Dominante', I: 'Influente', S: 'Estabilidade', C: 'Conformidade' };
+
+  section.innerHTML = `
+    <div class="disc-profile-card" style="border-top-color:${colab.cor}">
+      <div class="disc-avatar-lg" style="background:${colab.corLight};color:${colab.cor}">${colab.iniciais}</div>
+      <div style="flex:1">
+        <div style="font-size:20px;font-weight:700;color:var(--cinza-900);margin-bottom:2px;">${colab.nome}</div>
+        <div style="font-size:13px;color:var(--cinza-400);margin-bottom:10px;">${colab.cargo}</div>
+        <div class="disc-style-badge">🧠 ${pessoa.estilo} · ${pessoa.estiloLabel}</div>
+        <div class="disc-style-desc">${pessoa.estiloDesc}</div>
+        <div class="disc-tracos" style="margin-top:12px;">
+          ${pessoa.tracos.map(t => `<span class="traco-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="disc-charts-grid">
+      <div class="chart-card">
+        <h3>Escores DISC — Natural vs Adaptativo</h3>
+        <div class="disc-dimension-bars">
+          ${dims.map(d => `
+            <div class="disc-dim-row">
+              <div class="disc-dim-header">
+                <span class="disc-dim-label" style="color:${discDimColors[d].bg}">${d} · ${dimNames[d]}</span>
+                <span class="disc-dim-scores" style="font-size:12px;color:var(--cinza-400)">
+                  Natural: <strong style="color:${discDimColors[d].bg}">${nat[d]}</strong>
+                  &nbsp;|&nbsp; Adaptativo: <strong style="color:${discDimColors[d].bg};opacity:0.65">${ada[d]}</strong>
+                </span>
+              </div>
+              <div class="disc-dim-track-wrap">
+                <div class="disc-dim-track" style="position:absolute;top:0;left:0;right:0;height:10px;background:var(--cinza-100);border-radius:5px;">
+                  <div class="disc-dim-bar natural" style="width:${nat[d]}%;background:${discDimColors[d].bg};"></div>
+                </div>
+                <div class="disc-dim-track" style="position:absolute;top:14px;left:0;right:0;height:7px;background:var(--cinza-100);border-radius:4px;opacity:0.7;">
+                  <div style="position:absolute;top:0;left:0;height:100%;border-radius:4px;width:${ada[d]}%;background:${discDimColors[d].bg};opacity:0.6;transition:width 0.6s ease;"></div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="disc-bar-legend">
+          <span><span class="legend-dot" style="background:#555;opacity:1"></span>Natural</span>
+          <span><span class="legend-dot" style="background:#555;opacity:0.45"></span>Adaptativo (como age no trabalho)</span>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Values Index — Motivadores de valor</h3>
+        <div class="disc-dimension-bars" style="gap:10px">
+          ${[['EST','Estética'],[' ECO','Econômico'],['IND','Individualista'],['POL','Político'],['ALT','Altruísta'],['REG','Regulador'],['TEO','Teórico']].map(([k,label]) => {
+            const key = k.trim();
+            const v = val[key];
+            const isHigh = v >= 65;
+            const barColor = isHigh ? '#7C3AED' : '#7c7c9a';
+            return `
+              <div class="disc-dim-row" style="gap:2px">
+                <div class="disc-dim-header">
+                  <span style="font-size:11px;font-weight:${isHigh?'700':'500'};color:${isHigh?'#7C3AED':'var(--cinza-400)'}">${label}</span>
+                  <span style="font-size:12px;font-weight:700;color:${isHigh?'#7C3AED':'var(--cinza-400)'};">${v}</span>
+                </div>
+                <div style="height:7px;background:var(--cinza-100);border-radius:4px;overflow:hidden;">
+                  <div style="height:100%;border-radius:4px;width:${v}%;background:${barColor};opacity:${isHigh?'0.9':'0.45'};transition:width 0.6s ease;"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <div class="disc-bar-legend" style="margin-top:12px">
+          <span><span class="legend-dot" style="background:#7C3AED;opacity:0.9"></span>Destaque (≥65)</span>
+          <span><span class="legend-dot" style="background:#999;opacity:0.45"></span>Secundário</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="disc-tips-card">
+      <h4>💬 Como comunicar com ${colab.nome}</h4>
+      <p>${pessoa.comunicar}</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--cinza-400);">
+        <strong>Principais motivadores:</strong> ${pessoa.motivadores}
+      </p>
+    </div>
+    <div style="margin-bottom:20px;"></div>
+  `;
+}
+
+function initDiscTeamCharts() {
+  // Grouped bar — Natural DISC
+  const pessoas = [discLider, ...discEquipe.filter(d => d.estilo).map((d,i) => ({
+    ...d, nome: colaboradoras[d.colabId].nome, cor: colaboradoras[d.colabId].cor
+  }))];
+
+  const nomes = pessoas.map(p => p.nome);
+
+  if (discTeamChartObj) discTeamChartObj.destroy();
+  discTeamChartObj = new Chart(document.getElementById('discTeamChart'), {
+    type: 'bar',
+    data: {
+      labels: nomes,
+      datasets: [
+        { label: 'D · Dominante',    data: pessoas.map(p => p.natural.D), backgroundColor: discDimColors.D.bg + 'cc', borderRadius: 4 },
+        { label: 'I · Influente',    data: pessoas.map(p => p.natural.I), backgroundColor: discDimColors.I.bg + 'cc', borderRadius: 4 },
+        { label: 'S · Estabilidade', data: pessoas.map(p => p.natural.S), backgroundColor: discDimColors.S.bg + 'cc', borderRadius: 4 },
+        { label: 'C · Conformidade', data: pessoas.map(p => p.natural.C), backgroundColor: discDimColors.C.bg + 'cc', borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { stacked: false, ticks: { font: { size: 12 } } },
+        y: { min: 0, max: 100, ticks: { stepSize: 20 } }
+      },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 14, usePointStyle: true } } }
+    }
+  });
+
+  // Values Index team chart
+  const pessoasComVal = [discLider, ...discEquipe.filter(d => d.valores).map(d => ({
+    ...d, nome: colaboradoras[d.colabId].nome
+  }))];
+  const nomesVal = pessoasComVal.map(p => p.nome);
+  const valLabels = ['Estética','Econômico','Individualista','Político','Altruísta','Regulador','Teórico'];
+  const valKeys = ['EST','ECO','IND','POL','ALT','REG','TEO'];
+  const valColors = ['#9333EA','#E37400','#D93025','#1967D2','#1E8E3E','#0891B2','#7C3AED'];
+
+  if (valuesTeamChartObj) valuesTeamChartObj.destroy();
+  valuesTeamChartObj = new Chart(document.getElementById('valuesTeamChart'), {
+    type: 'bar',
+    data: {
+      labels: nomesVal,
+      datasets: valKeys.map((k, ki) => ({
+        label: valLabels[ki],
+        data: pessoasComVal.map(p => p.valores[k]),
+        backgroundColor: valColors[ki] + 'aa',
+        borderRadius: 3
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { stacked: false, ticks: { font: { size: 12 } } },
+        y: { min: 0, max: 100, ticks: { stepSize: 20 } }
+      },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true, boxWidth: 10 } } }
+    }
+  });
+}
+
+function renderDiscTable() {
+  const tbody = document.getElementById('disc-table-body');
+  const rows = [
+    { nome: 'Ananda (Líder)', d: discLider, cor: discLider.cor, corLight: discLider.corLight },
+    ...discEquipe.map(d => ({
+      nome: colaboradoras[d.colabId].nome,
+      d,
+      cor: colaboradoras[d.colabId].cor,
+      corLight: colaboradoras[d.colabId].corLight
+    }))
+  ];
+
+  tbody.innerHTML = rows.map(r => {
+    if (!r.d.estilo) return `
+      <tr>
+        <td><strong>${r.nome}</strong></td>
+        <td colspan="5" style="color:var(--cinza-400);font-size:12px;">Dados DISC não disponíveis</td>
+        <td></td>
+      </tr>
+    `;
+    const n = r.d.natural;
+    return `
+      <tr>
+        <td><strong>${r.nome}</strong></td>
+        <td style="text-align:center"><span class="disc-score-cell score-d">${n.D}</span></td>
+        <td style="text-align:center"><span class="disc-score-cell score-i">${n.I}</span></td>
+        <td style="text-align:center"><span class="disc-score-cell score-s">${n.S}</span></td>
+        <td style="text-align:center"><span class="disc-score-cell score-c">${n.C}</span></td>
+        <td><span class="style-badge-small">${r.d.estilo} · ${r.d.estiloLabel}</span></td>
+        <td style="font-size:12px;color:var(--cinza-700)">${r.d.motivadores.split(',')[0].trim()}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── CONSULTORIA IA ──
+function renderConsultoriaSelect() {
+  const select = document.getElementById('colab-select');
+  select.innerHTML =
+    '<option value="">Selecione uma colaboradora...</option>' +
+    '<option value="todas">👥 Toda a equipe — comunicado em grupo</option>' +
+    '<option disabled>──────────────────</option>' +
+    colaboradoras.map(c => `<option value="${c.id}">${c.nome} — ${c.cargo}</option>`).join('');
+}
+
+function updateDiscPreview() {
+  const val = document.getElementById('colab-select').value;
+  const area = document.getElementById('disc-preview-area');
+
+  if (!val) { area.innerHTML = ''; return; }
+
+  if (val === 'todas') {
+    const estilos = discEquipe
+      .filter(d => d.estilo)
+      .map(d => {
+        const c = colaboradoras[d.colabId];
+        return `<strong>${c.nome}</strong> · ${d.estilo} (${d.estiloLabel})`;
+      }).join('<br>');
+    area.innerHTML = `
+      <div class="disc-profile-preview">
+        <span class="disc-preview-icon">👥</span>
+        <div class="disc-preview-text">
+          <strong>Toda a equipe — perfis DISC</strong><br>
+          ${estilos}
+        </div>
+      </div>
+      <div style="margin-bottom:16px;"></div>
+    `;
+    return;
+  }
+
+  const disc = discEquipe.find(d => d.colabId === parseInt(val));
+  if (!disc || !disc.estilo) {
+    area.innerHTML = `<div class="disc-profile-preview"><span class="disc-preview-icon">ℹ️</span><div class="disc-preview-text">Perfil DISC não disponível para esta colaboradora.</div></div>`;
+    return;
+  }
+  const c = colaboradoras[parseInt(val)];
+  const n = disc.natural;
+  area.innerHTML = `
+    <div class="disc-profile-preview">
+      <span class="disc-preview-icon">🧠</span>
+      <div class="disc-preview-text">
+        <strong>${c.nome} · Estilo ${disc.estilo} (${disc.estiloLabel})</strong><br>
+        DISC Natural: D=${n.D} · I=${n.I} · S=${n.S} · C=${n.C}<br>
+        ${disc.estiloDesc}
+      </div>
+    </div>
+    <div style="margin-bottom:16px;"></div>
+  `;
+}
+
+function buildSystemPrompt(disc, colabNome) {
+  return `Você é uma consultora especializada em gestão de pessoas e comunicação baseada em perfis DISC (metodologia Innermetrix DISC Plus).
+
+PERFIL DA LÍDER — Ananda (Estilo IC · Influenciadora-Cautelosa):
+• DISC Natural: D=42, I=81, S=39, C=77
+• DISC Adaptativo: D=49, I=25, S=17, C=88 (nota: adapta suprimindo o I — pode parecer mais fria/distante no trabalho)
+• Values Index de destaque: Regulador=76, Econômico=65, Teórico=63, Político=56
+• Forças: comunicação empática, inspiração de pessoas, rigor técnico, criatividade
+• Atenção: em situações de pressão, I cai muito (81→25) — pode passar impresso de frieza
+
+PERFIL DA COLABORADORA — ${colabNome} (Estilo ${disc.estilo} · ${disc.estiloLabel}):
+• DISC Natural: D=${disc.natural.D}, I=${disc.natural.I}, S=${disc.natural.S}, C=${disc.natural.C}
+• DISC Adaptativo: D=${disc.adaptativo.D}, I=${disc.adaptativo.I}, S=${disc.adaptativo.S}, C=${disc.adaptativo.C}
+• Motivadores principais: ${disc.motivadores}
+• Traços: ${disc.tracos.join(', ')}
+• ${disc.estiloDesc}
+
+Sua missão: Orientar Ananda sobre como conduzir a interação descrita, considerando:
+1. Como Ananda naturalmente se comunica (estilo IC) e como pode se adaptar
+2. O que ${colabNome} precisa para receber e processar bem a mensagem (estilo ${disc.estilo})
+3. O contexto e tipo de interação descrito
+4. Diferenças de estilo que podem gerar ruído ou mal-entendidos
+
+FORMATO OBRIGATÓRIO DA RESPOSTA (use exatamente esses cabeçalhos com ##):
+## 🎯 Como Ananda deve abordar essa situação
+[2-3 parágrafos práticos e específicos]
+
+## 💬 O que ${colabNome} precisa ouvir
+[3-5 pontos baseados no perfil DISC dela]
+
+## 📋 Roteiro sugerido para a conversa
+[Passo a passo: abertura · desenvolvimento · encerramento]
+
+## ⚠️ Pontos de atenção
+[2-3 riscos específicos dado o contraste IC ↔ ${disc.estilo}]
+
+Seja prática, específica e empática. Linguagem profissional mas acessível. Responda em português.`;
+}
+
+function gerarConsultoria() {
+  const val = document.getElementById('colab-select').value;
+  if (!val) { alert('Selecione uma colaboradora ou "Toda a equipe".'); return; }
+
+  const tipo = document.getElementById('tipo-select').value;
+  const situacao = document.getElementById('situacao-textarea').value.trim();
+  if (!situacao) { alert('Descreva a situação para gerar o prompt.'); return; }
+
+  let prompt, metaLabel;
+
+  if (val === 'todas') {
+    prompt = buildPromptGrupo(tipo, situacao);
+    metaLabel = 'Toda a equipe · ' + tipo;
+  } else {
+    const disc = discEquipe.find(d => d.colabId === parseInt(val));
+    const colab = colaboradoras[parseInt(val)];
+    if (!disc || !disc.estilo) {
+      alert('Perfil DISC não disponível para esta colaboradora.');
+      return;
+    }
+    prompt = buildPromptCompleto(disc, colab.nome, tipo, situacao);
+    metaLabel = colab.nome + ' · ' + tipo;
+  }
+
+  document.getElementById('consultoria-response').classList.add('visible');
+  document.getElementById('response-meta').textContent = metaLabel;
+  document.getElementById('prompt-output').value = prompt;
+
+  document.getElementById('consultoria-response').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function buildPromptCompleto(disc, colabNome, tipo, situacao) {
+  return `Você é uma consultora especializada em gestão de pessoas e comunicação baseada em perfis DISC (metodologia Innermetrix DISC Plus).
+
+═══════════════════════════════════════
+PERFIL DA LÍDER — Ananda (Estilo IC · Influenciadora-Cautelosa)
+═══════════════════════════════════════
+• DISC Natural:    D=42  I=81  S=39  C=77
+• DISC Adaptativo: D=49  I=25  S=17  C=88
+  ↳ Nota: no adaptativo, o I cai de 81 para 25 — em situações de trabalho Ananda pode parecer mais fria/reservada do que é no natural
+• Values Index de destaque: Regulador=76, Econômico=65, Teórico=63, Político=56
+• Pontos fortes: comunicação empática, inspiração de pessoas, rigor técnico, criatividade
+• Ponto de atenção: tende a suprimir a expressividade (I) sob pressão, o que pode ser lido como distância pela equipe
+
+═══════════════════════════════════════
+PERFIL DA COLABORADORA — ${colabNome} (Estilo ${disc.estilo} · ${disc.estiloLabel})
+═══════════════════════════════════════
+• DISC Natural:    D=${disc.natural.D}  I=${disc.natural.I}  S=${disc.natural.S}  C=${disc.natural.C}
+• DISC Adaptativo: D=${disc.adaptativo.D}  I=${disc.adaptativo.I}  S=${disc.adaptativo.S}  C=${disc.adaptativo.C}
+• Motivadores principais: ${disc.motivadores}
+• Traços comportamentais: ${disc.tracos.join(', ')}
+• Descrição do estilo: ${disc.estiloDesc}
+• Como comunicar com ela: ${disc.comunicar}
+
+═══════════════════════════════════════
+SITUAÇÃO A SER TRABALHADA
+═══════════════════════════════════════
+Tipo de interação: ${tipo}
+
+Situação descrita por Ananda:
+"${situacao}"
+
+═══════════════════════════════════════
+SUA MISSÃO
+═══════════════════════════════════════
+Oriente Ananda sobre como conduzir essa interação de forma eficaz, considerando:
+1. Como Ananda naturalmente se comunica (estilo IC) e como deve se adaptar para ${colabNome}
+2. O que ${colabNome} precisa para receber e processar bem a mensagem (estilo ${disc.estilo})
+3. Diferenças de estilo que podem gerar ruído ou mal-entendidos entre IC e ${disc.estilo}
+
+FORMATO DA RESPOSTA — use exatamente esses títulos:
+
+## 🎯 Como Ananda deve abordar essa situação
+[2-3 parágrafos práticos e específicos]
+
+## 💬 O que ${colabNome} precisa ouvir
+[3-5 pontos baseados no perfil DISC dela]
+
+## 📋 Roteiro sugerido para a conversa
+[Passo a passo: abertura · desenvolvimento · encerramento]
+
+## ⚠️ Pontos de atenção
+[2-3 riscos específicos dado o contraste IC ↔ ${disc.estilo}]
+
+Seja prática, específica e empática. Linguagem profissional mas acessível. Responda em português.`;
+}
+
+function buildPromptGrupo(tipo, situacao) {
+  const membros = discEquipe
+    .map(d => {
+      const c = colaboradoras[d.colabId];
+      if (!d.estilo) return `• ${c.nome} — perfil DISC não disponível`;
+      return `• ${c.nome} · Estilo ${d.estilo} (${d.estiloLabel})
+  DISC Natural: D=${d.natural.D} I=${d.natural.I} S=${d.natural.S} C=${d.natural.C}
+  Traços: ${d.tracos.join(', ')}
+  Como comunicar: ${d.comunicar}`;
+    }).join('\n\n');
+
+  return `Você é uma consultora especializada em gestão de pessoas e comunicação baseada em perfis DISC (metodologia Innermetrix DISC Plus).
+
+═══════════════════════════════════════
+PERFIL DA LÍDER — Ananda (Estilo IC · Influenciadora-Cautelosa)
+═══════════════════════════════════════
+• DISC Natural:    D=42  I=81  S=39  C=77
+• DISC Adaptativo: D=49  I=25  S=17  C=88
+  ↳ Em situações de trabalho pode parecer mais reservada do que é no natural (I cai 81→25)
+• Values Index: Regulador=76, Econômico=65, Teórico=63, Político=56
+• Pontos fortes: comunicação empática, inspiração de pessoas, rigor técnico
+
+═══════════════════════════════════════
+PERFIS DA EQUIPE (6 colaboradoras)
+═══════════════════════════════════════
+${membros}
+
+═══════════════════════════════════════
+SITUAÇÃO / COMUNICADO
+═══════════════════════════════════════
+Tipo de interação: ${tipo}
+
+Mensagem ou situação que Ananda precisa comunicar para toda a equipe:
+"${situacao}"
+
+═══════════════════════════════════════
+SUA MISSÃO
+═══════════════════════════════════════
+Oriente Ananda sobre como comunicar essa mensagem para o grupo considerando a diversidade de perfis DISC da equipe.
+
+FORMATO DA RESPOSTA — use exatamente esses títulos:
+
+## 🎯 Como estruturar a mensagem para o grupo
+[Como Ananda deve enquadrar e apresentar a mensagem levando em conta que a equipe tem perfis D, I, S e C diferentes]
+
+## 👥 O que cada perfil precisa ouvir
+[Para cada estilo presente na equipe (DC, SC, IS, DI), o que precisa estar claro na mensagem para que cada perfil a receba bem]
+
+## 📋 Roteiro do comunicado
+[Estrutura sugerida: abertura · corpo da mensagem · encerramento com espaço para reações]
+
+## ⚠️ Cuidados específicos para este grupo
+[2-3 pontos de atenção dados os contrastes de perfil presentes na equipe]
+
+Seja prática, específica e empática. Linguagem profissional mas acessível. Responda em português.`;
+}
+
+function copiarPrompt() {
+  const textarea = document.getElementById('prompt-output');
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const btn = document.getElementById('btn-copiar');
+    btn.textContent = '✓ Copiado!';
+    btn.style.background = 'var(--verde)';
+    setTimeout(() => { btn.textContent = '📋 Copiar'; btn.style.background = ''; }, 2000);
+  }).catch(() => {
+    document.execCommand('copy');
+    alert('Prompt copiado!');
+  });
+}
+
+function limparResponse() {
+  document.getElementById('consultoria-response').classList.remove('visible');
+  document.getElementById('prompt-output').value = '';
+}
+
+function gerarIndicacaoPerfil() {
+  const tarefa = document.getElementById('tarefa-textarea').value.trim();
+  if (!tarefa) { alert('Descreva a tarefa para gerar a indicação.'); return; }
+  const tipo = document.getElementById('tarefa-tipo').value;
+
+  const membros = [discLider, ...discEquipe.map(d => ({
+    ...d, nome: colaboradoras[d.colabId].nome, desligada: isDesligada(d.colabId)
+  }))].filter(p => !p.desligada);
+
+  const perfilEquipe = membros.map(p => {
+    if (p.nome === 'Ananda') return null; // líder não entra como candidata
+    if (!p.estilo) return `• ${p.nome} — perfil DISC não disponível`;
+    const n = p.natural;
+    return `• ${p.nome} · Estilo ${p.estilo} (${p.estiloLabel})
+  DISC Natural: D=${n.D} I=${n.I} S=${n.S} C=${n.C}
+  Traços: ${(p.tracos||[]).join(', ')}
+  Pontos fortes: ${p.estiloDesc}
+  Motivadores: ${p.motivadores||'—'}`;
+  }).filter(Boolean).join('\n\n');
+
+  const prompt = `Você é uma consultora especializada em gestão de pessoas e delegação baseada em perfis DISC (Innermetrix DISC Plus).
+
+═══════════════════════════════════════
+CONTEXTO — Equipe Contábil e Fiscal · Grupo Paraná
+Líder: Ananda (Estilo IC · Influenciadora-Cautelosa)
+═══════════════════════════════════════
+
+PERFIS DISC DAS COLABORADORAS:
+${perfilEquipe}
+
+═══════════════════════════════════════
+TAREFA A SER DELEGADA
+═══════════════════════════════════════
+${tipo ? `Tipo: ${tipo}\n` : ''}Descrição: "${tarefa}"
+
+═══════════════════════════════════════
+SUA MISSÃO
+═══════════════════════════════════════
+Com base nos perfis DISC acima, analise qual(is) colaboradora(s) têm o perfil mais adequado para executar esta tarefa.
+
+FORMATO DA RESPOSTA — use exatamente esses títulos:
+
+## 🏆 Ranking de indicação
+[Classifique as colaboradoras de mais para menos indicadas, com nota de 1 a 5 e justificativa de 1-2 linhas para cada]
+
+## 🎯 Perfil mais indicado — análise detalhada
+[Explique por que a primeira colocada é a mais indicada: quais dimensões DISC e motivadores a tornam apta para esta tarefa específica]
+
+## ⚡ Como delegar com sucesso
+[3-4 dicas práticas para Ananda delegar esta tarefa considerando o estilo da colaboradora indicada e o próprio estilo IC de Ananda]
+
+## ⚠️ Riscos e pontos de atenção
+[O que pode dar errado e como mitigar, considerando os perfis envolvidos]
+
+Seja específica e prática. Responda em português.`;
+
+  document.getElementById('indicacao-response').classList.add('visible');
+  document.getElementById('indicacao-meta').textContent = tipo || 'Indicação de perfil por DISC';
+  document.getElementById('indicacao-output').value = prompt;
+  document.getElementById('indicacao-response').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copiarIndicacao() {
+  const textarea = document.getElementById('indicacao-output');
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const btn = document.getElementById('btn-copiar-ind');
+    btn.textContent = '✓ Copiado!';
+    btn.style.background = 'var(--verde)';
+    setTimeout(() => { btn.textContent = '📋 Copiar'; btn.style.background = ''; }, 2000);
+  }).catch(() => document.execCommand('copy'));
+}
+
+function limparIndicacao() {
+  document.getElementById('indicacao-response').classList.remove('visible');
+  document.getElementById('indicacao-output').value = '';
+}
+
+// ── Tabs ──
+function showTab(tab) {
+  const allTabs = ['visao-geral','equipe','individual','disc','consultoria'];
+  allTabs.forEach(t => {
+    const v = document.getElementById('view-' + t);
+    if (v) v.style.display = 'none';
+    const btn = document.querySelector(`.tab-btn[onclick="showTab('${t}')"]`);
+    if (btn) btn.classList.remove('active');
+  });
+
+  const view = document.getElementById('view-' + tab);
+  if (view) view.style.display = 'block';
+ 

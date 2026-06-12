@@ -1700,15 +1700,15 @@ const discEquipe = [
   },
   {
     colabId: 4,
-    estilo: null,
-    estiloLabel: "Perfil DISC não disponível",
-    estiloDesc: "O perfil DISC de Karen não está disponível no sistema. Os dados desta aba foram gerados com base nos demais instrumentos.",
-    natural:    null,
-    adaptativo: null,
-    valores:    null,
-    tracos: [],
-    comunicar: "Perfil DISC não disponível. Consulte as observações comportamentais da aba de Equipe.",
-    motivadores: "—"
+    estilo: "SI",
+    estiloLabel: "Estável-Influente",
+    estiloDesc: "Karen é uma profissional de alto S — estável, paciente e confiável. Preza por consistência, harmonia no ambiente e execução precisa. Sob pressão, suprime a expressividade natural, podendo parecer mais contida. Motivada por resultados concretos e reconhecimento de competência.",
+    natural:    { D: 42, I: 53, S: 88, C: 53 },
+    adaptativo: { D: 35, I: 53, S: 53, C: 53 },
+    valores:    { EST: 46, ECO: 83, IND: 28, POL: 48, ALT: 50, REG: 56, TEO: 51 },
+    tracos: ["Paciente", "Consistente", "Confiável", "Precisa", "Estabilizadora", "Orientada a resultados"],
+    comunicar: "Quebre o gelo com comentário pessoal antes de ir ao ponto. Apresente ideias de forma não-ameaçadora. Liste prós e contras. Deixe claro quais são as responsabilidades de cada um. Evite tom dominador ou apressado. Valorize a competência e o esforço demonstrado.",
+    motivadores: "Econômico (83), Regulador (56), Altruísta (50)"
   },
   {
     colabId: 5,
@@ -2752,27 +2752,4 @@ function showTab(tab) {
 
   const view = document.getElementById('view-' + tab);
   if (view) view.style.display = 'block';
-  const btn = document.querySelector(`.tab-btn[onclick="showTab('${tab}')"]`);
-  if (btn) btn.classList.add('active');
-
-  if (tab === 'individual') {
-    document.getElementById('tab-individual').style.display = 'inline-block';
-  }
-  if (tab === 'visao-geral') { initRadarEquipe(); initRadarDiscEquipe(); }
-  if (tab === 'disc') {
-    renderDiscPills();
-    initDiscTeamCharts();
-    renderDiscTable();
-  }
-  if (tab === 'consultoria') {
-    renderConsultoriaSelect();
-  }
-}
-
-// ── Init ──
-renderEquipe();
-initRadarEquipe();
-initRadarDiscEquipe();
-</script>
-</body>
-</html>
+ 
