@@ -2752,4 +2752,27 @@ function showTab(tab) {
 
   const view = document.getElementById('view-' + tab);
   if (view) view.style.display = 'block';
- 
+   const btn = document.querySelector(`.tab-btn[onclick="showTab('${tab}')"]`);
+  if (btn) btn.classList.add('active');
+
+  if (tab === 'individual') {
+    document.getElementById('tab-individual').style.display = 'inline-block';
+  }
+  if (tab === 'visao-geral') { initRadarEquipe(); initRadarDiscEquipe(); }
+  if (tab === 'disc') {
+    renderDiscPills();
+    initDiscTeamCharts();
+    renderDiscTable();
+  }
+  if (tab === 'consultoria') {
+    renderConsultoriaSelect();
+  }
+}
+
+// ── Init ──
+renderEquipe();
+initRadarEquipe();
+initRadarDiscEquipe();
+</script>
+</body>
+</html>
