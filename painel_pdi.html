@@ -1386,7 +1386,7 @@ const colaboradoras = [
     perfilLabel: "Liderança futura",
     status: "em-andamento",
     competencias: [4.0, 3.5, 4.0, 3.0, 3.0, 3.0],
-    comportamental: [3.5, 3.5, 5.0, 3.5, 3.5, 4.0],
+    comportamental: [4.0, 3.5, 5.0, 3.0, 3.7, 4.0],
     motivadores: [
       { label: "Aprender coisas novas", alto: true },
       { label: "Reconhecimento", alto: true },
@@ -1396,7 +1396,7 @@ const colaboradoras = [
     ],
     insights: [
       { tipo: "potencial", label: "Potencial identificado", texto: "Especialista fiscal com comunicação excepcional (5/5 em reuniões e interdepartamental). Entrega fiscal e conferência contábil fluem naturalmente. Alta percepção de aproveitamento de potencial (5/5) e espaço para crescimento (5/5). Quer ser referência técnica no setor supermercadista." },
-      { tipo: "atencao",   label: "Ponto de atenção", texto: "Excel e Reforma Tributária são lacunas urgentes (autoavaliação 2/5). Energia para desenvolvimento muito baixa — 1/5. PDI deve ser enxuto, prático e integrado à rotina. Ela prefere crescer como especialista: alinhar com visão da gestão no 1:1." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Excel e Reforma Tributária são lacunas urgentes (autoavaliação 2/5). Energia para desenvolvimento muito baixa — 1/5. PDI deve ser enxuto, prático e integrado à rotina. Ela prefere crescer como especialista: alinhar com visão da gestão no 1:1." },
     ],
     pdi: [
       { mes: "Mês 1–2", foco: "Reforma Tributária aplicada ao VT Paraná", status: "em-andamento", acoes: [
@@ -1426,13 +1426,36 @@ const colaboradoras = [
     perfil: "analista",
     perfilLabel: "Analista",
     status: "pendente",
-    competencias: [0, 0, 0, 0, 0, 0],
-    comportamental: [0, 0, 0, 0, 0, 0],
-    motivadores: [],
-    insights: [
-      { tipo: "info", label: "Aguardando formulário", texto: "Formulário de desenvolvimento ainda não respondido. Os dados serão preenchidos após o recebimento da resposta." },
+    competencias: [3.5, 4.0, 3.0, 2.0, 3.0, 1.0],
+    comportamental: [4.0, 3.5, 4.0, 2.0, 3.7, 4.0],
+    motivadores: [
+      { label: "Aprender coisas novas", alto: true },
+      { label: "Reconhecimento", alto: true },
+      { label: "Impacto no resultado", alto: true },
+      { label: "Crescer de cargo e salário", alto: false },
+      { label: "Equilíbrio trabalho-vida", alto: false },
     ],
-    pdi: []
+    insights: [
+      { tipo: "potencial", label: "Potencial identificado", texto: "Forte em contabilização e conciliações (4/5 cada) e muito confortável com tecnologia (5/5). Determinada — "procuro o erro até encontrar". Alta abertura para aprendizado. Interesse em auditoria e visão estratégica indica ambição técnica clara." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Legislação/pesquisa normativa muito baixa (1/5) e tributos fracos (2/5). Preferência acentuada por trabalho individual (2/5 em grupo). Ainda depende de orientação para tarefas novas — PDI deve incluir metodologia de resolução autônoma progressiva." },
+    ],
+    pdi: [
+      { mes: "Mês 1–2", foco: "Legislação e pesquisa normativa", status: "pendente", acoes: [
+        "Praticar busca de legislação: consulta ao Portal do SPED, RFB e legislação estadual",
+        "Responsável pela análise do Razão Analítico mensal de 3 entidades",
+        "Produzir 1 resumo técnico de norma fiscal relevante para a equipe",
+      ]},
+      { mes: "Mês 3–4", foco: "Reforma Tributária e tributos", status: "pendente", acoes: [
+        "Curso EAD: IBS/CBS fundamentos e impactos práticos (até 10h)",
+        "Elaborar planilha de simulação de carga tributária pós-reforma em 1 entidade",
+        "Apresentar conclusões técnicas para Ananda (20 min)",
+      ]},
+      { mes: "Mês 5–6", foco: "Análise de dados e visão estratégica", status: "pendente", acoes: [
+        "Aprofundar Excel/Power Query para análise de dados contábeis",
+        "Participar de 1 projeto de análise estratégica do grupo",
+        "Avaliar pós-graduação em auditoria e PDI do próximo ciclo",
+      ]},
+    ]
   },
   {
     id: 2,
@@ -1444,13 +1467,36 @@ const colaboradoras = [
     perfil: "analista",
     perfilLabel: "Analista",
     status: "pendente",
-    competencias: [0, 0, 0, 0, 0, 0],
-    comportamental: [0, 0, 0, 0, 0, 0],
-    motivadores: [],
-    insights: [
-      { tipo: "info", label: "Aguardando formulário", texto: "Formulário de desenvolvimento ainda não respondido. Os dados serão preenchidos após o recebimento da resposta." },
+    competencias: [4.0, 1.0, 2.0, 3.0, 2.5, 3.0],
+    comportamental: [2.5, 3.0, 4.0, 3.0, 3.0, 3.0],
+    motivadores: [
+      { label: "Aprender coisas novas", alto: true },
+      { label: "Reconhecimento", alto: true },
+      { label: "Bom relacionamento com equipe", alto: true },
+      { label: "Crescer de cargo", alto: false },
+      { label: "Auditoria fiscal", alto: false },
     ],
-    pdi: []
+    insights: [
+      { tipo: "potencial", label: "Potencial identificado", texto: "Excelente em classificação fiscal (5/5) e comunicação interdepartamental (5/5). Relacionamento interpessoal é um ponto forte natural. Vê muito espaço para crescer (5/5). Curiosidade por auditoria fiscal — área alinhada ao que já faz bem. Quer evoluir de auxiliar para analista." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Contabilização e conciliações ainda muito fraca (1/5 cada). Sente que apenas 2/5 do potencial é aproveitado — indicativo de subutilização. Dependência de superior para erros não mapeados. PDI deve ir do conforto (classificação) para competências adjacentes (obrigações, fechamento), gradualmente." },
+    ],
+    pdi: [
+      { mes: "Mês 1–2", foco: "Lançamentos contábeis — construindo a base", status: "pendente", acoes: [
+        "Estudar e praticar lançamentos contábeis básicos: teoria + prática no sistema",
+        "Acompanhar Ana Beatriz ou Ananda em 1 ciclo de conciliação",
+        "Meta: fazer 50% das conciliações com supervisão reduzida",
+      ]},
+      { mes: "Mês 3–4", foco: "Obrigações acessórias e fechamento", status: "pendente", acoes: [
+        "Curso EAD: Obrigações acessórias básicas (SPED/EFD) — até 8h",
+        "Participar ativamente do fechamento mensal de 1 entidade (acompanhando)",
+        "Reforma Tributária: leitura de material introdutório + vídeo-aula",
+      ]},
+      { mes: "Mês 5–6", foco: "Consolidação e primeiro desafio autônomo", status: "pendente", acoes: [
+        "Executar 1 tarefa de classificação fiscal de forma totalmente autônoma",
+        "Apresentar aprendizados do ciclo para Ananda",
+        "Definir especialidade e PDI do próximo ciclo",
+      ]},
+    ]
   },
   {
     id: 3,
@@ -1462,13 +1508,36 @@ const colaboradoras = [
     perfil: "tecnica",
     perfilLabel: "Especialista técnica",
     status: "pendente",
-    competencias: [0, 0, 0, 0, 0, 0],
-    comportamental: [0, 0, 0, 0, 0, 0],
-    motivadores: [],
-    insights: [
-      { tipo: "info", label: "Aguardando formulário", texto: "Formulário de desenvolvimento ainda não respondido. Os dados serão preenchidos após o recebimento da resposta." },
+    competencias: [3.0, 2.0, 3.0, 1.5, 2.5, 2.0],
+    comportamental: [4.0, 3.0, 3.5, 3.0, 3.0, 4.0],
+    motivadores: [
+      { label: "Aprender coisas novas", alto: true },
+      { label: "Crescer de cargo e salário", alto: true },
+      { label: "Impacto no resultado", alto: true },
+      { label: "Estabilidade e segurança", alto: false },
+      { label: "Reconhecimento", alto: false },
     ],
-    pdi: []
+    insights: [
+      { tipo: "potencial", label: "Potencial identificado", texto: "Muito confortável em assumir responsabilidades (5/5) e expor opinião (5/5). Alta abertura para tecnologia (5/5). Classificação e pedidos fiscais fluindo bem. Perfil de especialista — admira quem "domina com conhecimento praticamente todas as áreas". Energia moderada e boa disposição para crescimento." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Base contábil muito fraca (1/5 em lançamentos). Tributos ainda em desenvolvimento inicial (1-2/5). Comunicação interdepartamental baixa (2/5). PDI deve partir da classificação fiscal (força) para a base contábil (maior lacuna), construindo por adjacência." },
+    ],
+    pdi: [
+      { mes: "Mês 1–2", foco: "Base contábil integrada à rotina fiscal", status: "pendente", acoes: [
+        "Estudar lançamentos contábeis a partir das classificações fiscais que já domina",
+        "Curso EAD: contabilidade básica para analistas fiscais (até 8h)",
+        "Praticar 1 lançamento por semana com supervisão reduzida",
+      ]},
+      { mes: "Mês 3–4", foco: "Tributos e Reforma Tributária", status: "pendente", acoes: [
+        "Curso EAD: Reforma Tributária (IBS/CBS) — fundamentos práticos",
+        "Aprofundamento em ICMS e PIS/COFINS: teoria + exercícios práticos",
+        "Produzir 1 resumo de impacto tributário de uma entidade",
+      ]},
+      { mes: "Mês 5–6", foco: "Análise de dados e consolidação", status: "pendente", acoes: [
+        "Excel para análise de dados fiscais: tabelas dinâmicas e cruzamentos",
+        "Fechamento contábil participativo: acompanhar 1 ciclo completo",
+        "Avaliar PDI e definir especialidade para o próximo ciclo",
+      ]},
+    ]
   },
   {
     id: 4,
@@ -1480,13 +1549,36 @@ const colaboradoras = [
     perfil: "multi",
     perfilLabel: "Multiplicadora",
     status: "pendente",
-    competencias: [0, 0, 0, 0, 0, 0],
-    comportamental: [0, 0, 0, 0, 0, 0],
-    motivadores: [],
-    insights: [
-      { tipo: "info", label: "Aguardando formulário", texto: "Formulário de desenvolvimento ainda não respondido. Os dados serão preenchidos após o recebimento da resposta." },
+    competencias: [1.5, 1.5, 1.0, 1.0, 3.0, 1.0],
+    comportamental: [4.0, 3.5, 2.5, 3.0, 3.0, 4.0],
+    motivadores: [
+      { label: "Reconhecimento", alto: true },
+      { label: "Crescer de cargo e salário", alto: true },
+      { label: "Impacto no resultado", alto: true },
+      { label: "Estabilidade e segurança", alto: false },
+      { label: "Equilíbrio trabalho-vida", alto: false },
     ],
-    pdi: []
+    insights: [
+      { tipo: "potencial", label: "Potencial identificado", texto: "Boa abertura para tecnologia (4/5) e destaque em financeiro/comunicação interdepartamental. Motivação clara para crescimento e reconhecimento. Energia disponível para desenvolvimento (3/5) — acima de Karolyne. Formação em Administração é complemento valioso — interesse em aprofundar na Contabilidade." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Base técnica contábil e fiscal ainda em nível inicial (1-2/5 na maioria das áreas). Baixa confiança para expor opinião (2/5) e insegurança com expectativas: "maior desafio é não estar atendendo o esperado". PDI deve começar com base técnica sólida + feedbacks claros e frequentes para construir confiança." },
+    ],
+    pdi: [
+      { mes: "Mês 1–2", foco: "Base técnica — contabilização e fiscal", status: "pendente", acoes: [
+        "Estudar contabilização e lançamentos: conceitos + prática no sistema",
+        "Acompanhar colega em 1 ciclo de classificação fiscal",
+        "Reunião quinzenal com Ananda: feedback claro sobre desempenho e evolução",
+      ]},
+      { mes: "Mês 3–4", foco: "Obrigações acessórias e tributos básicos", status: "pendente", acoes: [
+        "Curso EAD: introdução às obrigações acessórias (SPED/DCTF)",
+        "Reforma Tributária: material introdutório + vídeo-aula (até 6h)",
+        "Executar 1 tarefa recorrente com autonomia crescente",
+      ]},
+      { mes: "Mês 5–6", foco: "Consolidação e projeção de carreira", status: "pendente", acoes: [
+        "Avaliar viabilidade de graduação em Ciências Contábeis (curso técnico-superior)",
+        "Assumir 1 responsabilidade técnica reconhecível pela equipe",
+        "Revisar PDI e alinhar expectativas de cargo para o próximo ciclo",
+      ]},
+    ]
   },
   {
     id: 5,
@@ -1498,13 +1590,36 @@ const colaboradoras = [
     perfil: "integra",
     perfilLabel: "Em integração",
     status: "pendente",
-    competencias: [0, 0, 0, 0, 0, 0],
-    comportamental: [0, 0, 0, 0, 0, 0],
-    motivadores: [],
-    insights: [
-      { tipo: "info", label: "Aguardando formulário", texto: "Formulário de desenvolvimento ainda não respondido. Os dados serão preenchidos após o recebimento da resposta." },
+    competencias: [4.0, 3.5, 3.0, 3.0, 3.0, 2.0],
+    comportamental: [2.5, 4.2, 4.0, 3.0, 3.7, 3.0],
+    motivadores: [
+      { label: "Aprender coisas novas", alto: true },
+      { label: "Reconhecimento", alto: true },
+      { label: "Ajudar e ensinar colegas", alto: true },
+      { label: "Liderança futura", alto: false },
+      { label: "Equilíbrio trabalho-vida", alto: false },
     ],
-    pdi: []
+    insights: [
+      { tipo: "potencial", label: "Potencial identificado", texto: "A maior energia disponível da equipe para desenvolvimento (5/5). Aspiração clara de liderança ("Sim, objetivo claro"). Fiscal já acima da média para o estágio. Alta abertura à tecnologia (5/5), interesse em Automações e IA. Quer crescer rapidamente — em 2 anos: especialista fiscal; em 5: gestão." },
+      { tipo: "atencao", label: "Ponto de atenção", texto: "Pesquisa normativa e legislação ainda fraca (2/5). Autonomia analítica a desenvolver — ainda depende do superior para erros não mapeados. PDI deve priorizar independência técnica, não apenas acumulação de conteúdo. Base acadêmica em construção (cursando graduação + CRC como meta)." },
+    ],
+    pdi: [
+      { mes: "Mês 1–2", foco: "Reforma Tributária + pesquisa normativa", status: "pendente", acoes: [
+        "Curso EAD: Reforma Tributária (IBS/CBS) — foco prático (até 10h)",
+        "Aprender a consultar legislação: Portal SPED, RFB, CONFAZ",
+        "Meta: resolver 1 dúvida técnica por semana de forma autônoma antes de escalar",
+      ]},
+      { mes: "Mês 3–4", foco: "Tributos e autonomia técnica", status: "pendente", acoes: [
+        "Aprofundamento: ICMS, PIS/COFINS — cálculo e conferência",
+        "Praticar análise de erros: encontrar e reportar com hipótese de causa",
+        "Explorar 1 ferramenta de automação aplicada à rotina fiscal (ex: Excel + fórmulas)",
+      ]},
+      { mes: "Mês 5–6", foco: "Consolidação e protagonismo", status: "pendente", acoes: [
+        "Conduzir 1 tarefa de treinamento ou explicação técnica para colega",
+        "Apresentar aprendizados do ciclo para Ananda",
+        "Revisar PDI com foco em liderança técnica para o próximo ciclo",
+      ]},
+    ]
   },
 ];
 
