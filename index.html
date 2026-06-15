@@ -2197,7 +2197,7 @@ let discSelectedId = -1; // -1 = nenhum selecionado (mostra só comparativo)
 
 const discDimColors = {
   D: { bg: '#D93025', light: '#FDE8E6' },
-  I: { bg: '#E37400', light: '#FEF3E2' },
+  I: { bg: '#F9AB00', light: '#FFF8E1' },
   S: { bg: '#1E8E3E', light: '#E6F4EA' },
   C: { bg: '#1967D2', light: '#E8F0FE' }
 };
@@ -2377,7 +2377,7 @@ function initDiscTeamCharts() {
   const nomesVal = pessoasComVal.map(p => p.nome);
   const valLabels = ['Estética','Econômico','Individualista','Político','Altruísta','Regulador','Teórico'];
   const valKeys = ['EST','ECO','IND','POL','ALT','REG','TEO'];
-  const valColors = ['#9333EA','#E37400','#D93025','#1967D2','#1E8E3E','#0891B2','#7C3AED'];
+  const valColors = ['#9333EA','#F9AB00','#D93025','#1967D2','#1E8E3E','#0891B2','#7C3AED'];
 
   if (valuesTeamChartObj) valuesTeamChartObj.destroy();
   valuesTeamChartObj = new Chart(document.getElementById('valuesTeamChart'), {
