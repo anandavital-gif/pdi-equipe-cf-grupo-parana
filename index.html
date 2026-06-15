@@ -1027,6 +1027,7 @@
   <button class="tab-btn" onclick="showTab('respostas')">📋 Respostas</button>
   <button class="tab-btn" onclick="showTab('um-a-um')">💬 1:1</button>
   <button class="tab-btn" onclick="showTab('pdi-view')">🎯 PDI</button>
+  <button class="tab-btn" onclick="showTab('meu-plano')">👩‍💼 Meu Plano</button>
 </div>
 
 <!-- VISÃO GERAL -->
@@ -1480,6 +1481,18 @@
 </div>
 
 
+
+
+<!-- ════════════════ ABA: MEU PLANO ════════════════ -->
+<div id="view-meu-plano" class="main" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+    <div style="font-size:18px;font-weight:700;color:#9333EA;">👩‍💼 Meu Plano de Liderança</div>
+    <button onclick="gerarPdfPlano()" style="padding:9px 20px;background:#9333EA;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">
+      🖨 Gerar PDF
+    </button>
+  </div>
+  <div id="meu-plano-content"></div>
+</div>
 
 
 <script>
@@ -2847,7 +2860,7 @@ function limparIndicacao() {
 
 // ── Tabs ──
 function showTab(tab) {
-  const allTabs = ['visao-geral','equipe','individual','disc','consultoria','respostas','um-a-um','pdi-view'];
+  const allTabs = ['visao-geral','equipe','individual','disc','consultoria','respostas','um-a-um','pdi-view','meu-plano'];
   allTabs.forEach(t => {
     const v = document.getElementById('view-' + t);
     if (v) v.style.display = 'none';
@@ -2875,6 +2888,7 @@ function showTab(tab) {
   if (tab === 'respostas') { renderRespostas(); }
   if (tab === 'um-a-um')   { renderUmaUm(); }
   if (tab === 'pdi-view')  { renderPdiView(); }
+  if (tab === 'meu-plano') { renderMeuPlano(); }
 }
 
 // ══════════════════════════════════════════════════════
@@ -3214,6 +3228,310 @@ const dadosFormulario = [
     ],
   },
 ];
+
+
+// ══════════════════════════════════════════════════════
+//  ABA MEU PLANO — Plano de liderança da Ananda
+// ══════════════════════════════════════════════════════
+
+const planoLideranca = {
+  perfil: {
+    disc: 'IC — Influenciadora-Cautelosa',
+    natural: { I: 81, C: 77, D: 42, S: 39 },
+    adaptativo: { C: 88, I: 25, D: 49, S: 17 },
+    alerta: 'Seu I cai de 81 → 25 no adaptativo. Sob pressão, você pode parecer fria ou distante para a equipe, mesmo sentindo o contrário por dentro. Este é o ponto de atenção mais importante da sua liderança.',
+    forcas: ['Comunicadora natural e inspiradora', 'Alta exigência com qualidade técnica', 'Capacidade analítica apurada', 'Empatia genuína com a equipe'],
+    desenvolver: ['Manter a expressividade do I natural mesmo sob pressão', 'Calibrar paciência com os perfis S altos (Karen, Karolyne, Laisa)', 'Estruturar feedback regular — a equipe toda pediu isso', 'Delegar com confiança, resistindo ao C adaptativo que quer controlar'],
+  },
+
+  timeEspera: [
+    { nome: 'Karolyne', espera: 'Gentileza, paciência, tratar como igual, respeitar dificuldades.' },
+    { nome: 'Ana Beatriz', espera: 'Apoio, direcionamento claro e feedbacks transparentes.' },
+    { nome: 'Mayggla', espera: 'Liderança transparente, tranquila, comunicação e companheirismo.' },
+    { nome: 'Thais', espera: 'Parceria e paciência.' },
+    { nome: 'Karen', espera: 'Comunicação clara, escuta ativa, empatia e reconhecimento.' },
+    { nome: 'Laisa', espera: 'Comunicação transparente e feedbacks sinceros.' },
+  ],
+
+  comoAgir: [
+    {
+      id: 0, nome: 'Karolyne', disc: 'DC', cargo: 'Analista Fiscal',
+      resumo: 'Alta exigência, independente, energia 1/5 para desenvolvimento. Já entrega no topo — não precisa de pressão, precisa de espaço.',
+      sim: [
+        'Autonomia total no VT Paraná — é onde ela brilha',
+        'Reconhecimento preciso pela entrega, não pelo esforço genérico',
+        'Desafios pontuais que ela escolhe aceitar (nunca impostos)',
+        '1:1 mensal objetivo: resultados, dificuldades, próximos passos',
+      ],
+      nao: [
+        'Cobrar participação em treinamentos além da carga atual',
+        'Microgerir ou questionar o método dela',
+        'Pressionar por desenvolvimento quando a energia não está disponível',
+        'Comparar com outras colaboradoras',
+      ],
+      frequencia: '1:1 mensal · Contato direto só se houver problema urgente',
+      alerta: 'Ela está em 1/5 de energia para desenvolvimento. Qualquer PDI precisa ser leve, integrado à rotina e com prazo flexível.',
+    },
+    {
+      id: 1, nome: 'Ana Beatriz', disc: 'SC', cargo: 'Analista Contábil',
+      resumo: 'Metódica, prefere muito o individual, não conseguir resolver sozinha é o que mais drena. Precisa de autonomia construída com segurança.',
+      sim: [
+        'Processos documentados e diretrizes claras antes de delegar',
+        'Tempo para analisar antes de responder — nunca pressione por resposta imediata',
+        'Feedbacks escritos + orais: o escrito dá segurança para ela processar',
+        'Criar protocolo de resolução: "tente, consulte material, depois venha até mim"',
+        '1:1 quinzenal com pauta definida com antecedência',
+      ],
+      nao: [
+        'Dar feedback vago ou apenas verbal em reunião de grupo',
+        'Cobrar posicionamento imediato em reuniões',
+        'Centralizar resoluções — isso alimenta a dependência que ela quer superar',
+      ],
+      frequencia: '1:1 quinzenal · Resposta em até 24h para dúvidas técnicas (não imediata)',
+      alerta: 'Ela disse que o que a drena é não resolver sozinha. O melhor presente que você pode dar é um ambiente que a force (com segurança) a tentar primeiro.',
+    },
+    {
+      id: 2, nome: 'Mayggla', disc: 'IS', cargo: 'Auxiliar Fiscal',
+      resumo: 'Sente que usa 2/5 do potencial. Quer ser designada para algo importante. Reconhecimento público tem peso enorme para ela.',
+      sim: [
+        'Designar para uma tarefa relevante e anunciar para a equipe o motivo',
+        'Reconhecer publicamente cada avanço — "Mayggla foi responsável por isso"',
+        'Check-in quinzenal sobre o progresso: ela precisa sentir que está evoluindo',
+        'Abrir espaço para que ela proponha como quer crescer',
+      ],
+      nao: [
+        'Mantê-la no mesmo ciclo sem novidade ou responsabilidade crescente',
+        'Dar feedback só em situações de erro',
+        'Ignorar que ela sente subutilização — isso vira desmotivação silenciosa',
+      ],
+      frequencia: '1:1 quinzenal · Reconhecimento semanal quando merecido (informal está ok)',
+      alerta: 'A falta de constância travou aprendizados anteriores. Ajude-a a criar rituais pequenos e consistentes — não metas grandes que abandonam.',
+    },
+    {
+      id: 3, nome: 'Thais', disc: 'DI', cargo: 'Auxiliar Fiscal',
+      resumo: 'Energia altíssima, se sente realizada todos os dias, quer crescer. Maior desafio técnico: gerar NF. Precisa de parceria, não só de chefia.',
+      sim: [
+        'Resolver o gargalo de gerar NF rapidamente — isso desbloqueia a confiança dela',
+        'Desafios progressivos: cada mês uma responsabilidade nova',
+        'Postura de parceria nas conversas — "o que você acha que deveríamos fazer?"',
+        'Conectar cada tarefa ao impacto no resultado — ela é motivada por resultado',
+      ],
+      nao: [
+        'Limitar a tarefas repetitivas sem perspectiva de crescimento',
+        'Ignorar o entusiasmo — ela percebe quando não é reconhecida',
+        'Deixar o gargalo da NF sem solução: trava o PDI inteiro dela',
+      ],
+      frequencia: '1:1 mensal · Contato direto para celebrar conquistas quando acontecerem',
+      alerta: 'Ela admira quem domina todas as áreas. Seja esse modelo — mostre o caminho com exemplos concretos do que você já dominou.',
+    },
+    {
+      id: 4, nome: 'Karen', disc: 'SI', cargo: 'Auxiliar Contábil/Fiscal',
+      resumo: 'Maior insegurança: não estar atendendo as expectativas. Pediu feedback explicitamente. Comunicação em público a inibe (2/5 para opinar).',
+      sim: [
+        'Feedback estruturado a cada 15 dias: o que foi bom, o que melhorar, como melhorar',
+        'Critérios claros de desempenho por escrito — ela precisa saber onde está a régua',
+        'Reconhecer pequenas conquistas imediatamente quando acontecem',
+        'Conversar em particular, nunca expor dificuldades para a equipe',
+        'Incluir no processo de feedback o que ela acha do próprio desempenho',
+      ],
+      nao: [
+        'Dar feedback só quando há problema',
+        'Deixar semanas sem sinal de como ela está indo',
+        'Cobrar em reunião de equipe',
+        'Assumir que ela está bem porque não reclama',
+      ],
+      frequencia: '1:1 QUINZENAL OBRIGATÓRIO · Nunca saltar esta reunião com Karen',
+      alerta: 'Ela respondeu este formulário com 3/5 de conforto — a mais baixa da equipe. Crie segurança psicológica antes de cobrar resultado.',
+    },
+    {
+      id: 5, nome: 'Laisa', disc: 'SC', cargo: 'Analista Fiscal',
+      resumo: 'Energia 5/5, aspiração clara de liderança em 5 anos, formatura e CRC em 2026. Maior retorno de investimento da equipe.',
+      sim: [
+        'Desafios que vão além do cargo atual — ela aguenta e quer mais',
+        'Incluí-la em conversas de coordenação e decisões de processo',
+        'Investir ativamente na formatura e no CRC como meta oficial do PDI',
+        'Feedbacks sinceros sobre o caminho para liderança: o que falta, o que ela já tem',
+        'Ser mentora ativa — não só gestora',
+      ],
+      nao: [
+        'Manter só na rotina operacional',
+        'Dar feedbacks genéricos — ela pediu feedbacks sinceros',
+        'Subestimar a ambição: 5 anos para coordenação é realista se bem investido',
+      ],
+      frequencia: '1:1 quinzenal · Mentorar ativamente para liderança — ela está pronta para isso',
+      alerta: 'Ela disse que está muito feliz de ter entrado para o grupo. Não desperdice essa energia inicial — canalize rapidamente para desafios reais.',
+    },
+  ],
+
+  planoMeses: [
+    {
+      periodo: 'Julho 2026', cor: '#7C3AED',
+      foco: 'Realizar os 6 primeiros 1:1 e estabelecer cadência',
+      acoes: [
+        'Concluir o 1:1 com todas as 6 colaboradoras usando os relatórios PDF',
+        'Definir cadência de reuniões: quinzenal (Ana, Mayggla, Karen, Laisa) e mensal (Karolyne, Thais)',
+        'Criar critérios de desempenho claros para Karen por escrito',
+        'Designar Mayggla para primeira responsabilidade relevante',
+        'Resolver gargalo de geração de NF com Thais',
+      ],
+    },
+    {
+      periodo: 'Agosto 2026', cor: '#1565C0',
+      foco: 'Capacitação em bloco + mentoria estruturada',
+      acoes: [
+        'Organizar capacitação coletiva sobre Reforma Tributária (IBS/CBS)',
+        'Iniciar mentoria semanal: Karolyne/Ana → Mayggla/Thais/Karen',
+        'Primeiro feedback estruturado com Karen (15 dias após o 1:1)',
+        'Acompanhar primeiras ações do PDI de cada colaboradora',
+        'Trabalhar conscientemente o I adaptativo: manter calor mesmo sob pressão',
+      ],
+    },
+    {
+      periodo: 'Setembro 2026', cor: '#1B5E20',
+      foco: 'Avaliação de progresso e ajuste de rota',
+      acoes: [
+        'Avaliar progresso de cada PDI com as colaboradoras (não sozinha)',
+        'Celebrar conquistas do trimestre — publicamente para Mayggla e Thais',
+        'Revisar critérios de Karen: ela progrediu? O que ajustar?',
+        'Checar carga de Karolyne: precisa de ajuste ou está em equilíbrio?',
+        'Definir desafio de liderança para Laisa no próximo trimestre',
+        'Avaliar seu próprio desenvolvimento: consegui manter o I? Como estou no feedback?',
+      ],
+    },
+  ],
+};
+
+function renderMeuPlano() {
+  const el = document.getElementById('meu-plano-content');
+  const cor = '#9333EA';
+  const corL = '#F3E8FF';
+
+  // Perfil
+  let html = `
+  <div style="border-left:4px solid ${cor};background:${corL};border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:20px;">
+    <div style="font-size:16px;font-weight:700;color:${cor};margin-bottom:4px;">Ananda · DISC ${planoLideranca.perfil.disc}</div>
+    <div style="font-size:12px;color:var(--cinza-500);">Natural: I=${planoLideranca.perfil.natural.I} · C=${planoLideranca.perfil.natural.C} · D=${planoLideranca.perfil.natural.D} · S=${planoLideranca.perfil.natural.S}
+    &nbsp;|&nbsp; Adaptativo: C=${planoLideranca.perfil.adaptativo.C} · I=${planoLideranca.perfil.adaptativo.I} · D=${planoLideranca.perfil.adaptativo.D} · S=${planoLideranca.perfil.adaptativo.S}</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+    <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);">
+      <div style="font-size:11px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">💪 Suas Forças como Líder</div>
+      ${planoLideranca.perfil.forcas.map(f => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:6px;display:flex;gap:6px;"><span style="color:${cor};">✓</span>${f}</div>`).join('')}
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);">
+      <div style="font-size:11px;font-weight:700;color:#C62828;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">🎯 O que Desenvolver</div>
+      ${planoLideranca.perfil.desenvolver.map(d => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:6px;display:flex;gap:6px;"><span style="color:#C62828;">→</span>${d}</div>`).join('')}
+    </div>
+  </div>
+
+  <div style="background:#FEF3C7;border:1.5px solid #F59E0B;border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
+    <span style="font-size:20px;flex-shrink:0;">⚠️</span>
+    <div style="font-size:13px;color:#92400E;line-height:1.6;">${planoLideranca.perfil.alerta}</div>
+  </div>
+
+  <!-- O que a equipe espera -->
+  <div style="background:#fff;border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:20px;">
+    <div style="font-size:12px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">💬 O que cada uma espera de mim como líder</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;">
+      ${planoLideranca.timeEspera.map(t => {
+        const c = colaboradoras.find(x => x.nome.startsWith(t.nome.split(' ')[0]));
+        const cor2 = c ? c.cor : '#666';
+        const corL2 = c ? c.corLight : '#eee';
+        return `<div style="background:${corL2};border-radius:8px;padding:10px 14px;border-left:3px solid ${cor2};">
+          <div style="font-size:11px;font-weight:700;color:${cor2};margin-bottom:4px;">${t.nome}</div>
+          <div style="font-size:12px;color:var(--cinza-600);line-height:1.5;">"${t.espera}"</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+
+  <!-- Como agir com cada uma -->
+  <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
+    🎯 Como Agir com Cada Uma
+  </div>`;
+
+  planoLideranca.comoAgir.forEach(p => {
+    const c = colaboradoras[p.id];
+    const cor2 = c ? c.cor : '#666';
+    const corL2 = c ? c.corLight : '#f5f5f5';
+    html += `
+    <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:14px;">
+      <div style="background:${cor2};padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <span style="font-size:14px;font-weight:700;color:#fff;">${p.nome}</span>
+          <span style="font-size:11px;color:rgba(255,255,255,.75);margin-left:8px;">${p.cargo} · DISC ${p.disc}</span>
+        </div>
+        <span style="font-size:11px;font-weight:600;background:rgba(255,255,255,.2);color:#fff;padding:3px 10px;border-radius:20px;">${p.frequencia}</span>
+      </div>
+      <div style="padding:14px 18px;">
+        <p style="font-size:12px;color:var(--cinza-500);font-style:italic;margin:0 0 12px;">${p.resumo}</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">✅ FAÇA</div>
+            ${p.sim.map(s => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:5px;display:flex;gap:6px;line-height:1.4;"><span style="color:#16a34a;flex-shrink:0;">+</span>${s}</div>`).join('')}
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#991B1B;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">❌ EVITE</div>
+            ${p.nao.map(n => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:5px;display:flex;gap:6px;line-height:1.4;"><span style="color:#dc2626;flex-shrink:0;">−</span>${n}</div>`).join('')}
+          </div>
+        </div>
+        <div style="background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;line-height:1.5;">
+          ⚡ <strong>Atenção:</strong> ${p.alerta}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  // Plano de ação mensal
+  html += `<div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin:20px 0 14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
+    📅 Plano de Ação — Jul a Set 2026
+  </div>`;
+
+  planoLideranca.planoMeses.forEach(m => {
+    html += `<div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:14px;">
+      <div style="background:${m.cor};padding:12px 18px;">
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px;">${m.periodo}</div>
+        <div style="font-size:14px;font-weight:700;color:#fff;margin-top:2px;">${m.foco}</div>
+      </div>
+      <div style="padding:14px 18px;">
+        ${m.acoes.map((a,i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;">
+          <span style="background:${m.cor};color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">${i+1}</span>
+          <span style="font-size:13px;color:var(--cinza-700);line-height:1.5;">${a}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function gerarPdfPlano() {
+  const conteudo = document.getElementById('meu-plano-content').innerHTML;
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8">
+  <title>Plano de Liderança — Ananda</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; color: #333; font-size: 13px; line-height: 1.6; }
+    @media print { body { margin: 16px; } button { display: none; } }
+    * { box-sizing: border-box; }
+    .shadow { box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    :root {
+      --cinza-100: #f3f4f6; --cinza-200: #e5e7eb; --cinza-400: #9ca3af;
+      --cinza-500: #6b7280; --cinza-600: #4b5563; --cinza-700: #374151;
+      --shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+  </style>
+  </head><body>
+  <div style="margin-bottom:20px;padding-bottom:12px;border-bottom:3px solid #9333EA;">
+    <div style="font-size:20px;font-weight:700;color:#9333EA;">👩‍💼 Plano de Liderança — Ananda</div>
+    <div style="font-size:12px;color:#666;margin-top:4px;">Grupo Paraná · PDI 2026–2027 · Ciclo Jul–Set 2026</div>
+  </div>
+  ${conteudo}
+  <script>window.onload = function(){ window.print(); }<\/script>
+  </body></html>`);
+  win.document.close();
+}
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function getCorColab(id) {
