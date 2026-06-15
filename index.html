@@ -1013,7 +1013,7 @@
     </div>
   </div>
   <div class="header-meta">
-    Ciclo 2025–2026<br>
+    Ciclo 2026–2027<br>
     6 colaboradoras · 6 meses
   </div>
 </div>
@@ -1024,6 +1024,9 @@
   <button class="tab-btn" onclick="showTab('individual')" id="tab-individual" style="display:none">Perfil individual</button>
   <button class="tab-btn" onclick="showTab('disc')">🧠 Perfis DISC</button>
   <button class="tab-btn" onclick="showTab('consultoria')">✨ Consultoria IA</button>
+  <button class="tab-btn" onclick="showTab('respostas')">📋 Respostas</button>
+  <button class="tab-btn" onclick="showTab('um-a-um')">💬 1:1</button>
+  <button class="tab-btn" onclick="showTab('pdi-view')">🎯 PDI</button>
 </div>
 
 <!-- VISÃO GERAL -->
@@ -1371,6 +1374,43 @@
     </div>
   </div>
 </div>
+
+<!-- ════════════════ ABA: RESPOSTAS ════════════════ -->
+<div id="view-respostas" class="main" style="display:none">
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+    <div style="font-size:18px;font-weight:700;color:var(--azul-900);">📋 Respostas do Formulário PDI</div>
+    <select id="resp-select" onchange="renderRespostas()" style="padding:8px 14px;border-radius:8px;border:1.5px solid var(--cinza-200);font-size:14px;color:var(--azul-900);background:#fff;cursor:pointer;">
+      <option value="">Selecione uma colaboradora...</option>
+    </select>
+  </div>
+  <div id="resp-content"></div>
+</div>
+
+<!-- ════════════════ ABA: 1:1 ════════════════ -->
+<div id="view-um-a-um" class="main" style="display:none">
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+    <div style="font-size:18px;font-weight:700;color:var(--azul-900);">💬 Condução do 1:1</div>
+    <select id="um-select" onchange="renderUmaUm()" style="padding:8px 14px;border-radius:8px;border:1.5px solid var(--cinza-200);font-size:14px;color:var(--azul-900);background:#fff;cursor:pointer;">
+      <option value="">Selecione uma colaboradora...</option>
+    </select>
+    <button onclick="printUmaUm()" style="padding:8px 16px;background:var(--azul-700);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">🖨 Imprimir</button>
+  </div>
+  <div id="um-content"></div>
+</div>
+
+<!-- ════════════════ ABA: PDI ════════════════ -->
+<div id="view-pdi-view" class="main" style="display:none">
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+    <div style="font-size:18px;font-weight:700;color:var(--azul-900);">🎯 Plano de Desenvolvimento Individual</div>
+    <select id="pdi-select" onchange="renderPdiView()" style="padding:8px 14px;border-radius:8px;border:1.5px solid var(--cinza-200);font-size:14px;color:var(--azul-900);background:#fff;cursor:pointer;">
+      <option value="">Selecione uma colaboradora...</option>
+    </select>
+  </div>
+  <div id="pdi-content"></div>
+</div>
+
+
+
 
 <script>
 // ── DADOS DAS COLABORADORAS ──
@@ -2737,7 +2777,7 @@ function limparIndicacao() {
 
 // ── Tabs ──
 function showTab(tab) {
-  const allTabs = ['visao-geral','equipe','individual','disc','consultoria'];
+  const allTabs = ['visao-geral','equipe','individual','disc','consultoria','respostas','um-a-um','pdi-view'];
   allTabs.forEach(t => {
     const v = document.getElementById('view-' + t);
     if (v) v.style.display = 'none';
@@ -2762,6 +2802,521 @@ function showTab(tab) {
   if (tab === 'consultoria') {
     renderConsultoriaSelect();
   }
+  if (tab === 'respostas') { renderRespostas(); }
+  if (tab === 'um-a-um')   { renderUmaUm(); }
+  if (tab === 'pdi-view')  { renderPdiView(); }
+}
+
+// ══════════════════════════════════════════════════════
+//  DADOS: Respostas formulário + PDI + Perguntas 1:1
+// ══════════════════════════════════════════════════════
+const dadosFormulario = [
+  {
+    id: 0, nome: 'Karolyne Carvalho', cargo: 'Analista Fiscal',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: 'Desafios, oportunidades de desenvolvimento e reconhecimento pelos resultados.' },
+        { p: 'O que mais motiva', r: 'Aprender coisas novas, Reconhecimento, Crescer de cargo.' },
+        { p: 'Semana de realização', r: 'Entreguei todas as obrigações sem impedimentos, minha casa fluiu, está organizada.' },
+        { p: 'O que drena energia', r: 'Sistemas e impedimentos de entrega.' },
+        { p: 'Usa o melhor de si (1–5)', r: '5 — Sim, plenamente.' },
+        { p: 'Para o melhor ano da carreira', r: 'Crescer e desenvolver profissionalmente, ajudando minha vida pessoal a desenvolver.' },
+        { p: 'Maior conquista', r: 'Minha casa e a família que construí.' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '4/5' }, { p: 'Conciliações', r: '3/5' },
+        { p: 'Obrigações Acessórias', r: '4/5' }, { p: 'Reforma Tributária', r: '2/5' },
+        { p: 'Excel', r: '2/5' }, { p: 'Sistemas', r: '4/5' },
+        { p: 'Legislação/Pesquisa', r: '3/5' }, { p: 'Classif. Fiscal', r: '4/5' },
+        { p: 'Financeiro', r: '5/5' }, { p: 'Comunicação Interdept.', r: '5/5' },
+        { p: 'IRPJ/CSLL', r: '4/5' }, { p: 'ICMS/PIS/COFINS', r: '4/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Pessoalmente.' },
+        { p: 'À vontade para opinar (1–5)', r: '5 — Totalmente à vontade.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '3 — Equilíbrio.' },
+        { p: 'Modelo de comunicação admirado', r: 'Explica com clareza e calma.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Tributos, Análise de dados.' },
+        { p: 'Aprende melhor', r: 'Fazendo na prática.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '1 — Quase nenhuma disponível hoje.' },
+        { p: 'Curso ideal', r: 'Área Fiscal e Tributária para Supermercados (VT Paraná).' },
+        { p: 'Já se imaginou liderando', r: 'Prefere crescer como especialista.' },
+        { p: 'Visão 2 e 5 anos', r: 'Especialista reconhecida, suporte para a empresa.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Receber desafios e conseguir concluir.' },
+        { p: 'Maior desafio hoje', r: 'Legislação.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Gentileza, paciência, tranquilidade, respeito às dificuldades e tratar como igual.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '5 — Muito bem, sentiu-se ouvida.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Você mencionou que sistemas e impedimentos drenam sua energia. Quais são os principais gargalos que podemos atacar juntas?',
+      'Sua energia para desenvolvimento está em 1/5 hoje. O que precisaria mudar na sua rotina para abrir mais espaço?',
+      'Excel é uma lacuna que você mesma identificou. Como você se sentiria com um plano prático de 30 min/semana?',
+      'Você quer ser especialista, não líder formal. Quais conhecimentos definem essa especialização ideal para você?',
+      'Você disse que a maior conquista foi sua casa e família. Como equilibramos a ambição profissional com esse equilíbrio?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Reforma Tributária aplicada ao VT Paraná', status: 'pendente', acoes: ['Curso EAD IBS/CBS para supermercados', 'Mapear impacto prático para o grupo', 'Produzir 1 resumo técnico para a equipe'] },
+      { periodo: 'Mês 3–4', foco: 'Legislação fiscal e análise de dados', status: 'pendente', acoes: ['Rotina de consulta ao Portal SPED e RFB', 'Treino de Excel: Power Query básico (30 min/semana)', 'Análise do Razão Analítico mensal de 2 entidades'] },
+      { periodo: 'Mês 5–6', foco: 'Consolidação como referência fiscal', status: 'pendente', acoes: ['Apresentar 1 tema técnico para a equipe', 'Avaliar pós-graduação em área tributária', 'Definir PDI do próximo ciclo'] },
+    ],
+  },
+  {
+    id: 1, nome: 'Ana Beatriz', cargo: 'Analista Contábil',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: 'Um lugar colaborativo, com aprendizado contínuo, valorização, processos estruturados e equipe alinhada.' },
+        { p: 'O que mais motiva', r: 'Aprender coisas novas, Reconhecimento, Impacto no resultado.' },
+        { p: 'Semana de realização', r: 'Consegui treinar a semana toda, realizei tudo que me propus, consegui ajudar o próximo.' },
+        { p: 'O que drena energia', r: 'Não conseguir resolver situações e problemas sozinha.' },
+        { p: 'Usa o melhor de si (1–5)', r: '4.' },
+        { p: 'Para o melhor ano da carreira', r: 'Saber que contribuí para bons resultados e fui reconhecida por isso.' },
+        { p: 'Maior conquista', r: 'Casar-se e terminar a faculdade.' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '4/5' }, { p: 'Conciliações', r: '4/5' },
+        { p: 'Obrigações Acessórias', r: '3/5' }, { p: 'Reforma Tributária', r: '2/5' },
+        { p: 'Excel', r: '3/5' }, { p: 'Sistemas', r: '3/5' },
+        { p: 'Legislação/Pesquisa', r: '1/5' }, { p: 'Classif. Fiscal', r: '4/5' },
+        { p: 'Financeiro', r: '2/5' }, { p: 'Comunicação Interdept.', r: '4/5' },
+        { p: 'IRPJ/CSLL', r: '2/5' }, { p: 'ICMS/PIS/COFINS', r: '3/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Depende do assunto.' },
+        { p: 'À vontade para opinar (1–5)', r: '4.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '2 — Prefere muito o individual.' },
+        { p: 'Já explicou tema técnico', r: 'Sim — ensinou cálculo de imposto para colega. Achou satisfatório.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Fechamento contábil, Análise de dados, Comunicação e oratória.' },
+        { p: 'Aprende melhor', r: 'Fazendo na prática.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '3.' },
+        { p: 'Curso ideal', r: 'Pós-graduação em auditoria ou visão estratégica de negócios.' },
+        { p: 'Já se imaginou liderando', r: 'Prefere crescer como especialista.' },
+        { p: 'Visão 2 e 5 anos', r: 'Profissional mais madura, com conhecimentos técnicos aprofundados, contribuindo significativamente.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Ter nível técnico mais maduro e ser reconhecida por isso.' },
+        { p: 'Maior desafio hoje', r: 'Não conseguir solucionar dúvidas sozinha.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Apoio, direcionamento claro e feedbacks transparentes.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '5 — Muito bem, sentiu-se ouvida.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Você disse que o que drena sua energia é não conseguir resolver problemas sozinha. Como posso te ajudar a construir mais autonomia sem te deixar largada?',
+      'Legislação/pesquisa normativa está em 1/5. Algum motivo específico para não ter avançado nessa área?',
+      'Você quer pós em auditoria. Isso é uma meta para o próximo ciclo ou algo de mais longo prazo?',
+      'Você prefere muito o trabalho individual (2/5 em grupo). Como podemos usar isso a seu favor sem virar isolamento?',
+      'Você mencionou feedbacks transparentes como expectativa. O que um feedback ideal parece para você — frequência, formato, tom?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Legislação e pesquisa normativa', status: 'pendente', acoes: ['Praticar busca no Portal SPED e RFB', 'Produzir 1 resumo técnico de norma por mês', 'Responsável pelo Razão Analítico de 3 entidades'] },
+      { periodo: 'Mês 3–4', foco: 'Reforma Tributária e tributos', status: 'pendente', acoes: ['Curso EAD: IBS/CBS fundamentos (até 10h)', 'Elaborar planilha de simulação de carga tributária pós-reforma', 'Apresentar conclusões para Ananda (20 min)'] },
+      { periodo: 'Mês 5–6', foco: 'Análise de dados e visão estratégica', status: 'pendente', acoes: ['Aprofundar Excel/Power Query para dados contábeis', 'Participar de 1 projeto de análise estratégica', 'Avaliar pós-graduação em auditoria'] },
+    ],
+  },
+  {
+    id: 2, nome: 'Mayggla', cargo: 'Auxiliar Fiscal',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: '"Plante esforço, colha reconhecimento."' },
+        { p: 'O que mais motiva', r: 'Aprender coisas novas, Reconhecimento, Bom relacionamento.' },
+        { p: 'Semana de realização', r: 'Foi o dia que recebi parabéns por não errar nenhuma classificação.' },
+        { p: 'O que drena energia', r: 'Tentar realizar uma demanda e não conseguir.' },
+        { p: 'Usa o melhor de si (1–5)', r: '2 — Sente que está sendo subutilizada.' },
+        { p: 'Para o melhor ano da carreira', r: 'Ter uma constante evolução.' },
+        { p: 'Maior conquista', r: 'Tornar-se mãe.' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '1/5' }, { p: 'Conciliações', r: '1/5' },
+        { p: 'Obrigações Acessórias', r: '2/5' }, { p: 'Reforma Tributária', r: '3/5' },
+        { p: 'Excel', r: '2/5' }, { p: 'Sistemas', r: '3/5' },
+        { p: 'Legislação/Pesquisa', r: '3/5' }, { p: 'Classif. Fiscal', r: '5/5' },
+        { p: 'Financeiro', r: '3/5' }, { p: 'Comunicação Interdept.', r: '5/5' },
+        { p: 'IRPJ/CSLL', r: '3/5' }, { p: 'ICMS/PIS/COFINS', r: '3/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Depende do assunto.' },
+        { p: 'À vontade para opinar (1–5)', r: '3.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '3 — Equilíbrio.' },
+        { p: 'Atividade que flui', r: 'Classificação e lançamentos fiscais.' },
+        { p: 'Atividade que evita', r: 'Conferir o cálculo de TVF ST.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Fechamento contábil, Tributos, Automações e IA.' },
+        { p: 'Aprende melhor', r: 'Fazendo na prática.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '3.' },
+        { p: 'Curso ideal', r: 'Contabilidade.' },
+        { p: 'Já se imaginou liderando', r: 'Nunca pensou, mas não descarta.' },
+        { p: 'Visão 2 e 5 anos', r: 'Graduar-se e evoluir de auxiliar para analista.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Ser designada para algo considerado importante.' },
+        { p: 'Maior desafio hoje', r: 'Aprender algo novo que nunca teve contato.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Liderança transparente, tranquila, com comunicação e companheirismo de ambas as partes.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '3.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Você sente que usa apenas 2/5 do seu potencial. O que você gostaria de estar fazendo que ainda não está?',
+      'Sua maior realização foi receber parabéns por uma classificação perfeita. O que esse reconhecimento significa para você?',
+      'Você quer ser designada para algo importante. Que tipo de responsabilidade você imaginaria assumir?',
+      'A falta de constância travou seu aprendizado antes. Como podemos montar uma rotina que caiba na sua vida?',
+      'Contabilização está em 1/5. Você quer desenvolver isso ou prefere aprofundar no fiscal?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Base contábil — lançamentos e conciliações', status: 'pendente', acoes: ['Acompanhar 1 fechamento contábil com Ana Beatriz', 'Praticar lançamentos básicos em ambiente de treino', 'Estudo dirigido: contabilização de NFs fiscais'] },
+      { periodo: 'Mês 3–4', foco: 'Obrigações acessórias e fechamento', status: 'pendente', acoes: ['Participar do processo de escrituração de 2 clientes', 'Estudar obrigações: SPED Fiscal, EFD-Contribuições', 'Mini-apresentação: o que aprendi no trimestre'] },
+      { periodo: 'Mês 5–6', foco: 'Primeiro desafio autônomo', status: 'pendente', acoes: ['Responsável por 1 cliente simples do início ao fechamento', 'Curso EAD: Reforma Tributária fundamentos', 'Avaliação e definição do próximo ciclo'] },
+    ],
+  },
+  {
+    id: 3, nome: 'Thays Mota', cargo: 'Auxiliar Fiscal',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: '"Sonho de vida."' },
+        { p: 'O que mais motiva', r: 'Aprender coisas novas, Estabilidade, Crescer de cargo, Impacto no resultado.' },
+        { p: 'Semana de realização', r: 'Se sente realizada todos os dias.' },
+        { p: 'O que drena energia', r: 'Pessoas negativas, que colocam defeito em tudo.' },
+        { p: 'Usa o melhor de si (1–5)', r: '5.' },
+        { p: 'Para o melhor ano da carreira', r: 'Mais conhecimento e reconhecimento.' },
+        { p: 'Maior conquista', r: 'Conquista do carro próprio.' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '1/5' }, { p: 'Conciliações', r: '3/5' },
+        { p: 'Obrigações Acessórias', r: '3/5' }, { p: 'Reforma Tributária', r: '2/5' },
+        { p: 'Excel', r: '2/5' }, { p: 'Sistemas', r: '3/5' },
+        { p: 'Legislação/Pesquisa', r: '2/5' }, { p: 'Classif. Fiscal', r: '4/5' },
+        { p: 'Financeiro', r: '1/5' }, { p: 'Comunicação Interdept.', r: '2/5' },
+        { p: 'IRPJ/CSLL', r: '1/5' }, { p: 'ICMS/PIS/COFINS', r: '2/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Depende do assunto.' },
+        { p: 'À vontade para opinar (1–5)', r: '5 — Totalmente à vontade.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '3 — Equilíbrio.' },
+        { p: 'Atividade que flui', r: 'Classificação, pedidos, conferências.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Fechamento contábil, Tributos, Análise de dados.' },
+        { p: 'Aprende melhor', r: 'Vendo alguém fazer, Vídeos e cursos online, Fazendo na prática.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '3.' },
+        { p: 'Curso ideal', r: 'Reforma Tributária.' },
+        { p: 'Já se imaginou liderando', r: 'Prefere crescer como especialista.' },
+        { p: 'Visão 2 e 5 anos', r: 'Com conhecimento mais elevado e reconhecimento profissional.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Novas demandas — acredita que pode evoluir assumindo mais.' },
+        { p: 'Maior desafio hoje', r: 'Gerar nota fiscal.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Parceria e paciência.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '5 — Muito bem, sentiu-se ouvida.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Você se sente realizada todos os dias — o que especificamente faz o seu dia se sentir completo?',
+      'Gerar nota é seu maior desafio hoje. Como posso te ajudar a superar esse obstáculo rapidamente?',
+      'Contabilização está em 1/5. É uma área que você quer desenvolver ou prefere manter o foco no fiscal?',
+      'Você admira quem domina praticamente todas as áreas. Quais áreas você mais quer dominar nos próximos 6 meses?',
+      'Você quer crescer de cargo. O que precisaria conquistar para você se sentir pronta para esse próximo passo?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Base contábil integrada à rotina fiscal', status: 'pendente', acoes: ['Treinar geração de NFs com acompanhamento', 'Estudar lançamentos contábeis básicos aplicados', 'Praticar conciliação bancária de 1 entidade simples'] },
+      { periodo: 'Mês 3–4', foco: 'Tributos e Reforma Tributária', status: 'pendente', acoes: ['Curso EAD: Reforma Tributária fundamentos', 'Exercícios práticos: ICMS, PIS/COFINS básico', 'Participar de 1 análise fiscal com Karolyne'] },
+      { periodo: 'Mês 5–6', foco: 'Análise de dados e consolidação', status: 'pendente', acoes: ['Aprender Excel intermediário: tabela dinâmica', 'Responsável por 1 relatório fiscal mensal', 'Avaliação do ciclo e próximos passos'] },
+    ],
+  },
+  {
+    id: 4, nome: 'Karen', cargo: 'Auxiliar Contábil/Fiscal',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: '"Trabalhe com o que você ama e nunca mais precisará trabalhar na vida."' },
+        { p: 'O que mais motiva', r: 'Reconhecimento, Crescer de cargo, Impacto no resultado.' },
+        { p: 'Semana de realização', r: 'Tudo fluiu bem, sem cobranças, entregou tudo e resolveu sem solicitar ajuda.' },
+        { p: 'O que drena energia', r: 'Quando não consegue entregar um bom relatório; cobranças por coisas que não dependem só dela.' },
+        { p: 'Usa o melhor de si (1–5)', r: '3.' },
+        { p: 'Para o melhor ano da carreira', r: 'Receber alguma promoção e ter reconhecimento do desempenho.' },
+        { p: 'Maior conquista', r: 'Formação e realização do sonho de ser mãe.' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '2/5' }, { p: 'Conciliações', r: '1/5' },
+        { p: 'Obrigações Acessórias', r: '1/5' }, { p: 'Reforma Tributária', r: '1/5' },
+        { p: 'Excel', r: '3/5' }, { p: 'Sistemas', r: '3/5' },
+        { p: 'Legislação/Pesquisa', r: '1/5' }, { p: 'Classif. Fiscal', r: '2/5' },
+        { p: 'Financeiro', r: '4/5' }, { p: 'Comunicação Interdept.', r: '3/5' },
+        { p: 'IRPJ/CSLL', r: '1/5' }, { p: 'ICMS/PIS/COFINS', r: '1/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Depende do assunto.' },
+        { p: 'À vontade para opinar (1–5)', r: '2 — Pouco confortável.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '3.' },
+        { p: 'Atividade que flui', r: 'Conferências de relatórios e cobranças.' },
+        { p: 'Atividade que evita', r: 'Contabilização — não consegue fazer diariamente.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Fechamento contábil, Tributos.' },
+        { p: 'Aprende melhor', r: 'Lendo materiais, Vídeos, Fazendo na prática, Discutindo com outras pessoas.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '3.' },
+        { p: 'Curso ideal', r: 'Contabilidade (já formada em Administração — período menor).' },
+        { p: 'Já se imaginou liderando', r: 'Sim, mas tem dúvidas.' },
+        { p: 'Visão 2 e 5 anos', r: '2 anos: conhecimento mais aprofundado; 5 anos: referência, novos desafios.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Saber como está indo seu desempenho — precisa de feedback claro.' },
+        { p: 'Maior desafio hoje', r: 'Não estar atendendo as expectativas esperadas.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Comunicação clara, escuta ativa, empatia e reconhecimento.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '3.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Seu maior medo é não estar atendendo as expectativas. Quero te dizer o que vejo em você — como prefere receber esse feedback?',
+      'Você precisa saber como está seu desempenho. Vamos definir juntas indicadores concretos para você acompanhar seu próprio progresso?',
+      'A base técnica contábil/fiscal está baixa. Você tem vontade de cursar contabilidade — como podemos tornar isso viável?',
+      'Você se sente pouco à vontade para opinar em reuniões (2/5). O que faria você se sentir mais segura para se posicionar?',
+      'Você quer crescer, mas tem dúvidas sobre liderança. O que te atrai e o que te assusta nesse papel?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Base técnica — contabilização e fiscal', status: 'pendente', acoes: ['Acompanhar 1 fechamento contábil por semana com Karolyne', 'Estudar NF-e e classificação fiscal básica', 'Definir com Ananda: métricas do meu desempenho'] },
+      { periodo: 'Mês 3–4', foco: 'Obrigações acessórias e tributos básicos', status: 'pendente', acoes: ['Estudo: SPED Fiscal e obrigações do Simples', 'Exercícios de lançamento contábil de NFs', 'Reunião mensal de feedback estruturado com Ananda'] },
+      { periodo: 'Mês 5–6', foco: 'Consolidação e projeção de carreira', status: 'pendente', acoes: ['Definir curso de contabilidade (graduação/pós)', 'Participar de 1 projeto relevante com autonomia', 'Avaliação e plano do próximo ciclo'] },
+    ],
+  },
+  {
+    id: 5, nome: 'Laisa', cargo: 'Analista Fiscal',
+    respostas: [
+      { cat: 'Perfil e Motivações', itens: [
+        { p: 'Trabalho ideal', r: 'Um trabalho onde possa crescer profissionalmente, aprender todos os dias e fazer parte de um time que valorize o desenvolvimento e os resultados.' },
+        { p: 'O que mais motiva', r: 'Aprender coisas novas, Reconhecimento, Ajudar e ensinar.' },
+        { p: 'Semana de realização', r: 'A semana em que entregou o estágio e recebeu nota máxima.' },
+        { p: 'O que drena energia', r: 'Quando não há colaboração entre as pessoas.' },
+        { p: 'Usa o melhor de si (1–5)', r: '5 — Plenamente.' },
+        { p: 'Para o melhor ano da carreira', r: 'Estar formada e tirar o CRC.' },
+        { p: 'Maior conquista', r: 'Contribuiu para organização tributária na empresa anterior, gerando economia de impostos. Está finalizando a faculdade.' },
+        { p: 'Mensagem adicional', r: 'Estou muito feliz de ter entrado para o grupo!' },
+      ]},
+      { cat: 'Autoavaliação Técnica', itens: [
+        { p: 'Contabilização', r: '4/5' }, { p: 'Conciliações', r: '3/5' },
+        { p: 'Obrigações Acessórias', r: '3/5' }, { p: 'Reforma Tributária', r: '2/5' },
+        { p: 'Excel', r: '4/5' }, { p: 'Sistemas', r: '2/5' },
+        { p: 'Legislação/Pesquisa', r: '2/5' }, { p: 'Classif. Fiscal', r: '4/5' },
+        { p: 'Financeiro', r: '3/5' }, { p: 'Comunicação Interdept.', r: '4/5' },
+        { p: 'IRPJ/CSLL', r: '4/5' }, { p: 'ICMS/PIS/COFINS', r: '4/5' },
+      ]},
+      { cat: 'Comportamento e Comunicação', itens: [
+        { p: 'Como prefere se comunicar', r: 'Depende do assunto.' },
+        { p: 'À vontade para opinar (1–5)', r: '4.' },
+        { p: 'Papel em conflito', r: 'Observa e só se posiciona se necessário.' },
+        { p: 'Prefere grupo vs. individual (1–5)', r: '3 — Equilíbrio.' },
+        { p: 'Habilidade destacada', r: 'Anota o processo na primeira explicação para não precisar perguntar de novo.' },
+      ]},
+      { cat: 'Desenvolvimento e Aspirações', itens: [
+        { p: 'Temas de interesse', r: 'Reforma Tributária, Tributos, Automações e IA, Comunicação e oratória.' },
+        { p: 'Aprende melhor', r: 'Fazendo na prática.' },
+        { p: 'Energia para desenvolvimento (1–5)', r: '5 — Máxima disponível.' },
+        { p: 'Curso ideal', r: 'Curso detalhado sobre a Reforma Tributária.' },
+        { p: 'Já se imaginou liderando', r: 'Sim, objetivo claro — em 5 anos: coordenação ou liderança.' },
+        { p: 'Visão 2 e 5 anos', r: '2 anos: especialista nas rotinas fiscais/contábeis e referência técnica; 5 anos: coordenação ou liderança.' },
+        { p: 'Para sentir evolução em 6 meses', r: 'Receber novos desafios e ter autonomia entre colegas e superiores.' },
+      ]},
+      { cat: 'Expectativas da Líder', itens: [
+        { p: 'O que espera de mim', r: 'Comunicação transparente e feedbacks sinceros.' },
+        { p: 'Sentiu-se respondendo (1–5)', r: '5 — Muito bem, sentiu-se ouvida.' },
+      ]},
+    ],
+    perguntas1a1: [
+      'Você quer liderar em 5 anos. Que habilidades você acha que precisa desenvolver para chegar lá?',
+      'Sua energia para desenvolvimento é 5/5. Como transformamos isso em um plano concreto sem te sobrecarregar?',
+      'Você disse que a falta de colaboração te desanima. Como está a dinâmica da equipe para você agora?',
+      'Você anota os processos na primeira explicação para não precisar perguntar de novo — como podemos aproveitar essa habilidade?',
+      'Você termina a faculdade esse ano e quer o CRC. Vamos incluir isso no PDI como meta oficial?',
+    ],
+    pdi: [
+      { periodo: 'Mês 1–2', foco: 'Reforma Tributária + pesquisa normativa', status: 'pendente', acoes: ['Curso detalhado Reforma Tributária (IBS/CBS/IS)', 'Acompanhar impactos práticos nos clientes do grupo', 'Produzir 1 resumo executivo para a equipe'] },
+      { periodo: 'Mês 3–4', foco: 'Tributos e autonomia técnica', status: 'pendente', acoes: ['Aprofundar IRPJ/CSLL com casos práticos', 'Exercícios de análise e conferência autônoma', 'Buscar desafios fora da rotina diária com Ananda'] },
+      { periodo: 'Mês 5–6', foco: 'Consolidação e protagonismo', status: 'pendente', acoes: ['Formatura + registro no CRC', 'Liderar 1 processo ou projeto pequeno', 'Definir trilha de desenvolvimento para liderança'] },
+    ],
+  },
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function getCorColab(id) {
+  const c = colaboradoras[id];
+  return c ? c.cor : '#666';
+}
+function getCorLightColab(id) {
+  const c = colaboradoras[id];
+  return c ? c.corLight : '#eee';
+}
+
+function populateSelect(selectId, placeholder) {
+  const sel = document.getElementById(selectId);
+  if (!sel || sel.options.length > 1) return;
+  dadosFormulario.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.nome + ' — ' + d.cargo;
+    sel.appendChild(opt);
+  });
+}
+
+// ── ABA RESPOSTAS ─────────────────────────────────────────────────────────────
+function renderRespostas() {
+  populateSelect('resp-select');
+  const sel = document.getElementById('resp-select');
+  const container = document.getElementById('resp-content');
+  const idx = sel.value;
+  if (idx === '') { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para ver as respostas.</p>'; return; }
+  const d = dadosFormulario[parseInt(idx)];
+  const cor = getCorColab(d.id);
+  const corL = getCorLightColab(d.id);
+
+  let html = `<div style="border-left:4px solid ${cor};padding:12px 20px;background:${corL};border-radius:0 12px 12px 0;margin-bottom:24px;">
+    <div style="font-size:16px;font-weight:700;color:${cor};">${d.nome}</div>
+    <div style="font-size:13px;color:var(--cinza-500);">${d.cargo}</div>
+  </div>`;
+
+  d.respostas.forEach(cat => {
+    html += `<div style="margin-bottom:20px;">
+      <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid ${corL};">${cat.cat}</div>`;
+    cat.itens.forEach(item => {
+      html += `<div style="margin-bottom:10px;padding:10px 14px;background:#fafafa;border-radius:8px;border:1px solid var(--cinza-100);">
+        <div style="font-size:11px;font-weight:600;color:var(--cinza-400);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">${item.p}</div>
+        <div style="font-size:13px;color:var(--cinza-700);line-height:1.6;">${item.r}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+// ── ABA 1:1 ──────────────────────────────────────────────────────────────────
+function renderUmaUm() {
+  populateSelect('um-select');
+  const sel = document.getElementById('um-select');
+  const container = document.getElementById('um-content');
+  const idx = sel.value;
+  if (idx === '') { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para preparar o 1:1.</p>'; return; }
+  const d = dadosFormulario[parseInt(idx)];
+  const cor = getCorColab(d.id);
+  const corL = getCorLightColab(d.id);
+
+  let html = `<div style="border-left:4px solid ${cor};padding:12px 20px;background:${corL};border-radius:0 12px 12px 0;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-size:16px;font-weight:700;color:${cor};">${d.nome}</div>
+      <div style="font-size:13px;color:var(--cinza-500);">${d.cargo} · 1:1 PDI 2026–2027</div>
+    </div>
+    <div style="font-size:12px;color:var(--cinza-400);">Data: _____ / _____ / 2026</div>
+  </div>
+
+  <div style="margin-bottom:24px;">
+    <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
+      💬 Perguntas Sugeridas
+    </div>`;
+
+  d.perguntas1a1.forEach((q, i) => {
+    html += `<div style="margin-bottom:18px;">
+      <div style="font-size:13px;font-weight:600;color:var(--cinza-700);margin-bottom:6px;">${i+1}. ${q}</div>
+      <textarea rows="3" placeholder="Anotações..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>
+    </div>`;
+  });
+
+  html += `</div>
+  <div style="margin-bottom:24px;">
+    <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
+      📝 Anotações Livres
+    </div>
+    <textarea rows="6" placeholder="Pontos levantados pela colaboradora, percepções, combinados..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>
+  </div>
+  <div>
+    <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
+      ✅ Próximos Passos Combinados
+    </div>
+    <textarea rows="4" placeholder="O que foi combinado? Quem faz o quê e até quando..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+function printUmaUm() { window.print(); }
+
+// ── ABA PDI ───────────────────────────────────────────────────────────────────
+const statusCiclo = {};
+
+function toggleStatus(id, periodoIdx) {
+  const key = id + '_' + periodoIdx;
+  const estados = ['pendente', 'em-andamento', 'concluido'];
+  const atual = statusCiclo[key] || 'pendente';
+  const prox = estados[(estados.indexOf(atual) + 1) % estados.length];
+  statusCiclo[key] = prox;
+  renderPdiView();
+}
+
+function renderPdiView() {
+  populateSelect('pdi-select');
+  const sel = document.getElementById('pdi-select');
+  const container = document.getElementById('pdi-content');
+  const idx = sel.value;
+  if (idx === '') { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para ver o PDI.</p>'; return; }
+  const d = dadosFormulario[parseInt(idx)];
+  const cor = getCorColab(d.id);
+  const corL = getCorLightColab(d.id);
+
+  const statusCfg = {
+    'pendente':     { label: 'Pendente',      bg: '#f3f4f6', color: '#6b7280', icon: '○' },
+    'em-andamento': { label: 'Em andamento',  bg: '#FEF9C3', color: '#854D0E', icon: '◑' },
+    'concluido':    { label: 'Concluído',      bg: '#DCFCE7', color: '#166534', icon: '●' },
+  };
+
+  // Progresso geral
+  const total = d.pdi.length;
+  const concluidos = d.pdi.filter((_, i) => (statusCiclo[d.id + '_' + i] || 'pendente') === 'concluido').length;
+  const emAndamento = d.pdi.filter((_, i) => (statusCiclo[d.id + '_' + i] || 'pendente') === 'em-andamento').length;
+  const pct = Math.round((concluidos / total) * 100);
+
+  let html = `<div style="border-left:4px solid ${cor};padding:12px 20px;background:${corL};border-radius:0 12px 12px 0;margin-bottom:20px;">
+    <div style="font-size:16px;font-weight:700;color:${cor};">${d.nome} · PDI 2026–2027</div>
+    <div style="font-size:13px;color:var(--cinza-500);">${d.cargo}</div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+      <div style="flex:1;height:8px;background:var(--cinza-100);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:${pct}%;background:${cor};border-radius:4px;transition:width .4s;"></div>
+      </div>
+      <span style="font-size:12px;font-weight:700;color:${cor};">${pct}% concluído</span>
+      <span style="font-size:11px;color:var(--cinza-400);">${concluidos}/${total} períodos</span>
+    </div>
+  </div>`;
+
+  d.pdi.forEach((p, i) => {
+    const key = d.id + '_' + i;
+    const st = statusCiclo[key] || 'pendente';
+    const cfg = statusCfg[st];
+    html += `<div style="margin-bottom:16px;border-radius:12px;overflow:hidden;border:1.5px solid var(--cinza-100);">
+      <div style="background:${cor};padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;">${p.periodo}</span>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-top:2px;">${p.foco}</div>
+        </div>
+        <button onclick="toggleStatus(${d.id}, ${i})"
+          style="padding:6px 14px;background:${cfg.bg};color:${cfg.color};border:none;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">
+          ${cfg.icon} ${cfg.label}
+        </button>
+      </div>
+      <div style="padding:14px 16px;background:#fff;">
+        ${p.acoes.map(a => `<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:13px;color:var(--cinza-700);line-height:1.5;">
+          <span style="color:${cor};font-weight:700;flex-shrink:0;">→</span>${a}
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
 }
 
 // ── Init ──
