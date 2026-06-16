@@ -2001,13 +2001,21 @@ function toggleCheck(el) {
 
 // ── DISC NO PERFIL INDIVIDUAL ──
 function getDiscData(colabId) {
-  const saved = localStorage.getItem('disc_' + colabId);
+  const saved = _ls.getItem('disc_' + colabId);
   if (saved) return JSON.parse(saved);
   return discEquipe.find(d => d.colabId === colabId) || null;
 }
 
+// Memória em sessão (substitui localStorage — GitHub Pages não persiste)
+const _store = {};
+const _ls = {
+  getItem: k => _store[k] ?? null,
+  setItem: (k, v) => { _store[k] = String(v); },
+  removeItem: k => { delete _store[k]; },
+};
+
 function isDesligada(id) {
-  return localStorage.getItem('desligada_' + id) === '1';
+  return _ls.getItem('desligada_' + id) === '1';
 }
 
 function renderDiscNoPerfil(id) {
@@ -2075,7 +2083,7 @@ function renderDiscNoPerfil(id) {
   }).join('') : '<p style="font-size:12px;color:var(--cinza-400)">Values Index não disponível.</p>';
 
   const tracos = (disc.tracos || []).map(t => `<span class="traco-tag">${t}</span>`).join('');
-  const savedMark = localStorage.getItem('disc_' + id) ? ' <span style="font-size:11px;font-weight:500;background:var(--verde-50);color:var(--verde);padding:2px 7px;border-radius:10px;margin-left:6px;">✓ Atualizado manualmente</span>' : '';
+  const savedMark = _ls.getItem('disc_' + id) ? ' <span style="font-size:11px;font-weight:500;background:var(--verde-50);color:var(--verde);padding:2px 7px;border-radius:10px;margin-left:6px;">✓ Atualizado manualmente</span>' : '';
 
   section.innerHTML = `
     <div class="ind-disc-section">
@@ -2194,7 +2202,7 @@ function salvarDiscModal() {
     }
   };
 
-  localStorage.setItem('disc_' + id, JSON.stringify(data));
+  _ls.setItem('disc_' + id, JSON.stringify(data));
   fecharModalDisc();
   renderDiscNoPerfil(id);
   renderEquipe();
@@ -2204,7 +2212,7 @@ function salvarDiscModal() {
 function registrarDesligamento(id) {
   const c = colaboradoras[id];
   if (!confirm(`Registrar desligamento de ${c.nome}?\n\nEsta ação marca a colaboradora como desligada no painel. Os dados ficam preservados e podem ser reativados.`)) return;
-  localStorage.setItem('desligada_' + id, '1');
+  _ls.setItem('desligada_' + id, '1');
   renderEquipe();
   abrirIndividual(id);
 }
@@ -2212,7 +2220,7 @@ function registrarDesligamento(id) {
 function reativarColaboradora(id) {
   const c = colaboradoras[id];
   if (!confirm(`Reativar ${c.nome} no painel?`)) return;
-  localStorage.removeItem('desligada_' + id);
+  _ls.removeItem('desligada_' + id);
   renderEquipe();
   abrirIndividual(id);
 }
