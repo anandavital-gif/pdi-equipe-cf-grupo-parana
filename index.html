@@ -2944,10 +2944,125 @@ const dadosFormulario = [
       'Você quer ser especialista, não líder formal. Quais conhecimentos definem essa especialização ideal para você?',
       'Você disse que a maior conquista foi sua casa e família. Como equilibramos a ambição profissional com esse equilíbrio?',
     ],
+    objetivo: 'Desenvolver competências de Analista Fiscal e Contábil conduzindo a reestruturação fiscal e contábil da VT Paraná Supermercado de forma autônoma e técnica.',
     pdi: [
-      { periodo: 'Mês 1–2', foco: 'Reforma Tributária aplicada ao VT Paraná', status: 'pendente', acoes: ['Curso EAD IBS/CBS para supermercados', 'Mapear impacto prático para o grupo', 'Produzir 1 resumo técnico para a equipe'] },
-      { periodo: 'Mês 3–4', foco: 'Legislação fiscal e análise de dados', status: 'pendente', acoes: ['Rotina de consulta ao Portal SPED e RFB', 'Treino de Excel: Power Query básico (30 min/semana)', 'Análise do Razão Analítico mensal de 2 entidades'] },
-      { periodo: 'Mês 5–6', foco: 'Consolidação como referência fiscal', status: 'pendente', acoes: ['Apresentar 1 tema técnico para a equipe', 'Avaliar pós-graduação em área tributária', 'Definir PDI do próximo ciclo'] },
+      {
+        periodo: 'Preparação · 15–30 Jun',
+        foco: 'Estudo dos tributos e domínio do CISSPoder',
+        acoes: [
+          'Estudar ICMS, ICMS-ST, PIS/COFINS e FUNRURAL com foco no varejo de Mato Grosso do Sul',
+          'Acessar CISSPoder: lançar NFs de teste e entender parametrização fiscal',
+          'Aprender a gerar as EFDs no sistema',
+          'Preparar resumo técnico do estudo para apresentar à Ananda',
+        ],
+        kpis: [
+          'Resumo técnico entregue até 30/06/2026',
+          'NFs de teste lançadas com parâmetros corretos no CISSPoder',
+        ],
+        entregavel: 'Resumo do estudo apresentado à Ananda até 30/06/2026',
+      },
+      {
+        periodo: 'Fase 1 · Julho',
+        foco: 'Diagnóstico fiscal e contábil da VT Paraná',
+        acoes: [
+          'Levantar obrigações acessórias ativas e pendentes',
+          'Amostragem de NFs dos últimos 3 meses e mapeamento do fluxo atual (AS-IS)',
+          'Identificar aproveitamento de créditos de PIS/COFINS e ICMS',
+          'Levantar plano de contas atual: contas sem uso e mal classificadas',
+          'Verificar balancete e amarrações entre fiscal e contábil',
+        ],
+        kpis: [
+          'Relatório de diagnóstico entregue até 31/07/2026',
+          'Mínimo 3 meses de NFs analisadas na amostragem',
+          'Divergências entre fiscal e contábil mapeadas e listadas',
+        ],
+        entregavel: 'Relatório de diagnóstico fiscal e contábil — até 31/07/2026',
+      },
+      {
+        periodo: 'Fase 2 · Agosto',
+        foco: 'Cadastros e plano de contas corrigidos',
+        acoes: [
+          'Atualizar regime tributário, NCM, CST, CFOP e parâmetros de ICMS-ST no CISSPoder',
+          'Habilitar FUNRURAL para fornecedores rurais PF e PJ',
+          'Gerar log de auditoria com todas as alterações realizadas',
+          'Ajustar e estruturar plano de contas conforme NBC TG e política do Grupo',
+          'Reclassificar contas mal posicionadas e padronizar grupos',
+        ],
+        kpis: [
+          'Cadastros 100% revisados e aprovados por Ananda',
+          'Plano de contas ajustado e validado',
+          'Log de auditoria completo com todas as alterações registradas',
+        ],
+        entregavel: 'Cadastros revisados + plano de contas ajustado e aprovado — até 31/08/2026',
+      },
+      {
+        periodo: 'Fase 3 · Setembro',
+        foco: 'Processos, POPs e amarrações fiscal-contábil',
+        acoes: [
+          'Criar 6 POPs fiscais: apuração de ICMS, ICMS-ST, PIS/COFINS, FUNRURAL, devoluções e bonificações',
+          'Documentar novo fluxo de entrada de NF (TO-BE)',
+          'Configurar amarrações entre lançamentos fiscais e contábeis no CISSPoder',
+          'Parametrizar históricos padrão e revisar centros de custo',
+          'Realizar conciliação contábil pós-configuração',
+        ],
+        kpis: [
+          '6 POPs fiscais concluídos e aprovados',
+          'Amarrações configuradas com zero divergências fiscal/contábil',
+          'Novo fluxo de entrada de NF documentado e testado',
+        ],
+        entregavel: '6 POPs fiscais + amarrações contábeis configuradas — até 30/09/2026',
+      },
+      {
+        periodo: 'Fase 4 · Outubro',
+        foco: 'Obrigações acessórias, ECD e ECF estruturados',
+        acoes: [
+          'Montar calendário fiscal completo com vencimentos: EFD ICMS/IPI, EFD-Contribuições, DCTF, DCTF-Web, REINF, GIA e FUNRURAL',
+          'Criar POPs de geração, validação e transmissão das EFDs com checklists',
+          'Estruturar ECD: escrituração contábil digital e parâmetros da ECF',
+          'Definir política de fechamento contábil da VT Paraná',
+          'Realizar conciliação de balancetes mensais',
+        ],
+        kpis: [
+          'Calendário fiscal 100% completo e revisado',
+          'POPs de EFD com checklists operacionais prontos',
+          'Estrutura ECD/ECF definida e aprovada',
+        ],
+        entregavel: 'Calendário fiscal + POPs EFD + estrutura ECD/ECF — até 31/10/2026',
+      },
+      {
+        periodo: 'Fase 5 · Novembro',
+        foco: 'Manual integrado fiscal e contábil VT Paraná v1.0',
+        acoes: [
+          'Consolidar Manual de Rotinas Fiscais VT Paraná v1.0 com todos os POPs',
+          'Criar protocolo de comunicação com Compras, Faturamento e Estoque',
+          'Implantar KPIs de acompanhamento e alertas de vencimento',
+          'Estruturar rotina de fechamento contábil mensal integrada ao fiscal',
+          'Definir fluxo de entrega de balancete e DRE mensais à Ananda',
+        ],
+        kpis: [
+          'Manual v1.0 entregue e aprovado',
+          'KPIs e alertas de vencimento implantados e funcionando',
+          'Primeira rotina de fechamento contábil executada com sucesso',
+        ],
+        entregavel: 'Manual v1.0 + rotina contábil mensal + KPIs implantados — até 30/11/2026',
+      },
+      {
+        periodo: 'Fase 6 · Dezembro',
+        foco: 'Consolidação final e apresentação executiva',
+        acoes: [
+          'Produzir relatório final consolidando os 6 meses do projeto',
+          'Elaborar mapa de riscos residuais com plano para 2027 e Reforma Tributária (CBS/IBS)',
+          'Realizar avaliação de desempenho com Ananda e definir PDI 2027',
+          'Preparar apresentação executiva Antes x Depois para Elizandra e direção do Grupo Paraná',
+        ],
+        kpis: [
+          'Relatório final entregue e aprovado por Ananda',
+          'Apresentação executiva realizada para Elizandra e direção',
+          'PDI 2027 definido e documentado',
+          'Zero pendências formais do projeto ao final de dezembro',
+        ],
+        entregavel: 'Relatório final + apresentação à Elizandra + PDI Karolyne 2027',
+      },
     ],
   },
   {
@@ -3672,6 +3787,7 @@ function renderPdiView() {
   let html = `<div style="border-left:4px solid ${cor};padding:12px 20px;background:${corL};border-radius:0 12px 12px 0;margin-bottom:20px;">
     <div style="font-size:16px;font-weight:700;color:${cor};">${d.nome} · PDI 2026–2027</div>
     <div style="font-size:13px;color:var(--cinza-500);">${d.cargo}</div>
+    ${d.objetivo ? `<div style="font-size:12px;color:var(--cinza-600);margin-top:6px;font-style:italic;">${d.objetivo}</div>` : ''}
     <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
       <div style="flex:1;height:8px;background:var(--cinza-100);border-radius:4px;overflow:hidden;">
         <div style="height:100%;width:${pct}%;background:${cor};border-radius:4px;transition:width .4s;"></div>
@@ -3697,9 +3813,19 @@ function renderPdiView() {
         </button>
       </div>
       <div style="padding:14px 16px;background:#fff;">
+        <div style="font-size:10px;font-weight:700;color:var(--cinza-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Ações</div>
         ${p.acoes.map(a => `<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:13px;color:var(--cinza-700);line-height:1.5;">
           <span style="color:${cor};font-weight:700;flex-shrink:0;">→</span>${a}
         </div>`).join('')}
+        ${p.kpis ? `<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--cinza-100);">
+          <div style="font-size:10px;font-weight:700;color:var(--cinza-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📊 Indicadores</div>
+          ${p.kpis.map(k => `<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12px;color:var(--cinza-600);line-height:1.5;">
+            <span style="color:#1967D2;flex-shrink:0;">◆</span>${k}
+          </div>`).join('')}
+        </div>` : ''}
+        ${p.entregavel ? `<div style="margin-top:10px;padding:10px 14px;background:#F0FDF4;border-radius:8px;border:1px solid #86EFAC;font-size:12px;color:#166534;display:flex;gap:8px;align-items:flex-start;">
+          <span style="flex-shrink:0;">✅</span><span><strong>Entregável:</strong> ${p.entregavel}</span>
+        </div>` : ''}
       </div>
     </div>`;
   });
