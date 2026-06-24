@@ -1108,15 +1108,15 @@ function togglePwdVis() {
 <div id="view-visao-geral" class="main">
   <div class="overview-grid">
     <div class="stat-card">
-      <div class="value">6</div>
+      <div class="value" id="stat-total">6</div>
       <div class="label">Colaboradoras no ciclo</div>
     </div>
     <div class="stat-card" style="border-left-color: var(--verde)">
-      <div class="value">1</div>
-      <div class="label">PDI iniciado</div>
+      <div class="value" id="stat-pdi">–</div>
+      <div class="label" id="stat-pdi-label">PDI em andamento</div>
     </div>
     <div class="stat-card" style="border-left-color: var(--amber)">
-      <div class="value">5</div>
+      <div class="value" id="stat-1a1">–</div>
       <div class="label">Aguardando 1:1</div>
     </div>
   </div>
@@ -1868,6 +1868,40 @@ function statusLabel(s) {
 }
 
 // ── Renderiza cards da equipe ──
+function buildCardExtras(c) {
+  const prog = calcPdiProgress(c.id);
+  const umAUmStr = c.umAUm || 'A definir';
+  let out = '';
+  if (prog.total > 0) {
+    if (prog.pct === 100) {
+      out += '<div class="pdi-concluido-badge">✅ PDI Concluído</div>';
+    } else {
+      out += '<div class="pdi-progress-wrap">';
+      out += '<div class="pdi-progress-label"><span>Progresso PDI</span><span>' + prog.done + '/' + prog.total + ' itens</span></div>';
+      out += '<div class="pdi-progress-track"><div class="pdi-progress-fill" style="width:' + prog.pct + '%;background:' + c.cor + '"></div></div>';
+      out += '</div>';
+    }
+  }
+  out += '<div class="uma-um-badge">📅 1:1 ' + umAUmStr + '</div>';
+  return out;
+}
+
+function updateStatCards() {
+  const ativas = colaboradoras.filter(function(c){ return !isDesligada(c.id); });
+  document.getElementById('stat-total').textContent = ativas.length;
+
+  // PDI com checklist real (não genérico)
+  const comPdi = ativas.filter(function(c) {
+    const d = dadosFormulario[c.id];
+    return d && d.pdi && d.pdi.some(function(p){ return p.checklist && p.checklist.length > 0; });
+  }).length;
+  document.getElementById('stat-pdi').textContent = comPdi;
+
+  // Aguardando 1:1 = umAUm === 'A definir'
+  const sem1a1 = ativas.filter(function(c){ return !c.umAUm || c.umAUm === 'A definir'; }).length;
+  document.getElementById('stat-1a1').textContent = sem1a1;
+}
+
 function renderEquipe() {
   const grid = document.getElementById('team-grid');
   grid.innerHTML = colaboradoras.map(c => {
@@ -1900,23 +1934,7 @@ function renderEquipe() {
         </div>
         <span class="ver-perfil">Ver perfil →</span>
       </div>
-      ${(function() {
-        const prog = calcPdiProgress(c.id);
-        const umAUmStr = c.umAUm || 'A definir';
-        let out = '';
-        if (prog.total > 0) {
-          if (prog.pct === 100) {
-            out += '<div class="pdi-concluido-badge">✅ PDI Concluído</div>';
-          } else {
-            out += '<div class="pdi-progress-wrap">';
-            out += '<div class="pdi-progress-label"><span>Progresso PDI</span><span>' + prog.done + '/' + prog.total + ' itens</span></div>';
-            out += '<div class="pdi-progress-track"><div class="pdi-progress-fill" style="width:' + prog.pct + '%;background:' + c.cor + '"></div></div>';
-            out += '</div>';
-          }
-        }
-        out += '<div class="uma-um-badge">📅 1:1 ' + umAUmStr + '</div>';
-        return out;
-      })()}
+      ${buildCardExtras(c)}
       <div class="card-actions" onclick="event.stopPropagation()">
         <button class="btn-card-disc" onclick="abrirModalDisc(${c.id})" title="Inserir ou atualizar dados DISC">📊 Atualizar DISC</button>
         ${desligada
@@ -2233,7 +2251,7 @@ function salvarDiscModal() {
   _ls.setItem('disc_' + id, JSON.stringify(data));
   fecharModalDisc();
   renderDiscNoPerfil(id);
-  renderEquipe();
+  renderEquipe(); updateStatCards();
 }
 
 // ── DESLIGAMENTO ──
