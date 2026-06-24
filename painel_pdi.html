@@ -4101,6 +4101,11 @@ function downloadUmaUm(colabId) {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
   a.download = '1on1_' + d.nome + '.txt'; a.click();
 }
+  });
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = '1on1_' + d.nome + '.txt'; a.click();
+}
 
 function renderUmaUm() {
   populateSelect('um-select');
