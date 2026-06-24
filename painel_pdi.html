@@ -4534,9 +4534,10 @@ function renderPdiView() {
 }
 
 // ── Init ──
-renderEquipe();
-initRadarEquipe();
-initRadarDiscEquipe();
+try { renderEquipe(); } catch(e) { console.error('renderEquipe:', e); }
+try { updateStatCards(); } catch(e) { console.error('updateStatCards:', e); }
+try { initRadarEquipe(); } catch(e) { console.error('initRadarEquipe:', e); }
+try { initRadarDiscEquipe(); } catch(e) { console.error('initRadarDiscEquipe:', e); }
 </script>
 </body>
 </html>
