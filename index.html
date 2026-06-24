@@ -4159,10 +4159,10 @@ function renderUmaUm() {
   // ── PRÓXIMOS PASSOS (checklist clicável) ──
   html += sec('📋', 'Próximos Passos a Combinar');
   r.proximosPassos.forEach(function(ps, i) {
-    html += '<div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:#F8FAFC;border-radius:7px;margin-bottom:6px;cursor:pointer;" onclick="this.querySelector('input').click()">'
-      + '<input type="checkbox" style="margin-top:2px;accent-color:'+cor+';cursor:pointer;" onclick="event.stopPropagation()">'
+    html += '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:#F8FAFC;border-radius:7px;margin-bottom:6px;cursor:pointer;">'
+      + '<input type="checkbox" style="margin-top:2px;accent-color:'+cor+';cursor:pointer;">'
       + '<span style="font-size:13px;color:#374151;line-height:1.5;">'+ps+'</span>'
-      + '</div>';
+      + '</label>';
   });
 
   // ── ANOTAÇÕES LIVRES ──
