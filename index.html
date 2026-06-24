@@ -4041,6 +4041,49 @@ function renderRespostas() {
 }
 
 // ── ABA 1:1 ──────────────────────────────────────────────────────────────────
+function saveUmaUm(colabId) {
+  const data = {};
+  document.querySelectorAll('[data-um-field]').forEach(function(el) {
+    data[el.dataset.umField] = el.value;
+  });
+  try {
+    localStorage.setItem('um1_notas_' + colabId, JSON.stringify(data));
+  } catch(e) {}
+  // Show saved feedback
+  const btn = document.getElementById('btn-salvar-um');
+  if (btn) { btn.textContent = '✓ Salvo!'; btn.style.background = '#166534'; setTimeout(function(){ btn.textContent = '💾 Salvar anotações'; btn.style.background = '#1E8E3E'; }, 1800); }
+}
+
+function loadUmaUm(colabId) {
+  try {
+    const raw = localStorage.getItem('um1_notas_' + colabId);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.keys(data).forEach(function(k) {
+      const el = document.querySelector('[data-um-field="'+k+'"]');
+      if (el) el.value = data[k];
+    });
+  } catch(e) {}
+}
+
+function downloadUmaUm(colabId) {
+  const d = dadosFormulario[colabId];
+  let txt = '=== ANOTAÇÕES 1:1 — ' + d.nome.toUpperCase() + ' ===
+
+';
+  document.querySelectorAll('[data-um-field]').forEach(function(el) {
+    if (el.value.trim()) {
+      txt += '[ ' + el.dataset.umField + ' ]
+' + el.value.trim() + '
+
+';
+    }
+  });
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = '1on1_' + d.nome + '.txt'; a.click();
+}
+
 function renderUmaUm() {
   populateSelect('um-select');
   const sel = document.getElementById('um-select');
@@ -4095,7 +4138,7 @@ function renderUmaUm() {
   d.perguntas1a1.forEach(function(q, i) {
     html += '<div style="margin-bottom:16px;">'
       + '<div style="font-size:13px;font-weight:600;color:var(--cinza-700);margin-bottom:6px;">'+(i+1)+'. '+q+'</div>'
-      + '<textarea rows="2" placeholder="Anotações..." style="width:100%;padding:9px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>'
+      + '<textarea data-um-field="q_'+i+'" rows="2" placeholder="Anotações..." style="width:100%;padding:9px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>'
       + '</div>';
   });
 
@@ -4110,13 +4153,20 @@ function renderUmaUm() {
 
   // ── ANOTAÇÕES LIVRES ──
   html += sec('📝', 'Anotações da Reunião');
-  html += '<textarea rows="5" placeholder="Pontos levantados, percepções, acordos..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
+  html += '<textarea data-um-field="notas" rows="5" placeholder="Pontos levantados, percepções, acordos..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
 
   // ── COMBINADOS ──
   html += sec('🤝', 'O Que Foi Combinado');
-  html += '<textarea rows="4" placeholder="Quem faz o quê e até quando..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
+  html += '<textarea data-um-field="combinados" rows="4" placeholder="Quem faz o quê e até quando..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
+
+  // ── BOTÕES ──
+  html += '<div style="display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:2px solid var(--cinza-100);">'
+    + '<button id="btn-salvar-um" onclick="saveUmaUm('+d.id+')" style="flex:1;padding:11px 0;background:#1E8E3E;color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s;">💾 Salvar anotações</button>'
+    + '<button onclick="downloadUmaUm('+d.id+')" style="padding:11px 18px;background:var(--azul-50);color:var(--azul-800);border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">⬇ Baixar .txt</button>'
+    + '</div>';
 
   container.innerHTML = html;
+  loadUmaUm(d.id);
 }
 
 function printUmaUm() { window.print(); }
