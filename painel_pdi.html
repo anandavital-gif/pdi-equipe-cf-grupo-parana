@@ -1003,6 +1003,74 @@
 </style>
 </head>
 <body>
+<!-- ── LOGIN GATE ─────────────────────────────────────────── -->
+<div id="login-gate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%);display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif;">
+  <div style="background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:48px 40px;width:360px;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.4);">
+    <div style="width:56px;height:56px;background:rgba(255,255,255,.1);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;">🔐</div>
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Painel PDI</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:32px;">Grupo Paraná · Equipe Fiscal e Contábil</div>
+    <div style="position:relative;margin-bottom:16px;">
+      <input id="pwd-input" type="password" placeholder="Senha de acesso"
+        style="width:100%;box-sizing:border-box;padding:14px 48px 14px 16px;border-radius:12px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:15px;outline:none;transition:border .2s;"
+        onkeydown="if(event.key==='Enter')checkPwd()"
+        onfocus="this.style.borderColor='rgba(255,255,255,.5)'"
+        onblur="this.style.borderColor='rgba(255,255,255,.2)'">
+      <span onclick="togglePwdVis()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:18px;color:rgba(255,255,255,.4);" id="eye-icon">👁</span>
+    </div>
+    <div id="login-err" style="font-size:12px;color:#FC8181;margin-bottom:12px;min-height:18px;"></div>
+    <button onclick="checkPwd()"
+      style="width:100%;padding:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;letter-spacing:.3px;"
+      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      Entrar
+    </button>
+    <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:24px;">PDI 2026–2027</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Verificar sessão ativa
+  if (sessionStorage.getItem('pdi_auth') === '1') {
+    document.getElementById('login-gate').style.display = 'none';
+    return;
+  }
+  // Foco automático no campo
+  window.addEventListener('load', function() {
+    var el = document.getElementById('pwd-input');
+    if (el) el.focus();
+  });
+})();
+
+async function checkPwd() {
+  const val = document.getElementById('pwd-input').value;
+  const err = document.getElementById('login-err');
+  if (!val) { err.textContent = 'Digite a senha para continuar.'; return; }
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(val));
+  const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hash === 'a8508245c5a9a8e56e86b036780380c27e4051c57ba1fd7b44556ae40c8a17ec') {
+    sessionStorage.setItem('pdi_auth', '1');
+    const gate = document.getElementById('login-gate');
+    gate.style.transition = 'opacity .4s';
+    gate.style.opacity = '0';
+    setTimeout(function(){ gate.style.display = 'none'; }, 400);
+    err.textContent = '';
+  } else {
+    err.textContent = 'Senha incorreta. Tente novamente.';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+
+function togglePwdVis() {
+  const inp = document.getElementById('pwd-input');
+  const eye = document.getElementById('eye-icon');
+  if (inp.type === 'password') { inp.type = 'text'; eye.textContent = '🙈'; }
+  else { inp.type = 'password'; eye.textContent = '👁'; }
+}
+</script>
+<!-- ── FIM LOGIN GATE ──────────────────────────────────────── -->
+
+
 
 <div class="header">
   <div class="header-left">
