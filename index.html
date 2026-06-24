@@ -908,6 +908,12 @@
 
   /* ── BADGE DESLIGADA ── */
   .badge-desligada { background: #FEF2F2; color: #DC2626; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+  .uma-um-badge { display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;background:#F0FDF4;color:#166534;padding:3px 8px;border-radius:10px;margin-top:6px; }
+  .pdi-progress-wrap { margin-top:8px; }
+  .pdi-progress-label { display:flex;justify-content:space-between;font-size:10px;color:var(--cinza-400);margin-bottom:3px; }
+  .pdi-progress-track { height:4px;background:var(--cinza-100);border-radius:3px;overflow:hidden; }
+  .pdi-progress-fill { height:100%;border-radius:3px;background:var(--card-color,var(--azul-500));transition:width 0.6s ease; }
+  .pdi-concluido-badge { display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;background:#DCFCE7;color:#166534;padding:4px 10px;border-radius:10px;margin-top:6px; }
   .card-desligada { opacity: 0.55; }
   .card-desligada::before { background: #DC2626 !important; }
 
@@ -1576,6 +1582,7 @@ const colaboradoras = [
     perfil: "lider",
     perfilLabel: "Liderança futura",
     status: "em-andamento",
+    umAUm: "26/06 · 14h–15h",
     competencias: [4.0, 3.5, 4.0, 3.0, 3.0, 3.0],
     comportamental: [4.0, 3.5, 5.0, 3.0, 3.7, 4.0],
     motivadores: [
@@ -1617,6 +1624,7 @@ const colaboradoras = [
     perfil: "analista",
     perfilLabel: "Analista",
     status: "pendente",
+    umAUm: "A definir",
     competencias: [3.5, 4.0, 3.0, 2.0, 3.0, 1.0],
     comportamental: [4.0, 3.5, 4.0, 2.0, 3.7, 4.0],
     motivadores: [
@@ -1658,6 +1666,7 @@ const colaboradoras = [
     perfil: "analista",
     perfilLabel: "Analista",
     status: "pendente",
+    umAUm: "A definir",
     competencias: [4.0, 1.0, 2.0, 3.0, 2.5, 3.0],
     comportamental: [2.5, 3.0, 4.0, 3.0, 3.0, 3.0],
     motivadores: [
@@ -1699,6 +1708,7 @@ const colaboradoras = [
     perfil: "tecnica",
     perfilLabel: "Especialista técnica",
     status: "pendente",
+    umAUm: "A definir",
     competencias: [3.0, 2.0, 3.0, 1.5, 2.5, 2.0],
     comportamental: [4.0, 3.0, 3.5, 3.0, 3.0, 4.0],
     motivadores: [
@@ -1740,6 +1750,7 @@ const colaboradoras = [
     perfil: "multi",
     perfilLabel: "Multiplicadora",
     status: "pendente",
+    umAUm: "A definir",
     competencias: [1.5, 1.5, 1.0, 1.0, 3.0, 1.0],
     comportamental: [4.0, 3.5, 2.5, 3.0, 3.0, 4.0],
     motivadores: [
@@ -1781,6 +1792,7 @@ const colaboradoras = [
     perfil: "integra",
     perfilLabel: "Em integração",
     status: "pendente",
+    umAUm: "26/06 · 15h–16h",
     competencias: [4.0, 3.5, 3.0, 3.0, 3.0, 2.0],
     comportamental: [2.5, 4.2, 4.0, 3.0, 3.7, 3.0],
     motivadores: [
@@ -1957,6 +1969,23 @@ function renderEquipe() {
         </div>
         <span class="ver-perfil">Ver perfil →</span>
       </div>
+      ${(function() {
+        const prog = calcPdiProgress(c.id);
+        const umAUmStr = c.umAUm || 'A definir';
+        let out = '';
+        if (prog.total > 0) {
+          if (prog.pct === 100) {
+            out += '<div class="pdi-concluido-badge">✅ PDI Concluído</div>';
+          } else {
+            out += '<div class="pdi-progress-wrap">';
+            out += '<div class="pdi-progress-label"><span>Progresso PDI</span><span>' + prog.done + '/' + prog.total + ' itens</span></div>';
+            out += '<div class="pdi-progress-track"><div class="pdi-progress-fill" style="width:' + prog.pct + '%;background:' + c.cor + '"></div></div>';
+            out += '</div>';
+          }
+        }
+        out += '<div class="uma-um-badge">📅 1:1 ' + umAUmStr + '</div>';
+        return out;
+      })()}
       <div class="card-actions" onclick="event.stopPropagation()">
         <button class="btn-card-disc" onclick="abrirModalDisc(${c.id})" title="Inserir ou atualizar dados DISC">📊 Atualizar DISC</button>
         ${desligada
@@ -3565,7 +3594,7 @@ const dadosFormulario = [
       {
         periodo: 'F2 · Agosto',
         foco: 'Execução assistida — 2º fechamento + conferência avança',
-        nota: 'Segundo fechamento com mais fluidez — ela já conhece o fluxo. Ananda acompanha, mas dá mais espaço. Conferência avança para o 2º trimestre de 2026 (abr–jun). Introdução à Reforma Tributária: 2h semanais integradas à rotina.',
+        nota: '⚠️ Ananda estará de férias em agosto — Laisa executa o fechamento com total autonomia. Ananda valida ao retornar das férias. Esse é o primeiro fechamento 100% solo: ela já conhece o fluxo pelo mês anterior. Conferência avança para o 2º trimestre (abr–jun). Reforma Tributária: 2h semanais.',
         acoes: [
           'Executar o fechamento fiscal de agosto com supervisão mais distante',
           'Identificar se os ajustes do mês anterior foram mantidos corretamente',
@@ -4157,6 +4186,22 @@ function toggleStatus(id, periodoIdx) {
   const prox = estados[(estados.indexOf(atual) + 1) % estados.length];
   statusCiclo[key] = prox;
   renderPdiView();
+}
+
+function calcPdiProgress(id) {
+  const d = dadosFormulario[id];
+  if (!d || !d.pdi) return { done: 0, total: 0, pct: 0 };
+  let done = 0, total = 0;
+  d.pdi.forEach(function(p, pi) {
+    if (p.checklist) {
+      p.checklist.forEach(function(_, ci) {
+        total++;
+        if (checklistState[id + '_' + pi + '_' + ci]) done++;
+      });
+    }
+  });
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  return { done, total, pct };
 }
 
 function buildChecklistOrAcoes(d, p, i, cor) {
