@@ -4924,17 +4924,11 @@ function loadUmaUm(colabId) {
 }
 function downloadUmaUm(colabId) {
   const d = dadosFormulario[colabId];
-  const labels = { abertura:'Como ela chegou', destaque:'Destaque', desafio:'Desafio', pdi:'PDI', suporte:'Suporte', proximos:'Próximos passos', feedback:'Feedback', observacoes:'Observações' };
-  let txt = 'ANOTACOES 1:1 - ' + d.nome.toUpperCase() + '
-' + new Date().toLocaleDateString('pt-BR') + '
-
-';
+  const labels = { abertura:'Como ela chegou', destaque:'Destaque', desafio:'Desafio', pdi:'PDI', suporte:'Suporte', proximos:'Proximos passos', feedback:'Feedback', observacoes:'Observacoes' };
+  var txt = 'ANOTACOES 1:1 - ' + d.nome.toUpperCase() + '\n' + new Date().toLocaleDateString('pt-BR') + '\n\n';
   document.querySelectorAll('[data-um-field]').forEach(function(el) {
     if (el.value.trim()) {
-      txt += '[ ' + (labels[el.dataset.umField] || el.dataset.umField) + ' ]
-' + el.value.trim() + '
-
-';
+      txt += '[ ' + (labels[el.dataset.umField] || el.dataset.umField) + ' ]\n' + el.value.trim() + '\n\n';
     }
   });
   const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
