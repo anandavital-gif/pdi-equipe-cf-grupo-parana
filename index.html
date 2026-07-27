@@ -1197,20 +1197,12 @@ function togglePwdVis() {
   <div class="disc-person-pills" id="disc-pills"></div>
   <div id="disc-individual-section"></div>
 
-  <div class="section-title">Comparativo da equipe — DISC natural</div>
+  <div class="section-title">Comparativo da equipe — DISC natural x adaptável</div>
   <div class="chart-card" style="margin-bottom:20px;">
-    <h3>D · I · S · C por colaborador(a) — como a pessoa é no natural (autêntica, sem observação)</h3>
-    <div style="position:relative;height:320px;">
+    <h3>D · I · S · C por colaborador(a) — cor sólida = natural, cinza ao lado = adaptável</h3>
+    <p style="font-size:12px;color:var(--cinza-400);margin:-4px 0 14px;">Segue o mesmo formato do relatório Innermetrix: cada barra colorida é o estilo natural (autêntico, sem observação); a barra cinza logo ao lado é o estilo adaptável (como a pessoa age sob observação ou pressão no trabalho). Quanto maior a diferença entre as duas, maior a tensão entre como ela é e como se sente obrigada a agir.</p>
+    <div style="position:relative;height:380px;">
       <canvas id="discTeamChart"></canvas>
-    </div>
-  </div>
-
-  <div class="section-title">Comparativo da equipe — DISC adaptável</div>
-  <div class="chart-card" style="margin-bottom:20px;">
-    <h3>D · I · S · C por colaborador(a) — como a pessoa se comporta sob observação, pressão ou estresse</h3>
-    <p style="font-size:12px;color:var(--cinza-400);margin:-4px 0 14px;">Compare com o gráfico natural acima: quanto maior a diferença entre as barras de uma mesma pessoa nos dois gráficos, maior a tensão entre como ela é de verdade e como ela se sente obrigada a agir no trabalho.</p>
-    <div style="position:relative;height:320px;">
-      <canvas id="discTeamChartAdapt"></canvas>
     </div>
   </div>
 
@@ -2032,7 +2024,7 @@ const discEquipe = [
 
 // ── Charts globais ──
 let radarEquipeChart, radarIndivChart, barIndivChart;
-let discTeamChartObj, discTeamChartAdaptObj, valuesTeamChartObj;
+let discTeamChartObj, valuesTeamChartObj;
 const checklistState = {};
 
 function perfilClass(p) {
@@ -2686,10 +2678,14 @@ function initDiscTeamCharts() {
     data: {
       labels: nomes,
       datasets: [
-        { label: 'D · Dominante',    data: pessoas.map(p => p.natural.D), backgroundColor: discDimColors.D.bg + 'cc', borderRadius: 4 },
-        { label: 'I · Influente',    data: pessoas.map(p => p.natural.I), backgroundColor: discDimColors.I.bg + 'cc', borderRadius: 4 },
-        { label: 'S · Estabilidade', data: pessoas.map(p => p.natural.S), backgroundColor: discDimColors.S.bg + 'cc', borderRadius: 4 },
-        { label: 'C · Conformidade', data: pessoas.map(p => p.natural.C), backgroundColor: discDimColors.C.bg + 'cc', borderRadius: 4 },
+        { label: 'D · Dominante',        data: pessoas.map(p => p.natural.D),    backgroundColor: discDimColors.D.bg + 'ee', borderRadius: 4, grupo: 'D' },
+        { label: 'D · Adaptável',        data: pessoas.map(p => p.adaptativo.D), backgroundColor: '#B0B7C3',                borderRadius: 4, grupo: 'D' },
+        { label: 'I · Influente',        data: pessoas.map(p => p.natural.I),    backgroundColor: discDimColors.I.bg + 'ee', borderRadius: 4, grupo: 'I' },
+        { label: 'I · Adaptável',        data: pessoas.map(p => p.adaptativo.I), backgroundColor: '#B0B7C3',                borderRadius: 4, grupo: 'I' },
+        { label: 'S · Estabilidade',     data: pessoas.map(p => p.natural.S),    backgroundColor: discDimColors.S.bg + 'ee', borderRadius: 4, grupo: 'S' },
+        { label: 'S · Adaptável',        data: pessoas.map(p => p.adaptativo.S), backgroundColor: '#B0B7C3',                borderRadius: 4, grupo: 'S' },
+        { label: 'C · Conformidade',     data: pessoas.map(p => p.natural.C),    backgroundColor: discDimColors.C.bg + 'ee', borderRadius: 4, grupo: 'C' },
+        { label: 'C · Adaptável',        data: pessoas.map(p => p.adaptativo.C), backgroundColor: '#B0B7C3',                borderRadius: 4, grupo: 'C' },
       ]
     },
     options: {
@@ -2698,30 +2694,37 @@ function initDiscTeamCharts() {
         x: { stacked: false, ticks: { font: { size: 12 } } },
         y: { min: 0, max: 100, ticks: { stepSize: 20 } }
       },
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 14, usePointStyle: true } } }
-    }
-  });
-
-  // Grouped bar — Adaptável DISC (mesmo conjunto de pessoas do gráfico natural)
-  if (discTeamChartAdaptObj) discTeamChartAdaptObj.destroy();
-  discTeamChartAdaptObj = new Chart(document.getElementById('discTeamChartAdapt'), {
-    type: 'bar',
-    data: {
-      labels: nomes,
-      datasets: [
-        { label: 'D · Dominante',    data: pessoas.map(p => p.adaptativo.D), backgroundColor: discDimColors.D.bg + 'cc', borderRadius: 4 },
-        { label: 'I · Influente',    data: pessoas.map(p => p.adaptativo.I), backgroundColor: discDimColors.I.bg + 'cc', borderRadius: 4 },
-        { label: 'S · Estabilidade', data: pessoas.map(p => p.adaptativo.S), backgroundColor: discDimColors.S.bg + 'cc', borderRadius: 4 },
-        { label: 'C · Conformidade', data: pessoas.map(p => p.adaptativo.C), backgroundColor: discDimColors.C.bg + 'cc', borderRadius: 4 },
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: {
-        x: { stacked: false, ticks: { font: { size: 12 } } },
-        y: { min: 0, max: 100, ticks: { stepSize: 20 } }
-      },
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 14, usePointStyle: true } } }
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 11 }, padding: 12, usePointStyle: true, boxWidth: 8,
+            generateLabels: chart => {
+              const ds = chart.data.datasets;
+              const naturais = ds
+                .map((d, i) => ({ d, i }))
+                .filter(o => !o.d.label.includes('Adaptável'))
+                .map(o => ({
+                  text: o.d.label,
+                  fillStyle: o.d.backgroundColor,
+                  strokeStyle: o.d.backgroundColor,
+                  fontColor: '#374151',
+                  pointStyle: 'rect',
+                  datasetIndex: o.i
+                }));
+              naturais.push({
+                text: 'Adaptável (todas as dimensões)',
+                fillStyle: '#B0B7C3',
+                strokeStyle: '#B0B7C3',
+                fontColor: '#374151',
+                pointStyle: 'rect',
+                datasetIndex: -1
+              });
+              return naturais;
+            }
+          }
+        }
+      }
     }
   });
 
