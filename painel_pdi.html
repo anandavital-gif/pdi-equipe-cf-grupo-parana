@@ -1127,6 +1127,10 @@ function togglePwdVis() {
 
   <div style="background:var(--branco);border-radius:var(--radius);padding:28px 32px;box-shadow:var(--shadow);margin-bottom:24px;">
     <h3 style="font-size:14px;font-weight:700;color:var(--cinza-700);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;">Radar comparativo da equipe</h3>
+    <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B7280;cursor:pointer;margin-bottom:10px;">
+      <input type="checkbox" id="toggle-desligados" onchange="initRadarEquipe();initRadarDiscEquipe();">
+      Mostrar colaboradores desligados
+    </label>
     <div style="position:relative;height:340px;max-width:500px;margin:0 auto;">
       <canvas id="radarEquipe"></canvas>
     </div>
@@ -1519,92 +1523,73 @@ function togglePwdVis() {
         <div style="font-size:11px;opacity:0.7;margin-top:6px;line-height:1.5;">Fechamentos · Encerramentos · Análises<br>Desenvolvimento da equipe · Atendimento à diretoria</div>
       </div>
 
-      <!-- Connector line -->
-      <div style="width:2px;height:32px;background:var(--cinza-200);"></div>
+      <!-- Linha vertical central -->
+      <div style="width:2px;height:28px;background:#CBD5E1;"></div>
 
-      <!-- Horizontal bar -->
-      <div style="display:flex;align-items:flex-start;gap:0;width:100%;justify-content:center;">
+      <!-- Barra horizontal -->
+      <div style="width:80%;height:2px;background:#CBD5E1;"></div>
 
-        <!-- Left connectors -->
-        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
-          <div style="height:2px;background:var(--cinza-200);width:50%;align-self:flex-end;margin-bottom:0;"></div>
-          <div style="display:flex;gap:16px;width:100%;justify-content:flex-end;padding-right:8px;">
-
-            <!-- Karolyne -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#EEEDFE;border:2px solid #534AB7;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#534AB7;">Karolyne</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Analista Fiscal</div>
-                <div style="font-size:10px;color:#534AB7;margin-top:6px;line-height:1.5;">Encerramentos VT<br>Fechamentos fiscais</div>
-              </div>
-            </div>
-
-            <!-- Laísa -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#FFEBEE;border:2px solid #D32F2F;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#D32F2F;">Laísa</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Contábil</div>
-                <div style="font-size:10px;color:#D32F2F;margin-top:6px;line-height:1.5;">Encerramentos contábeis<br>Análises Ativo/Passivo/PL/Result.<br>Apoio migração de sistema</div>
-              </div>
-            </div>
-
-            <!-- Murilo -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#ECFEFF;border:2px solid #0891B2;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#0891B2;">Murilo</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Fiscal</div>
-                <div style="font-size:10px;color:#0891B2;margin-top:6px;line-height:1.5;">Fechamentos contábeis<br>Lançamentos · Análises fiscais<br>Legislação</div>
-              </div>
-            </div>
-
+      <!-- Linha 1: Karolyne, Laísa, Murilo -->
+      <div style="display:flex;gap:20px;justify-content:center;margin-top:0;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#EEEDFE;border:2px solid #534AB7;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#534AB7;">Karolyne</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Analista Fiscal</div>
+            <div style="font-size:10px;color:#534AB7;margin-top:6px;line-height:1.5;">Encerramentos VT<br>Fechamentos fiscais</div>
           </div>
         </div>
-
-        <!-- Center vertical -->
-        <div style="width:2px;background:var(--cinza-200);align-self:stretch;margin:0 0;"></div>
-
-        <!-- Right connectors -->
-        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
-          <div style="height:2px;background:var(--cinza-200);width:50%;align-self:flex-start;margin-bottom:0;"></div>
-          <div style="display:flex;gap:16px;width:100%;justify-content:flex-start;padding-left:8px;">
-
-            <!-- Thays -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#FFF8EC;border:2px solid #E8903A;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#E8903A;">Thays</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal/Contábil</div>
-                <div style="font-size:10px;color:#E8903A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas<br>Início de contabilização</div>
-              </div>
-            </div>
-
-            <!-- Karen -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#F0FDF4;border:2px solid #16A34A;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#16A34A;">Karen</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal/Contábil</div>
-                <div style="font-size:10px;color:#16A34A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas</div>
-              </div>
-            </div>
-
-            <!-- Indianara -->
-            <div style="display:flex;flex-direction:column;align-items:center;">
-              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
-              <div style="background:#FFFBEB;border:2px solid #D97706;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
-                <div style="font-size:14px;font-weight:700;color:#D97706;">Indianara</div>
-                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Financeiro</div>
-                <div style="font-size:10px;color:#D97706;margin-top:6px;line-height:1.5;">Contas a pagar e receber<br>DDA · Boletos<br>Comunicação direta c/ financeiro</div>
-              </div>
-            </div>
-
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#FFEBEE;border:2px solid #D32F2F;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#D32F2F;">Laísa</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Contábil</div>
+            <div style="font-size:10px;color:#D32F2F;margin-top:6px;line-height:1.5;">Encerramentos contábeis<br>Análises Ativo/Passivo/PL/Result.<br>Apoio migração de sistema</div>
           </div>
         </div>
-
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#ECFEFF;border:2px solid #0891B2;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#0891B2;">Murilo</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Fiscal</div>
+            <div style="font-size:10px;color:#0891B2;margin-top:6px;line-height:1.5;">Fechamentos contábeis<br>Lançamentos · Análises fiscais<br>Legislação</div>
+          </div>
+        </div>
       </div>
+
+      <!-- Espaço entre linhas -->
+      <div style="height:24px;"></div>
+      <!-- Barra horizontal linha 2 -->
+      <div style="width:80%;height:2px;background:#CBD5E1;"></div>
+
+      <!-- Linha 2: Thays, Karen, Indianara -->
+      <div style="display:flex;gap:20px;justify-content:center;margin-top:0;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#FFF8EC;border:2px solid #E8903A;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#E8903A;">Thays</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal/Contábil</div>
+            <div style="font-size:10px;color:#E8903A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas<br>Início de contabilização</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#F0FDF4;border:2px solid #16A34A;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#16A34A;">Karen</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal/Contábil</div>
+            <div style="font-size:10px;color:#16A34A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:2px;height:20px;background:#CBD5E1;"></div>
+          <div style="background:#FFFBEB;border:2px solid #D97706;border-radius:10px;padding:12px 16px;text-align:center;min-width:160px;">
+            <div style="font-size:14px;font-weight:700;color:#D97706;">Indianara</div>
+            <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Financeiro</div>
+            <div style="font-size:10px;color:#D97706;margin-top:6px;line-height:1.5;">Contas a pagar e receber<br>DDA · Boletos<br>Comunicação c/ financeiro</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -2469,15 +2454,18 @@ function initRadarDiscEquipe() {
   if (radarDiscEquipeChart) radarDiscEquipeChart.destroy();
   const dims = ['D','I','S','C'];
   const dimLabels = ['Dominante','Influente','Estabilidade','Conformidade'];
+  const mostrarDesligDisc = document.getElementById('toggle-desligados') && document.getElementById('toggle-desligados').checked;
   const datasets = colaboradoras.map(c => {
+    if (!mostrarDesligDisc && isDesligada(c.id)) return null;
     const disc = getDiscData(c.id);
-    if (!disc || !disc.natural) return null;
+    if (!disc || !disc.natural || !disc.estilo) return null;
     return {
-      label: c.nome,
+      label: c.nome + (isDesligada(c.id) ? ' (desligado)' : ''),
       data: dims.map(d => disc.natural[d]),
-      backgroundColor: c.cor + '18',
-      borderColor: c.cor,
-      borderWidth: 1.5,
+      backgroundColor: c.cor + (isDesligada(c.id) ? '10' : '18'),
+      borderColor: c.cor + (isDesligada(c.id) ? '60' : ''),
+      borderWidth: isDesligada(c.id) ? 1 : 1.5,
+      borderDash: isDesligada(c.id) ? [4,4] : [],
       pointBackgroundColor: c.cor,
       pointRadius: 3
     };
@@ -2505,13 +2493,16 @@ function initRadarDiscEquipe() {
 
 function initRadarEquipe() {
   if (radarEquipeChart) radarEquipeChart.destroy();
+  const mostrarDeslig = document.getElementById('toggle-desligados') && document.getElementById('toggle-desligados').checked;
+  const membrosAtivos = colaboradoras.filter(c => mostrarDeslig || !isDesligada(c.id));
   radarEquipeChart = new Chart(document.getElementById('radarEquipe'), {
     type: 'radar',
     data: {
       labels: labelsRadar,
-      datasets: colaboradoras.map(c => ({
-        label: c.nome, data: c.competencias,
-        backgroundColor: c.cor + '18', borderColor: c.cor, borderWidth: 1.5,
+      datasets: membrosAtivos.map(c => ({
+        label: c.nome + (isDesligada(c.id) ? ' (desligado)' : ''), data: c.competencias,
+        backgroundColor: c.cor + (isDesligada(c.id) ? '10' : '18'), borderColor: c.cor + (isDesligada(c.id) ? '60' : ''),
+        borderWidth: isDesligada(c.id) ? 1 : 1.5, borderDash: isDesligada(c.id) ? [4,4] : [],
         pointBackgroundColor: c.cor, pointRadius: 3
       }))
     },
