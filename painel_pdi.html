@@ -1148,6 +1148,10 @@ function togglePwdVis() {
 
 <!-- EQUIPE -->
 <div id="view-equipe" class="main" style="display:none">
+  <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B7280;cursor:pointer;margin-bottom:14px;width:fit-content;background:var(--cinza-50);padding:6px 12px;border-radius:20px;border:1px solid var(--cinza-200);">
+    <input type="checkbox" id="toggle-desligados-equipe" onchange="renderEquipe()">
+    Mostrar colaboradores desligados
+  </label>
   <div class="team-grid" id="team-grid"></div>
 </div>
 
@@ -2061,7 +2065,12 @@ function updateStatCards() {
 
 function renderEquipe() {
   const grid = document.getElementById('team-grid');
-  grid.innerHTML = colaboradoras.map(c => {
+  const mostrarDeslig = document.getElementById('toggle-desligados-equipe') && document.getElementById('toggle-desligados-equipe').checked;
+  const lista = colaboradoras
+    .filter(function(c){ return mostrarDeslig || !isDesligada(c.id); })
+    .slice()
+    .sort(function(a,b){ return a.nome.localeCompare(b.nome, 'pt-BR'); });
+  grid.innerHTML = lista.map(c => {
     const desligada = isDesligada(c.id);
     const disc = getDiscData(c.id);
     const discBadge = (disc && disc.estilo) ? `<span style="font-size:10px;font-weight:700;background:var(--azul-50);color:var(--azul-800);padding:2px 7px;border-radius:10px;margin-left:6px;">${disc.estilo}</span>` : '';
