@@ -1825,7 +1825,7 @@ const colaboradoras = [
     cor: "#D32F2F",
     corLight: "#FFEBEE",
     perfil: "lider",
-    perfilLabel: "Braço direito",
+    perfilLabel: "Referência técnica",
     status: "pendente",
     umAUm: "26/06 · 15h–16h",
     competencias: [4.0, 3.5, 3.0, 3.0, 3.0, 2.0],
@@ -1873,6 +1873,10 @@ const colaboradoras = [
     competencias: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
     comportamental: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
     motivadores: [],
+    insights: [
+      { tipo: "potencial", label: "Em integração", texto: "Murilo está em processo de onboarding no departamento (entrada em julho/2026). Perfil técnico e comportamental (DISC) ainda em consolidação — competências serão reavaliadas ao final do período de integração." },
+    ],
+    pdi: [],
     disc: null,
   },
   {
@@ -1889,6 +1893,10 @@ const colaboradoras = [
     competencias: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
     comportamental: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
     motivadores: [],
+    insights: [
+      { tipo: "potencial", label: "Em integração", texto: "Indianara está em processo de onboarding no departamento (entrada em julho/2026). Perfil técnico e comportamental (DISC) ainda em consolidação — competências serão reavaliadas ao final do período de integração." },
+    ],
+    pdi: [],
     disc: null,
   },
 ];
@@ -2137,15 +2145,15 @@ function abrirIndividual(id) {
     </div>
   `;
   renderDiscNoPerfil(id);
-  document.getElementById('ind-motivadores').innerHTML = c.motivadores
+  document.getElementById('ind-motivadores').innerHTML = (c.motivadores || [])
     .map(m => `<span class="motivador-tag ${m.alto ? 'alto' : ''}">${m.label}</span>`).join('');
-  document.getElementById('ind-insights').innerHTML = c.insights.map(i => `
+  document.getElementById('ind-insights').innerHTML = (c.insights || []).map(i => `
     <div class="insight-card insight-${i.tipo}">
       <div class="insight-label">${i.label}</div>
       <div class="insight-text">${i.texto}</div>
     </div>
   `).join('');
-  document.getElementById('pdi-timeline').innerHTML = c.pdi.map((p, pi) => `
+  document.getElementById('pdi-timeline').innerHTML = (c.pdi || []).map((p, pi) => `
     <div class="pdi-mes">
       <div class="pdi-mes-left">
         <div class="mes-label">${p.mes.split(' ')[0]}<br>${p.mes.split(' ').slice(1).join(' ')}</div>
@@ -4225,12 +4233,12 @@ const dadosFormulario = [
       'Você anota os processos na primeira explicação para não precisar perguntar de novo — como podemos aproveitar essa habilidade?',
       'Você termina a faculdade esse ano e quer o CRC. Vamos incluir isso no PDI como meta oficial?',
     ],
-    objetivo: 'Ser o braço direito de Ananda no departamento — dominando os encerramentos contábeis, conferências e análises de contas (Ativo, Passivo, PL e Resultado) — e apoiando a migração de sistema. Laisa é a profissional que sustenta o departamento quando Ananda não está.',
+    objetivo: 'Ser o referência técnica de Ananda no departamento — dominando os encerramentos contábeis, conferências e análises de contas (Ativo, Passivo, PL e Resultado) — e apoiando a migração de sistema. Laisa é a profissional que sustenta o departamento quando Ananda não está.',
     pdi: [
       {
         periodo: 'Prep · Julho',
         foco: 'Entender o novo escopo e organizar a base',
-        nota: 'Julho é o mês de alinhamento: Laisa e Ananda definem exatamente o que "braço direito" significa na prática — o que ela decide sozinha, o que valida com Ananda, quais encerramentos assume. IS precisa de clareza sobre como contribui para o time antes de executar.',
+        nota: 'Julho é o mês de alinhamento: Laisa e Ananda definem exatamente o que "referência técnica" significa na prática — o que ela decide sozinha, o que valida com Ananda, quais encerramentos assume. IS precisa de clareza sobre como contribui para o time antes de executar.',
         acoes: [
           'Alinhar com Ananda: escopo exato de encerramentos contábeis que assumirá',
           'Mapear as análises de contas que estão sob sua responsabilidade: Ativo, Passivo, PL, Resultado',
@@ -4238,14 +4246,14 @@ const dadosFormulario = [
           'Executar conferências de contas de julho com checklist estruturado',
         ],
         checklist: [
-          'Alinhar com Ananda: o que é "braço direito" na prática — o que decide, o que valida',
+          'Alinhar com Ananda: o que é "referência técnica" na prática — o que decide, o que valida',
           'Mapear encerramentos contábeis que assumirá e em que mês',
           'Mapear análises de contas: Ativo, Passivo, PL, Contas de Resultado',
           'Entender cronograma de migração de sistema e papel de Laísa nesse processo',
           'Executar conferências de contas de julho',
           '📄 Entregar mapa de escopo + checklist de conferências até 31/07/2026',
         ],
-        kpis: ['Escopo de braço direito mapeado e alinhado', 'Análises de contas mapeadas', 'Conferências de julho executadas'],
+        kpis: ['Escopo de referência técnica mapeado e alinhado', 'Análises de contas mapeadas', 'Conferências de julho executadas'],
         entregavel: 'Mapa de escopo do novo papel + conferências de julho — até 31/07/2026',
       },
       {
@@ -4315,7 +4323,7 @@ const dadosFormulario = [
       },
       {
         periodo: 'F4 · Novembro',
-        foco: 'Braço direito consolidado + apresentação de resultados',
+        foco: 'Referência técnica consolidado + apresentação de resultados',
         nota: 'Novembro é o marco de consolidação. Laísa apresenta o ciclo: encerramentos realizados, análises entregues, migração apoiada. Para IS, apresentar o que contribuiu para o time é o reconhecimento mais significativo.',
         acoes: [
           'Executar encerramento contábil de novembro',
@@ -4336,13 +4344,13 @@ const dadosFormulario = [
       },
       {
         periodo: 'F5 · Dezembro',
-        foco: 'Avaliação + PDI 2027 como braço direito',
-        nota: 'Dezembro: avaliação do ciclo completo. PDI 2027 aprofunda a posição de braço direito — IRPJ/CSLL, obrigações acessórias mais complexas, ou desenvolvimento para supervisão técnica da equipe.',
+        foco: 'Avaliação + PDI 2027 como referência técnica',
+        nota: 'Dezembro: avaliação do ciclo completo. PDI 2027 aprofunda a posição de referência técnica — IRPJ/CSLL, obrigações acessórias mais complexas, ou desenvolvimento para supervisão técnica da equipe.',
         acoes: [
           'Executar encerramento contábil de dezembro',
           'Receber avaliação de desempenho de Ananda',
           'Apresentar Antes x Depois do ciclo',
-          'Definir PDI 2027: próximo passo como braço direito',
+          'Definir PDI 2027: próximo passo como referência técnica',
         ],
         checklist: [
           'Executar encerramento contábil de dezembro',
@@ -4352,7 +4360,7 @@ const dadosFormulario = [
           'Definir PDI 2027 com Ananda: supervisão técnica, IRPJ/CSLL ou obrigações complexas',
           '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
         ],
-        kpis: ['Avaliação recebida', 'PDI 2027 definido como braço direito', 'Ciclo encerrado com excelência'],
+        kpis: ['Avaliação recebida', 'PDI 2027 definido como referência técnica', 'Ciclo encerrado com excelência'],
         entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
       },
     ],
