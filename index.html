@@ -1104,6 +1104,7 @@ function togglePwdVis() {
   <button class="tab-btn" onclick="showTab('um-a-um')">💬 1:1</button>
   <button class="tab-btn" onclick="showTab('pdi-view')">🎯 PDI</button>
   <button class="tab-btn" onclick="showTab('meu-plano')">👩‍💼 Meu Plano</button>
+  <button class="tab-btn" onclick="showTab('estrutura')">🏗 Estrutura</button>
 </div>
 
 <!-- VISÃO GERAL -->
@@ -1502,6 +1503,133 @@ function togglePwdVis() {
 </div>
 
 
+
+<!-- ════════════════ ABA: ESTRUTURA ════════════════ -->
+<div id="view-estrutura" class="main" style="display:none">
+  <div style="font-size:18px;font-weight:700;color:var(--azul-900);margin-bottom:20px;">🏗 Estrutura do Departamento</div>
+
+  <!-- Org chart -->
+  <div style="background:#fff;border-radius:16px;border:1px solid var(--cinza-100);padding:32px;overflow-x:auto;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0;min-width:700px;">
+
+      <!-- Ananda -->
+      <div style="background:#1E3A5F;color:#fff;border-radius:12px;padding:16px 28px;text-align:center;min-width:220px;box-shadow:0 4px 16px rgba(30,58,95,0.15);">
+        <div style="font-size:16px;font-weight:800;">Ananda</div>
+        <div style="font-size:12px;opacity:0.85;margin-top:2px;">Contadora · Líder Técnica</div>
+        <div style="font-size:11px;opacity:0.7;margin-top:6px;line-height:1.5;">Fechamentos · Encerramentos · Análises<br>Desenvolvimento da equipe · Atendimento à diretoria</div>
+      </div>
+
+      <!-- Connector line -->
+      <div style="width:2px;height:32px;background:var(--cinza-200);"></div>
+
+      <!-- Horizontal bar -->
+      <div style="display:flex;align-items:flex-start;gap:0;width:100%;justify-content:center;">
+
+        <!-- Left connectors -->
+        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+          <div style="height:2px;background:var(--cinza-200);width:50%;align-self:flex-end;margin-bottom:0;"></div>
+          <div style="display:flex;gap:16px;width:100%;justify-content:flex-end;padding-right:8px;">
+
+            <!-- Karolyne -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#EEEDFE;border:2px solid #534AB7;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
+                <div style="font-size:14px;font-weight:700;color:#534AB7;">Karolyne</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Analista Fiscal</div>
+                <div style="font-size:10px;color:#534AB7;margin-top:6px;line-height:1.5;">Encerramentos VT<br>Fechamentos fiscais</div>
+              </div>
+            </div>
+
+            <!-- Laísa -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#FFEBEE;border:2px solid #D32F2F;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;position:relative;">
+                <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#D32F2F;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap;">BRAÇO DIREITO</div>
+                <div style="font-size:14px;font-weight:700;color:#D32F2F;margin-top:6px;">Laísa</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Contábil</div>
+                <div style="font-size:10px;color:#D32F2F;margin-top:6px;line-height:1.5;">Encerramentos contábeis<br>Análises Ativo/Passivo/PL/Result.<br>Apoio migração de sistema</div>
+              </div>
+            </div>
+
+            <!-- Murilo -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#ECFEFF;border:2px solid #0891B2;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
+                <div style="font-size:14px;font-weight:700;color:#0891B2;">Murilo</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Assistente Fiscal/Contábil</div>
+                <div style="font-size:10px;color:#0891B2;margin-top:6px;line-height:1.5;">Fechamentos contábeis<br>Lançamentos · Análises fiscais<br>Legislação</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Center vertical -->
+        <div style="width:2px;background:var(--cinza-200);align-self:stretch;margin:0 0;"></div>
+
+        <!-- Right connectors -->
+        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+          <div style="height:2px;background:var(--cinza-200);width:50%;align-self:flex-start;margin-bottom:0;"></div>
+          <div style="display:flex;gap:16px;width:100%;justify-content:flex-start;padding-left:8px;">
+
+            <!-- Thays -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#FFF8EC;border:2px solid #E8903A;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
+                <div style="font-size:14px;font-weight:700;color:#E8903A;">Thays</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal</div>
+                <div style="font-size:10px;color:#E8903A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas<br>Início de contabilização</div>
+              </div>
+            </div>
+
+            <!-- Karen -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#F0FDF4;border:2px solid #16A34A;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
+                <div style="font-size:14px;font-weight:700;color:#16A34A;">Karen</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Fiscal</div>
+                <div style="font-size:10px;color:#16A34A;margin-top:6px;line-height:1.5;">Classificação fiscal<br>Lançamentos · Demandas</div>
+              </div>
+            </div>
+
+            <!-- Indianara -->
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:2px;height:20px;background:var(--cinza-200);"></div>
+              <div style="background:#FFFBEB;border:2px solid #D97706;border-radius:10px;padding:12px 16px;text-align:center;min-width:150px;">
+                <div style="font-size:14px;font-weight:700;color:#D97706;">Indianara</div>
+                <div style="font-size:11px;color:#6B7280;margin-top:2px;">Auxiliar Financeiro</div>
+                <div style="font-size:10px;color:#D97706;margin-top:6px;line-height:1.5;">Contas a pagar e receber<br>DDA · Boletos<br>Comunicação direta c/ financeiro</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Visão por área -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px;">
+    <div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:18px;">
+      <div style="font-weight:700;font-size:13px;color:#534AB7;margin-bottom:10px;">📊 Contábil</div>
+      <div style="font-size:12px;color:var(--azul-900);line-height:1.8;">Ananda · Laísa · Murilo<br><span style="color:var(--cinza-400);font-size:11px;">Fechamentos, encerramentos, análises, lançamentos</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:18px;">
+      <div style="font-weight:700;font-size:13px;color:#E8903A;margin-bottom:10px;">🏷 Fiscal</div>
+      <div style="font-size:12px;color:var(--azul-900);line-height:1.8;">Karolyne · Thays · Karen<br><span style="color:var(--cinza-400);font-size:11px;">Classificação, encerramentos VT, lançamentos fiscais</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:18px;">
+      <div style="font-weight:700;font-size:13px;color:#D97706;margin-bottom:10px;">💰 Financeiro</div>
+      <div style="font-size:12px;color:var(--azul-900);line-height:1.8;">Indianara<br><span style="color:var(--cinza-400);font-size:11px;">Contas a pagar/receber, DDA, boletos</span></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:18px;">
+      <div style="font-weight:700;font-size:13px;color:#1E3A5F;margin-bottom:10px;">🎯 Objetivo do departamento</div>
+      <div style="font-size:12px;color:var(--azul-900);line-height:1.8;">Um departamento que se auto sustenta — técnico, autônomo e em constante desenvolvimento.</div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── DADOS DAS COLABORADORAS ──
 const colaboradoras = [
@@ -1639,7 +1767,7 @@ const colaboradoras = [
     cor: "#0F6E56",
     corLight: "#E1F5EE",
     perfil: "tecnica",
-    perfilLabel: "Especialista técnica",
+    perfilLabel: "Classificação & Contabilização",
     status: "pendente",
     umAUm: "02/07 · A definir",
     competencias: [3.0, 2.0, 3.0, 1.5, 2.5, 2.0],
@@ -1681,7 +1809,7 @@ const colaboradoras = [
     cor: "#BA7517",
     corLight: "#FAEEDA",
     perfil: "multi",
-    perfilLabel: "Multiplicadora",
+    perfilLabel: "Classificação & Lançamentos",
     status: "pendente",
     umAUm: "01/07 · A definir",
     competencias: [1.5, 1.5, 1.0, 1.0, 3.0, 1.0],
@@ -1722,8 +1850,8 @@ const colaboradoras = [
     iniciais: "LA",
     cor: "#D32F2F",
     corLight: "#FFEBEE",
-    perfil: "integra",
-    perfilLabel: "Em integração",
+    perfil: "lider",
+    perfilLabel: "Braço direito",
     status: "pendente",
     umAUm: "26/06 · 15h–16h",
     competencias: [4.0, 3.5, 3.0, 3.0, 3.0, 2.0],
@@ -1760,12 +1888,12 @@ const colaboradoras = [
   {
     id: 6,
     nome: "Murilo",
-    cargo: "Assistente Administrativo",
+    cargo: "Assistente Fiscal/Contábil",
     iniciais: "MU",
     cor: "#0891B2",
     corLight: "#ECFEFF",
     perfil: "integração",
-    perfilLabel: "Em integração",
+    perfilLabel: "Fechamentos e Fiscal",
     status: "em-andamento",
     umAUm: "A definir",
     competencias: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
@@ -1884,6 +2012,30 @@ const discEquipe = [
     tracos: ["Altruísta", "Colaborativa", "Receptiva", "Paciente", "Orientada para o coletivo"],
     comunicar: "Aborde com cuidado e empatia — ela é muito receptiva quando há confiança. Mostre como o desenvolvimento dela impacta o time (ALT=65). Use linguagem de crescimento, nunca de cobrança. Valorize aprendizado (TEO=70).",
     motivadores: "Altruísta (65), Teórico (70), Econômico (68)"
+  },
+  {
+    colabId: 6,
+    estilo: null,
+    estiloLabel: "DISC a definir",
+    estiloDesc: "Murilo está em processo de integração. Perfil DISC será aplicado após onboarding.",
+    natural:    { D: 0, I: 0, S: 0, C: 0 },
+    adaptativo: { D: 0, I: 0, S: 0, C: 0 },
+    valores:    {},
+    tracos: ["Em integração"],
+    comunicar: "Perfil DISC ainda não aplicado. Aplicar avaliação após período de onboarding (sugere-se setembro/2026).",
+    motivadores: "A definir após avaliação DISC"
+  },
+  {
+    colabId: 7,
+    estilo: null,
+    estiloLabel: "DISC a definir",
+    estiloDesc: "Indianara está em processo de integração. Perfil DISC será aplicado após onboarding.",
+    natural:    { D: 0, I: 0, S: 0, C: 0 },
+    adaptativo: { D: 0, I: 0, S: 0, C: 0 },
+    valores:    {},
+    tracos: ["Em integração"],
+    comunicar: "Perfil DISC ainda não aplicado. Aplicar avaliação após período de onboarding (sugere-se setembro/2026).",
+    motivadores: "A definir após avaliação DISC"
   }
 ];
 
@@ -2952,7 +3104,7 @@ function limparIndicacao() {
 
 // ── Tabs ──
 function showTab(tab) {
-  const allTabs = ['visao-geral','equipe','individual','disc','consultoria','respostas','um-a-um','pdi-view','meu-plano'];
+  const allTabs = ['visao-geral','equipe','individual','disc','consultoria','respostas','um-a-um','pdi-view','meu-plano','estrutura'];
   allTabs.forEach(t => {
     const v = document.getElementById('view-' + t);
     if (v) v.style.display = 'none';
@@ -3726,163 +3878,134 @@ const dadosFormulario = [
       'Você admira quem domina praticamente todas as áreas. Quais áreas você mais quer dominar nos próximos 6 meses?',
       'Você quer crescer de cargo. O que precisaria conquistar para você se sentir pronta para esse próximo passo?',
     ],
-    objetivo: 'Dominar a classificação fiscal com excelência e autonomia — tornando-se referência da equipe — e iniciar ICMS e PIS/COFINS de forma aplicada, no próprio ritmo, sem abrir mão da demanda diária.',
+    objetivo: 'Ser a referência de classificação da equipe — construindo o Guia de Classificação — e iniciar a trilha de contabilização de forma aplicada, ampliando seu escopo técnico no segundo semestre de 2026.',
     pdi: [
       {
         periodo: 'F1 · Julho',
         foco: 'Classificação com autonomia e menos retrabalho',
-        nota: 'Thays já tem 4/5 em classificação e energia 5/5. Julho é o mês de eliminar os erros que ainda acontecem e criar o hábito de conferência própria — sem depender de revisão externa. DI precisa de autonomia: ela conduz, Ananda valida ao final.',
+        nota: 'Thays já tem 4/5 em classificação e energia 5/5. Julho é o mês de eliminar erros residuais e criar o hábito de conferência própria — sem depender de revisão externa. DI precisa de autonomia: ela conduz, Ananda valida ao final.',
         acoes: [
           'Criar checklist pessoal de conferência antes de entregar qualquer classificação',
-          'Registrar toda dúvida de classificação que surgir — resolver antes de perguntar',
           'Mapear os 3 tipos de classificação que mais geram retrabalho',
-          'Executar pedidos sem atrasos',
+          'Executar pedidos e lançamentos sem atrasos',
         ],
         checklist: [
           'Criar checklist pessoal de conferência de classificação',
-          'Usar o checklist em 100% das classificações de julho',
+          'Usar checklist em 100% das classificações de julho',
           'Registrar dúvidas e como resolveu — sem deixar passar',
           'Mapear os 3 tipos de classificação que mais geram retrabalho',
           'Executar pedidos sem atrasos no mês',
           'Alinhar com Ananda: o que significa ser referência em classificação',
           '📄 Entregar checklist + mapa de retrabalho até 31/07/2026',
         ],
-        kpis: [
-          'Checklist criado e em uso',
-          'Mapa de retrabalho entregue',
-          'Zero atrasos em pedidos',
-        ],
+        kpis: ['Checklist criado e em uso', 'Mapa de retrabalho entregue', 'Zero atrasos em pedidos'],
         entregavel: 'Checklist de conferência + mapa dos 3 tipos com mais retrabalho — até 31/07/2026',
       },
       {
         periodo: 'F2 · Agosto',
         foco: 'Qualidade + o impacto fiscal da classificação',
-        nota: 'Agosto conecta classificação com fiscal — o que NCM errado gera em ICMS e PIS/COFINS. Para DI, aprender o impacto do próprio trabalho é o que aumenta o nível de exigência consigo mesma. Ananda e Laisa apoiam nessa conexão.',
+        nota: 'Agosto conecta classificação com fiscal — o que NCM errado gera em ICMS e PIS/COFINS. Para DI, aprender o impacto do próprio trabalho aumenta o nível de exigência consigo mesma. Ananda e Laisa apoiam nessa conexão.',
         acoes: [
           'Usar checklist em 100% das classificações',
-          'Entender: NCM errado → qual o impacto em ICMS e PIS/COFINS? Com Ananda ou Laisa',
+          'Entender: NCM errado → impacto em ICMS e PIS/COFINS — com Ananda ou Laisa',
           'Pesquisar NCM de 10 produtos que mais geram dúvida e documentar',
-          'Registrar redução de retrabalho em relação a julho',
         ],
         checklist: [
           'Usar checklist em 100% das classificações de agosto',
           'Sessão com Ananda ou Laisa: NCM errado e impacto em ICMS',
           'Sessão com Ananda ou Laisa: NCM errado e impacto em PIS/COFINS',
           'Pesquisar e documentar NCM de 10 produtos que geram mais dúvida',
-          'Comparar: retrabalho de agosto vs. julho (melhorou?)',
+          'Comparar: retrabalho de agosto vs. julho',
           'Executar pedidos sem atrasos',
           '📄 Entregar documentação dos 10 NCMs + comparativo de retrabalho até 31/08/2026',
         ],
-        kpis: [
-          'Checklist usado em 100% das classificações',
-          '10 NCMs pesquisados e documentados',
-          'Redução de retrabalho em relação a julho',
-        ],
-        entregavel: 'Documentação dos 10 NCMs + comparativo de retrabalho ago vs. jul — até 31/08/2026',
+        kpis: ['Checklist usado em 100% das classificações', '10 NCMs documentados', 'Retrabalho reduzido vs. julho'],
+        entregavel: 'Documentação dos 10 NCMs + comparativo de retrabalho — até 31/08/2026',
       },
       {
         periodo: 'F3 · Setembro',
-        foco: 'Co-criar o Guia de Classificação com Mayggla',
-        nota: 'Para DI, construir algo ao lado de alguém sem perder a autonomia é o melhor cenário. Thays e Mayggla criam o guia juntas — Mayggla define a estrutura, Thays conquista sua parte: os casos reais de retrabalho que ela mapeou e o impacto fiscal que aprendeu. Dois olhares, um entregável mais forte. Ananda valida no final.',
+        foco: 'Criar o Guia de Classificação + início de contabilização',
+        nota: 'Setembro tem dois eixos: Thays escreve o Guia de Classificação da equipe (conquista DI — algo que vai ficar com seu nome) e inicia a trilha de contabilização com Ananda. Dois desafios simultâneos que combinam com o perfil de quem quer crescer.',
         acoes: [
-          'Reunião de kick-off com Mayggla: dividir seções, definir prazo parcial de cada uma',
-          'Redigir contribuição de Thays ao guia: os casos de retrabalho mais comuns e como evitar',
-          'Incluir: impacto fiscal das classificações que mais erram (ICMS e PIS/COFINS)',
-          'Entregar parte para Mayggla revisar e integrar ao guia',
-          'Aprofundar ICMS básico: débito, crédito, ST aplicado ao que classifica',
+          'Redigir o Guia de Classificação: NCM, CST e CFOP mais usados + erros comuns',
+          'Incluir no guia: impacto fiscal de cada classificação',
+          'Validar o guia com Ananda',
+          'Sessão com Ananda: o que é contabilização e como se conecta com classificação',
+          'Acompanhar Ananda em 1 lançamento contábil básico',
         ],
         checklist: [
-          'Reunião com Mayggla: definir divisão de seções e prazo de cada parte',
-          'Redigir: os casos de classificação que mais geram retrabalho e como evitar (sua seção)',
-          'Incluir: impacto fiscal de cada tipo de classificação (com base no que aprendeu em agosto)',
-          'Entregar contribuição para Mayggla dentro do prazo combinado',
-          'Participar da revisão final com Mayggla antes de ir para Ananda',
-          'Sessão com Laisa ou Ananda: ICMS básico aplicado à classificação',
+          'Redigir Guia: seção NCM — os mais usados e suas dúvidas',
+          'Redigir Guia: seção CST — quando usar cada código',
+          'Redigir Guia: seção CFOP — operações mais comuns',
+          'Incluir no guia: erros mais comuns e como evitar',
+          'Incluir no guia: impacto fiscal de cada classificação',
+          'Validar guia com Ananda e incorporar ajustes',
+          'Sessão com Ananda: o que é contabilização e como funciona',
+          'Acompanhar 1 lançamento contábil básico com Ananda',
           'Executar pedidos sem atrasos',
-          '📄 Contribuição entregue para Mayggla + validação do guia junto com Ananda até 30/09/2026',
+          '📄 Entregar Guia de Classificação v1.0 validado até 30/09/2026',
         ],
-        kpis: [
-          'Contribuição ao Guia de Classificação entregue dentro do prazo para Mayggla',
-          'Guia v1.0 validado por Ananda (co-autoria com Mayggla)',
-          'ICMS básico estudado',
-          'Zero atrasos em pedidos',
-        ],
-        entregavel: 'Contribuição ao Guia de Classificação v1.0 (co-autora com Mayggla) — até 30/09/2026',
+        kpis: ['Guia de Classificação v1.0 aprovado por Ananda', 'Primeira sessão de contabilização realizada', 'Zero atrasos em pedidos'],
+        entregavel: 'Guia de Classificação v1.0 + primeira sessão de contabilização — até 30/09/2026',
       },
       {
         periodo: 'F4 · Outubro',
-        foco: 'Referência: a equipe consulta ela e Mayggla',
-        nota: 'Outubro é o marco de referência — dúvidas de classificação vão para Thays e Mayggla, não para Ananda. DI valoriza autonomia e impacto: ser consultada ao lado de Mayggla é conquista, não concorrência. Cada uma tem seu papel claro. PIS/COFINS entra de forma aplicada.',
+        foco: 'Referência em classificação + lançamentos básicos',
+        nota: 'Outubro: dúvidas de classificação vão para ela. Contabilização avança — executa lançamentos básicos com supervisão de Ananda. DI: dois escopos, mais responsabilidade, mais conquista.',
         acoes: [
-          'Com Mayggla, ser ponto de resposta para dúvidas de classificação da equipe',
-          'Registrar as dúvidas respondidas e como resolveu',
-          'Aprofundar PIS/COFINS básico com Ananda ou Laisa',
-          'Levantar novos casos para atualizar o guia e passar para Mayggla integrar',
+          'Ser o ponto de resposta para dúvidas de classificação da equipe',
+          'Executar lançamentos contábeis básicos com Ananda como apoio',
+          'Atualizar o Guia de Classificação com novos casos',
+          'Atender demandas sem atrasos',
         ],
         checklist: [
-          'Com Mayggla: responder dúvidas de classificação — registrar cada caso',
-          'Sessão com Ananda ou Laisa: PIS/COFINS aplicado à classificação',
-          'Levantar novos casos do mês e passar para Mayggla incluir no guia',
-          'Comparar: retrabalho de outubro vs. julho (evolução do ciclo)',
-          'Executar pedidos sem atrasos',
-          '📄 Entregar lista de novos casos + registro de dúvidas respondidas até 31/10/2026',
+          'Responder dúvidas de classificação da equipe — registrar cada caso',
+          'Executar lançamentos contábeis básicos de outubro com Ananda',
+          'Atualizar Guia de Classificação com novos casos do mês',
+          'Atender demandas no prazo',
+          '📄 Entregar guia atualizado + log de lançamentos até 31/10/2026',
         ],
-        kpis: [
-          'Dúvidas de classificação respondidas por ela (junto com Mayggla)',
-          'PIS/COFINS básico estudado',
-          'Novos casos levantados e entregues para atualização do guia',
-        ],
-        entregavel: 'Registro de dúvidas respondidas + novos casos para o guia — até 31/10/2026',
+        kpis: ['Dúvidas de classificação respondidas por ela', 'Lançamentos básicos executados', 'Guia atualizado'],
+        entregavel: 'Guia atualizado + log de lançamentos de outubro — até 31/10/2026',
       },
       {
         periodo: 'F5 · Novembro',
-        foco: 'Apresentar juntas: o que conquistamos',
-        nota: 'DI quer impacto visível — e apresentar junto com Mayggla é mostrar que construiu algo real com autonomia e parceria. Não é dividir o palco: é mostrar que dois perfis diferentes geraram um entregável mais forte. Thays apresenta sua visão: o impacto no retrabalho e o que aprendeu de fiscal.',
+        foco: 'Apresentar conquistas: classificação + contabilização',
+        nota: 'Novembro é o momento de mostrar o que construiu — o guia, a evolução na classificação e os primeiros passos na contabilização. DI quer impacto visível: dados concretos, antes vs. agora.',
         acoes: [
-          'Com Mayggla: preparar apresentação conjunta do Guia de Classificação',
-          'Thays apresenta: sua parte da jornada — os casos mapeados, a evolução, o impacto',
-          'Redigir mini-resumo fiscal: o que domina hoje sobre ICMS e PIS/COFINS',
-          'Propor: responsável pelas atualizações de NCM no guia em 2027',
+          'Preparar apresentação: guia criado, erros reduzidos, primeiros lançamentos',
+          'Apresentar resultados do ciclo para Ananda',
+          'Redigir mini-resumo: o que entende hoje de contabilização',
+          'Propor: responsável pelo Guia de Classificação em 2027',
         ],
         checklist: [
-          'Reunião com Mayggla para preparar apresentação conjunta',
-          'Preparar parte de Thays: trajetória jul–nov, casos mapeados, erros reduzidos',
-          'Apresentar juntas para Ananda: Guia de Classificação e resultados do ciclo',
-          'Redigir mini-resumo fiscal: ICMS e PIS/COFINS aplicados à rotina',
-          'Propor responsabilidade 2027: atualizações de NCM no Guia de Classificação',
-          'Executar pedidos sem atrasos',
-          '📄 Entregar apresentação conjunta + mini-resumo fiscal até 30/11/2026',
+          'Preparar apresentação: trajetória jul–nov com dados concretos',
+          'Apresentar para Ananda: resultados de classificação + contabilização',
+          'Redigir mini-resumo: o que aprendeu sobre contabilização',
+          'Propor responsabilidade 2027: manutenção do Guia de Classificação',
+          'Executar pedidos e lançamentos sem atrasos',
+          '📄 Entregar apresentação + mini-resumo até 30/11/2026',
         ],
-        kpis: [
-          'Apresentação conjunta com Mayggla realizada para Ananda',
-          'Mini-resumo fiscal entregue',
-          'Proposta de responsabilidade 2027 formalizada',
-        ],
-        entregavel: 'Apresentação conjunta (Thays + Mayggla) do ciclo + mini-resumo fiscal — até 30/11/2026',
+        kpis: ['Apresentação realizada com dados concretos', 'Mini-resumo de contabilização entregue', 'Proposta 2027 formalizada'],
+        entregavel: 'Apresentação do ciclo + mini-resumo de contabilização — até 30/11/2026',
       },
       {
         periodo: 'F6 · Dezembro',
         foco: 'Avaliação + próximo nível',
-        nota: 'DI quer crescer de cargo — e esse é o momento de avaliar se o caminho está sendo construído. Avaliação direta, feedback sincero, PDI 2027 com próxima conquista clara. Ela sente que usa 5/5 do potencial — mantenha isso.',
+        nota: 'DI quer crescer de cargo. Dezembro é a avaliação direta com dados, e o PDI 2027 com a próxima conquista: mais contabilização, obrigações acessórias ou outro escopo técnico.',
         acoes: [
           'Receber avaliação de desempenho de Ananda — direta e com dados',
-          'Apresentar: Antes x Depois do ciclo',
-          'Definir PDI 2027: crescimento de cargo, mais responsabilidade fiscal ou coordenação',
-          'Confirmar posição como referência de classificação da equipe',
+          'Apresentar Antes x Depois do ciclo',
+          'Definir PDI 2027: mais contabilização, obrigações ou outro crescimento técnico',
         ],
         checklist: [
-          'Receber avaliação de desempenho completa de Ananda',
-          'Preparar apresentação Antes x Depois: jul→dez',
-          'Definir PDI 2027 com Ananda: próximo cargo ou próxima conquista técnica',
+          'Receber avaliação de desempenho completa',
+          'Preparar e apresentar Antes x Depois: jul→dez',
+          'Definir PDI 2027 com Ananda: próxima conquista técnica',
           'Confirmar: responsável pelo Guia de Classificação em 2027',
-          'Executar pedidos e classificações de dezembro sem atrasos',
           '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
         ],
-        kpis: [
-          'Avaliação de desempenho recebida com feedback direto',
-          'PDI 2027 com próxima conquista definida',
-          'Posição de referência em classificação confirmada',
-        ],
+        kpis: ['Avaliação recebida com feedback direto', 'PDI 2027 com próxima conquista definida', 'Referência em classificação confirmada'],
         entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
       },
     ],
@@ -3937,174 +4060,134 @@ const dadosFormulario = [
       'Você se sente pouco à vontade para opinar em reuniões (2/5). O que faria você se sentir mais segura para se posicionar?',
       'Você quer crescer, mas tem dúvidas sobre liderança. O que te atrai e o que te assusta nesse papel?',
     ],
-    objetivo: 'Atingir excelência total na função financeira (contas a receber/pagar e DDA) e tornar-se autônoma na contabilização do Protheus — identificando e corrigindo erros sem suporte — até o final de 2026.',
+    objetivo: 'Fazer a transição do financeiro para classificação e lançamentos — tornando-se referência nessa nova rotina ao lado de Thays. Karen tem energia para mudança e foco em resultados: o ciclo 2026 é sobre conquistar um novo escopo com excelência.',
     pdi: [
       {
         periodo: 'F1 · Julho',
-        foco: '100% na função financeira — acompanhamento diário',
-        nota: 'Julho é o mês da consolidação financeira. Karen executa a conferência completa e Ananda monitora via sistema e grupo de comunicação diariamente. Cada inconsistência encontrada por ela é um avanço. No Protheus: navegação e primeiras entradas guiadas por Ana.',
+        foco: 'Transição: passar o financeiro, entrar na classificação',
+        nota: 'Julho é o mês da virada. Karen passa o financeiro para Indianara com organização e sem perda de informação, e mergulha na classificação — área onde ela já tem base pelo trabalho anterior. A transição bem feita é o primeiro entregável.',
         acoes: [
-          'Executar conferência diária de contas a receber e contas a pagar com atenção total',
-          'Conferir DDAs de amanhã para frente — sem pendência',
-          'Registrar toda inconsistência encontrada e como foi resolvida',
-          'Protheus: sessões semanais com Ana — aprender estrutura de lançamento',
+          'Documentar e passar todo o processo de financeiro para Indianara',
+          'Mapear o estado atual da classificação que ficará sob sua responsabilidade',
+          'Alinhar com Ananda: escopo exato de classificação + lançamentos que assumirá',
+          'Executar primeiras classificações com foco em zero erros',
         ],
         checklist: [
-          'Executar conferência de contas a receber todos os dias úteis de julho',
-          'Executar conferência de contas a pagar todos os dias úteis de julho',
-          'Conferir DDAs — nenhum vencimento perdido em julho',
-          'Registrar inconsistências encontradas: o que era, como resolveu',
-          'Sessão semanal 1 com Ana no Protheus: estrutura e navegação',
-          'Sessão semanal 2 com Ana no Protheus: primeiros lançamentos guiados',
-          'Sessão semanal 3 com Ana no Protheus: lançamentos com supervisão',
-          'Sessão semanal 4 com Ana no Protheus: revisão do que aprendeu',
-          'Receber feedback de Ananda sobre a qualidade da conferência financeira',
-          '📄 Entregar relatório financeiro de julho + evolução no Protheus até 31/07/2026',
+          'Documentar processo de contas a pagar e passar para Indianara',
+          'Documentar processo de contas a receber e passar para Indianara',
+          'Documentar DDA e boletos — entregar para Indianara',
+          'Mapear escopo de classificação: produtos, NCM e CST mais frequentes',
+          'Alinhar com Ananda: quais lançamentos assumirá e a partir de quando',
+          'Executar classificações de julho com checklist de conferência',
+          '📄 Entregar documentação do financeiro + mapa de classificação até 31/07/2026',
         ],
-        kpis: [
-          'Zero vencimentos perdidos em contas a pagar/receber no mês',
-          'Inconsistências registradas e resolvidas (quantidade)',
-          '4 sessões no Protheus com Ana concluídas',
-          'Relatório entregue até 31/07/2026',
-        ],
-        entregavel: 'Relatório da conferência financeira de julho + registro de evolução no Protheus — até 31/07/2026',
+        kpis: ['Financeiro 100% documentado e passado para Indianara', 'Escopo de classificação mapeado', 'Zero atrasos na transição'],
+        entregavel: 'Documentação do financeiro entregue para Indianara + mapa de classificação — até 31/07/2026',
       },
       {
         periodo: 'F2 · Agosto',
-        foco: 'Financeiro consolidado + Protheus: primeiros lançamentos autônomos',
-        nota: 'O financeiro já deve estar fluindo. Agosto é sobre aumentar a autonomia no Protheus — ela começa a lançar sem Ana do lado, e Ana revisa ao final. Feedback quinzenal de Ananda é obrigatório nessa fase.',
+        foco: 'Classificação consolidada',
+        nota: 'Agosto é o primeiro mês 100% no novo escopo. Classificação com atenção à qualidade e sem dependência de revisão. Lançamentos básicos entram aqui como aprendizado inicial.',
         acoes: [
-          'Continuar conferência financeira diária com autonomia total',
-          'Protheus: realizar lançamentos contábeis básicos de forma autônoma',
-          'Ana Beatriz revisa os lançamentos ao final do dia — feedback direto',
-          'Identificar e registrar qualquer erro nos próprios lançamentos antes de Ana revisar',
+          'Executar classificações com autonomia e checklist de conferência',
+          'Registrar dúvidas de NCM e CST — resolver antes de perguntar',
+          'Iniciar lançamentos básicos com supervisão de Ananda',
+          'Atender demandas do departamento dentro do prazo',
         ],
         checklist: [
-          'Conferência financeira diária de agosto — zero pendência',
-          'Realizar lançamentos contábeis básicos no Protheus de forma autônoma',
-          'Ana revisa os lançamentos — registrar feedback recebido',
-          'Tentar identificar os próprios erros antes da revisão de Ana',
-          'Feedback quinzenal 1 com Ananda: como está indo a conferência financeira',
-          'Feedback quinzenal 2 com Ananda: como está o progresso no Protheus',
-          'Registrar dificuldades técnicas ainda existentes no Protheus',
-          '📄 Entregar relatório de agosto + registro de erros identificados até 31/08/2026',
+          'Executar classificações de agosto com checklist — registrar taxa de erro',
+          'Registrar dúvidas de classificação e como resolveu',
+          'Sessão com Ananda: introdução aos lançamentos contábeis básicos',
+          'Executar primeiros lançamentos supervisionados',
+          'Atender demandas sem atrasos',
+          '📄 Entregar relatório de classificações + primeiros lançamentos até 31/08/2026',
         ],
-        kpis: [
-          'Financeiro: zero erros não identificados por ela mesma no mês',
-          'Lançamentos no Protheus realizados autonomamente',
-          '2 feedbacks quinzenais com Ananda realizados',
-          'Relatório entregue até 31/08/2026',
-        ],
-        entregavel: 'Relatório financeiro de agosto + registro de evolução no Protheus com erros identificados — até 31/08/2026',
+        kpis: ['Classificações executadas com autonomia', 'Primeiros lançamentos realizados', 'Zero atrasos em demandas'],
+        entregavel: 'Relatório de classificações de agosto + primeiros lançamentos — até 31/08/2026',
       },
       {
         periodo: 'F3 · Setembro',
-        foco: 'Protheus: autônoma e identifica erros — mapeamento concluído',
-        nota: 'Terceiro mês no Protheus — mapeamento concluído. Karen deve conseguir lançar e identificar inconsistências sem apoio de Ana. Esse é o marco do trimestre. No financeiro: ela já é referência da rotina.',
+        foco: 'Lançamentos contábeis com supervisão',
+        nota: 'Setembro aprofunda os lançamentos — Karen executa com Ananda disponível para dúvidas. Classificação já é rotina: foco em qualidade e agilidade.',
         acoes: [
-          'Executar lançamentos no Protheus de forma totalmente autônoma',
-          'Identificar e corrigir inconsistências nos próprios lançamentos sem precisar de Ana',
-          'Documentar os tipos de erros mais comuns que encontrou e como corrigiu',
-          'Apresentar para Ananda o mapa de evolução: o que domina, o que ainda é desafio',
+          'Executar lançamentos contábeis sob supervisão de Ananda',
+          'Classificação: manter qualidade, reduzir erros vs. agosto',
+          'Atender demandas do departamento com agilidade',
+          'Registrar dúvidas e como resolveu',
         ],
         checklist: [
-          'Conferência financeira diária de setembro — sem suporte necessário',
-          'Lançamentos no Protheus realizados com autonomia total',
-          'Identificar e corrigir ao menos 3 inconsistências sem ajuda de Ana',
-          'Documentar tipos de erros comuns e suas correções',
-          'Preparar mapa de evolução: Protheus mês 1 vs. mês 3',
-          'Apresentar mapa de evolução para Ananda',
-          'Receber feedback de Ananda sobre os 3 meses de acompanhamento',
-          '📄 Entregar relatório de setembro + mapa de evolução no Protheus até 30/09/2026',
+          'Executar lançamentos contábeis de setembro — registrar cada um',
+          'Registrar dúvidas consultadas com Ananda e como resolveu',
+          'Manter taxa de erro de classificação abaixo de agosto',
+          'Atender demandas sem atrasos',
+          '📄 Entregar log de lançamentos + comparativo de erros até 30/09/2026',
         ],
-        kpis: [
-          'Lançamentos no Protheus autônomos e sem revisão de Ana',
-          'Ao menos 3 inconsistências identificadas e corrigidas por ela mesma',
-          'Mapa de evolução apresentado e validado por Ananda',
-          'Relatório entregue até 30/09/2026',
-        ],
-        entregavel: 'Relatório de setembro + mapa de evolução Protheus (3 meses) — até 30/09/2026',
+        kpis: ['Lançamentos de setembro executados', 'Redução de erros de classificação vs. agosto', 'Demandas atendidas no prazo'],
+        entregavel: 'Log de lançamentos + comparativo de erros — até 30/09/2026',
       },
       {
         periodo: 'F4 · Outubro',
-        foco: 'Financeiro como referência + aprofundamento contábil',
-        nota: 'Karen já é referência na conferência financeira e autônoma no Protheus. Outubro é sobre solidificar e expandir — iniciar conciliações básicas e aprofundar o que ainda tem lacuna técnica.',
+        foco: 'Lançamentos com mais autonomia',
+        nota: 'Outubro: Karen conduz lançamentos com menos supervisão. Classificação no piloto automático. Atendimento a demandas com agilidade.',
         acoes: [
-          'Manter conferência financeira como referência — zero erros, zero pendências',
-          'Iniciar estudo e prática de conciliações básicas com Ana',
-          'Aprofundar Protheus: lançamentos de maior complexidade',
-          'Definir com Ananda: qual área técnica aprofundar no próximo ciclo',
+          'Conduzir lançamentos contábeis com autonomia crescente',
+          'Consultar Ananda apenas em dúvidas pontuais — registrar',
+          'Classificação + lançamentos como rotina consolidada',
+          'Atender demandas com agilidade e qualidade',
         ],
         checklist: [
-          'Conferência financeira outubro — 100% sem supervisão',
-          'Primeira conciliação básica realizada com Ana Beatriz',
-          'Protheus: realizar ao menos 1 lançamento de maior complexidade',
-          'Feedback mensal com Ananda: como está o desempenho geral',
-          'Definir com Ananda a área de foco para novembro e dezembro',
-          '📄 Entregar relatório de outubro até 31/10/2026',
+          'Conduzir lançamentos de outubro com autonomia',
+          'Registrar consultas a Ananda: o que foi, como resolveu',
+          'Classificações de outubro: zero erros de retrabalho',
+          'Atender todas as demandas dentro do prazo',
+          '📄 Entregar log de lançamentos + registro de consultas até 31/10/2026',
         ],
-        kpis: [
-          'Financeiro 100% sem supervisão',
-          'Primeira conciliação realizada',
-          'Relatório entregue até 31/10/2026',
-        ],
-        entregavel: 'Relatório financeiro de outubro + primeira conciliação realizada — até 31/10/2026',
+        kpis: ['Lançamentos conduzidos com autonomia', 'Número de consultas reduzido vs. setembro', 'Zero atrasos em demandas'],
+        entregavel: 'Log de lançamentos autônomos + registro de consultas — até 31/10/2026',
       },
       {
         periodo: 'F5 · Novembro',
-        foco: 'Criar o POP da rotina financeira',
-        nota: 'Karen já domina o financeiro. Agora é hora de documentar — o POP que ela escrever vai ser o manual da função dela e um legado para a equipe. Para SI: escrever o próprio POP é um ato de reconhecimento do domínio conquistado.',
+        foco: 'Classificação + lançamentos como rotina',
+        nota: 'Novembro consolida o ciclo: Karen executa classificação e lançamentos sem supervisão. Apresenta a evolução — antes (financeiro) vs. agora (contábil).',
         acoes: [
-          'Redigir o POP da conferência de contas a receber',
-          'Redigir o POP da conferência de contas a pagar e DDA',
-          'Incluir no POP: pontos críticos, erros mais comuns e como evitar',
-          'Apresentar o POP para Ananda para validação',
+          'Executar classificação e lançamentos de novembro sem supervisão',
+          'Atender demandas com autonomia e qualidade',
+          'Preparar comparativo: antes (financeiro) vs. agora (classificação + lançamentos)',
+          'Apresentar evolução para Ananda',
         ],
         checklist: [
-          'Redigir POP: conferência de contas a receber — passo a passo completo',
-          'Redigir POP: conferência de contas a pagar e DDA',
-          'Incluir no POP: principais erros e como evitar',
-          'Incluir no POP: como escalar quando houver dúvida',
-          'Apresentar os POPs para Ananda e incorporar feedback',
-          'Continuar conferência financeira e lançamentos no Protheus',
-          '📄 Entregar POPs validados + relatório de novembro até 30/11/2026',
+          'Classificação e lançamentos de novembro — sem supervisão',
+          'Atender demandas no prazo',
+          'Preparar comparativo antes x agora com dados concretos',
+          'Apresentar evolução para Ananda',
+          '📄 Entregar apresentação de evolução até 30/11/2026',
         ],
-        kpis: [
-          'POP de contas a receber aprovado por Ananda',
-          'POP de contas a pagar e DDA aprovado por Ananda',
-          'Relatório entregue até 30/11/2026',
-        ],
-        entregavel: 'POPs da rotina financeira (contas a receber + pagar + DDA) + relatório de novembro — até 30/11/2026',
+        kpis: ['Classificação + lançamentos autônomos', 'Apresentação realizada', 'Demandas no prazo'],
+        entregavel: 'Apresentação de evolução do ciclo — até 30/11/2026',
       },
       {
         periodo: 'F6 · Dezembro',
-        foco: 'Avaliação e feedback sincero — o que ela pediu',
-        nota: 'Karen pediu explicitamente feedback claro sobre seu desempenho. Dezembro é o momento de honrar esse pedido: avaliação completa, reconhecimento do que cresceu e clareza sobre o que ainda desenvolver. PDI 2027 com ela.',
+        foco: 'Avaliação + PDI 2027',
+        nota: 'Dezembro é a avaliação do ciclo completo: transição, aprendizado, entregas. PDI 2027 com próximo passo técnico — mais lançamentos, obrigações acessórias ou aprofundamento contábil.',
         acoes: [
-          'Manter financeiro e Protheus com autonomia total',
-          'Receber avaliação de desempenho completa de Ananda — o feedback que ela pediu',
-          'Apresentar visão Antes × Depois: o que chegou sabendo, o que domina agora',
-          'Construir PDI 2027 com Ananda: próximos passos de carreira',
+          'Receber avaliação de desempenho de Ananda',
+          'Apresentar Antes x Depois do ciclo 2026',
+          'Definir PDI 2027: próxima competência técnica',
         ],
         checklist: [
-          'Conferência financeira dezembro — 100% autônoma',
-          'Lançamentos Protheus dezembro — sem suporte',
-          'Receber avaliação de desempenho completa de Ananda',
-          'Preparar visão Antes × Depois do ano',
-          'Definir PDI 2027: área de foco, metas, possibilidade de crescimento de cargo',
-          '📄 Entregar relatório final + apresentação Antes × Depois até 31/12/2026',
+          'Receber avaliação de desempenho',
+          'Preparar e apresentar Antes x Depois: jul→dez',
+          'Definir PDI 2027 com Ananda',
+          'Executar classificações e lançamentos de dezembro',
+          '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
         ],
-        kpis: [
-          'Avaliação de desempenho realizada com feedback claro (o que ela pediu)',
-          'PDI 2027 definido e documentado',
-          'Relatório final entregue até 31/12/2026',
-        ],
-        entregavel: 'Relatório final de dezembro + apresentação Antes × Depois + PDI 2027 — até 31/12/2026',
+        kpis: ['Avaliação recebida', 'PDI 2027 definido', 'Ciclo encerrado com autonomia'],
+        entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
       },
     ],
   },
   {
-    id: 5, nome: 'Laisa', cargo: 'Analista Fiscal',
+    id: 5, nome: 'Laisa', cargo: 'Assistente Contábil',
     respostas: [
       { cat: 'Perfil e Motivações', itens: [
         { p: 'Trabalho ideal', r: 'Um trabalho onde possa crescer profissionalmente, aprender todos os dias e fazer parte de um time que valorize o desenvolvimento e os resultados.' },
@@ -4152,918 +4235,394 @@ const dadosFormulario = [
       'Você anota os processos na primeira explicação para não precisar perguntar de novo — como podemos aproveitar essa habilidade?',
       'Você termina a faculdade esse ano e quer o CRC. Vamos incluir isso no PDI como meta oficial?',
     ],
-    objetivo: 'Tornar-se referência técnica nos fechamentos fiscais do Grupo Paraná, evoluindo de execução assistida (Jul–Set) para domínio autônomo e protagonismo na apresentação das informações fiscais (Out–Dez 2026).',
+    objetivo: 'Ser o braço direito de Ananda no departamento — dominando os encerramentos contábeis, conferências e análises de contas (Ativo, Passivo, PL e Resultado) — e apoiando a migração de sistema. Laisa é a profissional que sustenta o departamento quando Ananda não está.',
     pdi: [
       {
-        periodo: 'Prep · 15–30 Jun',
-        foco: 'Entender o terreno antes de executar',
-        nota: 'Antes de começar os fechamentos, entender como o processo funciona hoje — o fluxo, os sistemas, as planilhas de classificação e o que já foi entregue em 2026. SC anota tudo na primeira explicação: use esse tempo bem.',
+        periodo: 'Prep · Julho',
+        foco: 'Entender o novo escopo e organizar a base',
+        nota: 'Julho é o mês de alinhamento: Laisa e Ananda definem exatamente o que "braço direito" significa na prática — o que ela decide sozinha, o que valida com Ananda, quais encerramentos assume. IS precisa de clareza sobre como contribui para o time antes de executar.',
         acoes: [
-          'Conversar com Karolyne e Ananda sobre o fluxo atual de fechamento fiscal',
-          'Conhecer as planilhas de classificação existentes — estrutura, colunas, lógica',
-          'Mapear o que já foi entregue em 2026 (quais obrigações, quais períodos)',
-          'Anotar o passo a passo do fechamento para usar como guia no primeiro mês',
+          'Alinhar com Ananda: escopo exato de encerramentos contábeis que assumirá',
+          'Mapear as análises de contas que estão sob sua responsabilidade: Ativo, Passivo, PL, Resultado',
+          'Entender o cronograma de migração de sistema e como apoiará',
+          'Executar conferências de contas de julho com checklist estruturado',
         ],
         checklist: [
-          'Alinhar com Ananda: o que é esperado do fechamento fiscal mensal',
-          'Estudar o fluxo atual: como entram as NFs, como são classificadas, como são apuradas',
-          'Conhecer as planilhas de classificação — estrutura e lógica de preenchimento',
-          'Mapear obrigações entregues em 2026: quais meses, quais declarações, quais sistemas',
-          'Anotar o passo a passo do fechamento fiscal para uso próprio',
-          'Alinhar com Ananda o que será conferido nas entregas de 2026',
-          '📄 Entregar documento com entendimento inicial do processo até 30/06/2026',
+          'Alinhar com Ananda: o que é "braço direito" na prática — o que decide, o que valida',
+          'Mapear encerramentos contábeis que assumirá e em que mês',
+          'Mapear análises de contas: Ativo, Passivo, PL, Contas de Resultado',
+          'Entender cronograma de migração de sistema e papel de Laísa nesse processo',
+          'Executar conferências de contas de julho',
+          '📄 Entregar mapa de escopo + checklist de conferências até 31/07/2026',
         ],
-        kpis: [
-          'Documento de entendimento do processo entregue até 30/06',
-          'Passo a passo do fechamento escrito pela Laisa e validado por Ananda',
-        ],
-        entregavel: 'Documento de entendimento do processo fiscal — entregue à Ananda até 30/06/2026',
+        kpis: ['Escopo de braço direito mapeado e alinhado', 'Análises de contas mapeadas', 'Conferências de julho executadas'],
+        entregavel: 'Mapa de escopo do novo papel + conferências de julho — até 31/07/2026',
       },
       {
-        periodo: 'F1 · Julho',
-        foco: 'Execução assistida — 1º fechamento fiscal',
-        nota: 'Ela executa, Ananda acompanha. Não é observação — é execução real com suporte disponível. Paralelo: início da conferência das classificações do 1º trimestre de 2026 (jan–mar).',
+        periodo: 'F1 · Agosto',
+        foco: 'Primeiro encerramento contábil solo — Ananda de férias',
+        nota: 'Agosto é o teste real: Ananda está de férias e Laísa faz o fechamento sozinha. Para IS, esse momento é de servir e sustentar o time — é exatamente o que motiva. Ela planeja em julho, executa em agosto, Ananda valida no retorno. Análises de Ativo e Passivo entram aqui.',
         acoes: [
-          'Executar o fechamento fiscal de julho com Ananda acompanhando cada etapa',
-          'Conferir NFs de entrada do período: NCM, CST, CFOP corretos',
-          'Apurar ICMS e PIS/COFINS do mês',
-          'Gerar e transmitir os arquivos fiscais (SPED, EFD)',
-          'Iniciar conferência das planilhas de classificação: janeiro a março/2026',
-          'Registrar dúvidas e ajustes feitos durante o processo',
+          'Executar encerramento contábil de agosto de forma autônoma',
+          'Realizar análise de contas do Ativo: conferir saldos e identificar inconsistências',
+          'Realizar análise de contas do Passivo: conferir saldos e identificar inconsistências',
+          'Registrar tudo para validação de Ananda no retorno',
+          'Executar conferências de contas do mês',
         ],
         checklist: [
-          'Conferir NFs de entrada de julho: NCM, CST, CFOP',
-          'Verificar retenções: ICMS-ST, PIS/COFINS, FUNRURAL quando aplicável',
-          'Apurar ICMS do mês (débito × crédito)',
-          'Apurar PIS/COFINS do mês',
-          'Gerar arquivo SPED Fiscal e validar no PVA',
-          'Transmitir e registrar o recibo de entrega',
-          'Registrar no calendário fiscal: o que foi entregue, data, recibo',
-          'Conferir planilhas de classificação: janeiro/2026',
-          'Conferir planilhas de classificação: fevereiro/2026',
-          'Conferir planilhas de classificação: março/2026',
-          'Registrar inconsistências encontradas nas classificações (jan–mar)',
-          '📄 Entregar relatório do fechamento de julho + status das conferências até 31/07/2026',
+          'Executar encerramento contábil de agosto — de forma autônoma',
+          'Análise de Ativo: conferir saldos, identificar inconsistências',
+          'Análise de Passivo: conferir saldos, identificar inconsistências',
+          'Registrar todas as decisões e dúvidas para validação de Ananda',
+          'Executar conferências de contas de agosto',
+          'Apoio inicial no processo de migração: o que for necessário em agosto',
+          '📄 Entregar encerramento + análises de Ativo/Passivo + registro de dúvidas até 31/08/2026',
         ],
-        kpis: [
-          'Fechamento fiscal de julho executado e aprovado por Ananda',
-          'Planilhas jan–mar/2026 conferidas com registro de inconsistências',
-          'Relatório de fechamento entregue até 31/07/2026',
-        ],
-        entregavel: 'Relatório do fechamento fiscal de julho + status das conferências (jan–mar/2026)',
+        kpis: ['Encerramento de agosto realizado solo', 'Análises de Ativo e Passivo entregues', 'Registro completo para validação de Ananda'],
+        entregavel: 'Encerramento de agosto + análises de Ativo/Passivo + registro de dúvidas — até 31/08/2026',
       },
       {
-        periodo: 'F2 · Agosto',
-        foco: 'Execução assistida — 2º fechamento + conferência avança',
-        nota: '⚠️ Ananda estará de férias em agosto — Laisa executa o fechamento com total autonomia. Ananda valida ao retornar das férias. Esse é o primeiro fechamento 100% solo: ela já conhece o fluxo pelo mês anterior. Conferência avança para o 2º trimestre (abr–jun). Reforma Tributária: 2h semanais.',
+        periodo: 'F2 · Setembro',
+        foco: 'Análises de PL + Contas de Resultado',
+        nota: 'Setembro amplia as análises: Patrimônio Líquido e Contas de Resultado entram no escopo. Encerramento contábil agora já tem ritmo. Laísa começa a ter visão completa do balanço.',
         acoes: [
-          'Executar o fechamento fiscal de agosto com supervisão mais distante',
-          'Identificar se os ajustes do mês anterior foram mantidos corretamente',
-          'Conferir planilhas de classificação: abril a junho/2026',
-          'Iniciar estudo da Reforma Tributária (IBS/CBS) — 2h semanais',
-          'Pesquisar legislação para fundamentar correções identificadas nas classificações',
+          'Executar encerramento contábil de setembro com autonomia',
+          'Realizar análise de PL: verificar movimentações e consistência',
+          'Realizar análise de Contas de Resultado: receitas, custos, despesas',
+          'Executar conferências de contas',
+          'Apoiar migração de sistema conforme cronograma',
         ],
         checklist: [
-          'Conferir NFs de entrada de agosto: NCM, CST, CFOP',
-          'Verificar retenções do mês',
-          'Apurar ICMS de agosto',
-          'Apurar PIS/COFINS de agosto',
-          'Gerar, validar e transmitir SPED Fiscal de agosto',
-          'Registrar no calendário fiscal',
-          'Conferir planilhas de classificação: abril/2026',
-          'Conferir planilhas de classificação: maio/2026',
-          'Conferir planilhas de classificação: junho/2026',
-          'Registrar inconsistências (abr–jun) com referência legislativa',
-          'Iniciar estudo Reforma Tributária: IBS/CBS fundamentos',
-          '📄 Entregar relatório do fechamento de agosto + conferências abr–jun até 31/08/2026',
+          'Executar encerramento contábil de setembro',
+          'Análise de PL: movimentações, reservas, lucro/prejuízo do período',
+          'Análise de Contas de Resultado: receitas vs. despesas, consistência',
+          'Executar conferências de contas de setembro',
+          'Apoio à migração: etapa de setembro conforme cronograma',
+          '📄 Entregar encerramento + análises de PL e Resultado até 30/09/2026',
         ],
-        kpis: [
-          'Fechamento fiscal de agosto executado e aprovado por Ananda',
-          'Planilhas abr–jun/2026 conferidas com fundamentação legislativa',
-          'Estudo da Reforma Tributária iniciado (min. 8h no mês)',
-          'Relatório entregue até 31/08/2026',
-        ],
-        entregavel: 'Relatório do fechamento fiscal de agosto + conferências (abr–jun/2026)',
+        kpis: ['Encerramento de setembro autônomo', 'Análises de PL e Resultado entregues', 'Migração apoiada'],
+        entregavel: 'Encerramento de setembro + análises de PL e Contas de Resultado — até 30/09/2026',
       },
       {
-        periodo: 'F3 · Setembro',
-        foco: 'Execução assistida — 3º fechamento + revisão de 2026 concluída',
-        nota: 'Terceiro fechamento — ela já domina o fluxo. Ananda valida ao final, não durante. Conferência das entregas de 2026 concluída (jul–set). Resultado: mapa completo de consistência das classificações do ano.',
+        periodo: 'F3 · Outubro',
+        foco: 'Visão completa do balanço + migração em andamento',
+        nota: 'Outubro: Laísa tem visão de todo o balanço — Ativo, Passivo, PL e Resultado. Encerramento e conferências são rotina. A migração de sistema ganha mais peso e ela é referência técnica nesse processo.',
         acoes: [
-          'Executar o fechamento fiscal de setembro com autonomia — Ananda valida ao final',
-          'Conferir planilhas de classificação: julho a setembro/2026',
-          'Consolidar mapa de consistência de todas as classificações de 2026 (jan–set)',
-          'Documentar padrão de erros encontrados e sugerir correção sistêmica',
-          'Avançar estudo Reforma Tributária: aplicação prática no grupo',
+          'Executar encerramento contábil de outubro com autonomia',
+          'Análise completa de contas: Ativo, Passivo, PL e Resultado integrados',
+          'Apoiar migração de sistema: papel ativo conforme cronograma',
+          'Executar conferências de contas',
         ],
         checklist: [
-          'Conferir NFs de entrada de setembro: NCM, CST, CFOP',
-          'Verificar retenções do mês',
-          'Apurar ICMS de setembro',
-          'Apurar PIS/COFINS de setembro',
-          'Gerar, validar e transmitir SPED Fiscal de setembro',
-          'Registrar no calendário fiscal',
-          'Conferir planilhas de classificação: julho/2026',
-          'Conferir planilhas de classificação: agosto/2026',
-          'Conferir planilhas de classificação: setembro/2026',
-          'Consolidar mapa de consistência: jan–set/2026 (o que estava certo, erros, correções)',
-          'Documentar padrão de erros encontrados com sugestão de correção',
-          '📄 Entregar relatório do fechamento de setembro + mapa completo de 2026 até 30/09/2026',
+          'Executar encerramento contábil de outubro',
+          'Análise integrada: Ativo, Passivo, PL e Resultado — identificar inconsistências',
+          'Apoio ativo à migração de sistema: etapa de outubro',
+          'Executar conferências de contas de outubro',
+          '📄 Entregar encerramento + análise integrada + status da migração até 31/10/2026',
         ],
-        kpis: [
-          'Fechamento fiscal de setembro executado e aprovado por Ananda',
-          'Mapa de consistência jan–set/2026 entregue e validado',
-          'Padrão de erros documentado com sugestão de correção sistêmica',
-          'Relatório entregue até 30/09/2026',
-        ],
-        entregavel: 'Relatório do fechamento de setembro + mapa de consistência das classificações 2026 (jan–set)',
+        kpis: ['Análise completa do balanço entregue', 'Migração apoiada conforme cronograma', 'Encerramento autônomo'],
+        entregavel: 'Encerramento + análise integrada do balanço + status da migração — até 31/10/2026',
       },
       {
-        periodo: 'F4 · Outubro',
-        foco: 'Domínio — fechamento autônomo + apresentação das informações',
-        nota: 'Virada de fase: ela passa a ser a responsável pelo fechamento e por levar as informações fiscais a Ananda. Não espera ser chamada — traz o relatório. Primeiro exercício real de protagonismo fiscal.',
+        periodo: 'F4 · Novembro',
+        foco: 'Braço direito consolidado + apresentação de resultados',
+        nota: 'Novembro é o marco de consolidação. Laísa apresenta o ciclo: encerramentos realizados, análises entregues, migração apoiada. Para IS, apresentar o que contribuiu para o time é o reconhecimento mais significativo.',
         acoes: [
-          'Executar o fechamento fiscal de outubro com total autonomia',
-          'Preparar e apresentar o relatório de fechamento para Ananda (não apenas entregar — apresentar)',
-          'Aprofundar obrigações acessórias: calendário fiscal completo, vencimentos, transmissão',
-          'Pesquisa normativa: fundamentar classificações fiscais consultando SPED e Portal RFB',
-          'Conferir classificações de out/2026 e registrar no mapa contínuo',
+          'Executar encerramento contábil de novembro',
+          'Análise completa de contas do mês',
+          'Preparar apresentação: ciclo de encerramentos + análises + migração',
+          'Apresentar resultados para Ananda',
         ],
         checklist: [
-          'Executar fechamento fiscal de outubro com autonomia total',
-          'Preparar apresentação do relatório de fechamento para Ananda',
-          'Apresentar o relatório — trazer as informações, não esperar ser perguntada',
-          'Mapear calendário fiscal completo: vencimentos de novembro e dezembro',
-          'Pesquisar legislação: fundamentar 3 classificações questionadas no mapa de consistência',
-          'Conferir classificações de outubro/2026',
-          'Atualizar mapa de consistência: out/2026',
-          '📄 Entregar relatório do fechamento de outubro + apresentação até 31/10/2026',
+          'Executar encerramento contábil de novembro',
+          'Análise completa de contas de novembro',
+          'Preparar apresentação: trajetória jul–nov, análises realizadas, migração',
+          'Apresentar para Ananda: contribuição do ciclo',
+          'Apoio à migração: etapa de novembro',
+          '📄 Entregar apresentação de resultados até 30/11/2026',
         ],
-        kpis: [
-          'Fechamento fiscal de outubro executado sem supervisão',
-          'Apresentação do relatório feita por Laisa (não entregue — apresentada)',
-          'Calendário fiscal de nov–dez mapeado',
-          'Relatório entregue até 31/10/2026',
-        ],
-        entregavel: 'Relatório do fechamento de outubro apresentado por Laisa à Ananda — até 31/10/2026',
+        kpis: ['Encerramento de novembro autônomo', 'Apresentação realizada', 'Migração na etapa correta'],
+        entregavel: 'Apresentação do ciclo (encerramentos + análises + migração) — até 30/11/2026',
       },
       {
-        periodo: 'F5 · Novembro',
-        foco: 'Domínio + Manual de Fechamento Fiscal',
-        nota: 'Ela fecha, apresenta e agora documenta. O Manual de Fechamento Fiscal escrito por ela será o material de referência da equipe — e o primeiro produto que ela vai deixar como legado técnico. Reforma Tributária: módulo de aplicação prática.',
+        periodo: 'F5 · Dezembro',
+        foco: 'Avaliação + PDI 2027 como braço direito',
+        nota: 'Dezembro: avaliação do ciclo completo. PDI 2027 aprofunda a posição de braço direito — IRPJ/CSLL, obrigações acessórias mais complexas, ou desenvolvimento para supervisão técnica da equipe.',
         acoes: [
-          'Executar o fechamento fiscal de novembro com autonomia e apresentar à Ananda',
-          'Redigir o Manual de Fechamento Fiscal v1.0 (passo a passo completo)',
-          'Incluir no manual: NCM/CST/CFOP, apuração de ICMS, PIS/COFINS, SPED, calendário',
-          'Avançar Reforma Tributária: como IBS/CBS impactará o grupo a partir de 2027',
-          'Conferir classificações de novembro e atualizar mapa',
+          'Executar encerramento contábil de dezembro',
+          'Receber avaliação de desempenho de Ananda',
+          'Apresentar Antes x Depois do ciclo',
+          'Definir PDI 2027: próximo passo como braço direito',
         ],
         checklist: [
-          'Executar fechamento fiscal de novembro com autonomia total',
-          'Apresentar relatório de fechamento à Ananda',
-          'Redigir Manual de Fechamento Fiscal v1.0 — seção: fluxo de NFs de entrada',
-          'Redigir Manual — seção: classificação fiscal (NCM, CST, CFOP)',
-          'Redigir Manual — seção: apuração de ICMS',
-          'Redigir Manual — seção: apuração de PIS/COFINS',
-          'Redigir Manual — seção: geração e transmissão do SPED Fiscal',
-          'Redigir Manual — seção: calendário fiscal e registro de entregas',
-          'Validar Manual com Ananda antes de finalizar',
-          'Estudo Reforma Tributária: impacto prático no Grupo Paraná a partir de 2027',
-          'Conferir classificações de novembro e atualizar mapa de consistência',
-          '📄 Entregar Manual v1.0 + relatório de novembro até 30/11/2026',
+          'Executar encerramento contábil de dezembro',
+          'Análise completa de contas de dezembro',
+          'Receber avaliação de desempenho de Ananda',
+          'Preparar e apresentar Antes x Depois: jul→dez',
+          'Definir PDI 2027 com Ananda: supervisão técnica, IRPJ/CSLL ou obrigações complexas',
+          '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
         ],
-        kpis: [
-          'Fechamento de novembro executado e apresentado autonomamente',
-          'Manual de Fechamento Fiscal v1.0 aprovado por Ananda',
-          'Mapa de consistência atualizado jan–nov/2026',
-          'Relatório entregue até 30/11/2026',
-        ],
-        entregavel: 'Manual de Fechamento Fiscal v1.0 + relatório do fechamento de novembro — até 30/11/2026',
+        kpis: ['Avaliação recebida', 'PDI 2027 definido como braço direito', 'Ciclo encerrado com excelência'],
+        entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
       },
-      {
-        periodo: 'F6 · Dezembro',
-        foco: 'Encerramento do ciclo — avaliação, CRC e PDI 2027',
-        nota: 'Encerramento formal do ciclo 2026. Ela fecha dezembro, apresenta os resultados do ano e recebe avaliação de desempenho com feedback sincero (que ela pediu explicitamente). Formatura e CRC como marcos oficiais.',
-        acoes: [
-          'Executar e apresentar o fechamento fiscal de dezembro com autonomia total',
-          'Consolidar mapa de consistência das classificações de 2026 (jan–dez)',
-          'Receber avaliação de desempenho de Ananda com feedback sincero e estruturado',
-          'Apresentar relatório Antes × Depois do ano: o que chegou sabendo, o que domina agora',
-          'Definir PDI 2027 com trilha para coordenação/liderança',
-          'Formatura e encaminhamento do CRC como meta oficial validada',
-        ],
-        checklist: [
-          'Executar e apresentar fechamento fiscal de dezembro com autonomia total',
-          'Consolidar mapa de consistência jan–dez/2026 — versão final',
-          'Preparar apresentação Antes × Depois do ano (o que evoluiu)',
-          'Receber avaliação de desempenho com feedback sincero de Ananda',
-          'Definir PDI 2027: trilha para coordenação/liderança — habilidades, metas, prazos',
-          'Confirmar formatura e iniciar processo de registro no CRC',
-          '📄 Entregar relatório final de dezembro + apresentação Antes × Depois até 31/12/2026',
-        ],
-        kpis: [
-          'Fechamento de dezembro executado e apresentado autonomamente',
-          'Mapa de consistência 2026 completo (jan–dez) entregue',
-          'PDI 2027 com trilha de liderança definido e documentado',
-          'CRC encaminhado ou em processo',
-          'Relatório final entregue até 31/12/2026',
-        ],
-        entregavel: 'Relatório final de dezembro + apresentação Antes × Depois 2026 + PDI 2027 — até 31/12/2026',
-      },
-    ],
-  },
-];
-
-
-// ══════════════════════════════════════════════════════
-//  ABA MEU PLANO — Plano de liderança da Ananda
-// ══════════════════════════════════════════════════════
-
-const planoLideranca = {
-  perfil: {
-    disc: 'IC — Influenciadora-Cautelosa',
-    natural: { I: 81, C: 77, D: 42, S: 39 },
-    adaptativo: { C: 88, I: 25, D: 49, S: 17 },
-    alerta: 'Seu I cai de 81 → 25 no adaptativo. Sob pressão, você pode parecer fria ou distante para a equipe, mesmo sentindo o contrário por dentro. Este é o ponto de atenção mais importante da sua liderança.',
-    forcas: ['Comunicadora natural e inspiradora', 'Alta exigência com qualidade técnica', 'Capacidade analítica apurada', 'Empatia genuína com a equipe'],
-    desenvolver: ['Manter a expressividade do I natural mesmo sob pressão', 'Calibrar paciência com os perfis S altos (Karen, Karolyne, Laisa)', 'Estruturar feedback regular — a equipe toda pediu isso', 'Delegar com confiança, resistindo ao C adaptativo que quer controlar'],
-  },
-
-  timeEspera: [
-    { nome: 'Karolyne', espera: 'Gentileza, paciência, tratar como igual, respeitar dificuldades.' },
-    { nome: 'Ana Beatriz', espera: 'Apoio, direcionamento claro e feedbacks transparentes.' },
-    { nome: 'Mayggla', espera: 'Liderança transparente, tranquila, comunicação e companheirismo.' },
-    { nome: 'Thais', espera: 'Parceria e paciência.' },
-    { nome: 'Karen', espera: 'Comunicação clara, escuta ativa, empatia e reconhecimento.' },
-    { nome: 'Laisa', espera: 'Comunicação transparente e feedbacks sinceros.' },
-  ],
-
-  comoAgir: [
-    {
-      id: 0, nome: 'Karolyne', disc: 'DC', cargo: 'Analista Fiscal',
-      resumo: 'Alta exigência, independente, energia 1/5 para desenvolvimento. Já entrega no topo — não precisa de pressão, precisa de espaço.',
-      sim: [
-        'Autonomia total no VT Paraná — é onde ela brilha',
-        'Reconhecimento preciso pela entrega, não pelo esforço genérico',
-        'Desafios pontuais que ela escolhe aceitar (nunca impostos)',
-        '1:1 mensal objetivo: resultados, dificuldades, próximos passos',
-      ],
-      nao: [
-        'Cobrar participação em treinamentos além da carga atual',
-        'Microgerir ou questionar o método dela',
-        'Pressionar por desenvolvimento quando a energia não está disponível',
-        'Comparar com outras colaboradoras',
-      ],
-      frequencia: '1:1 mensal · Contato direto só se houver problema urgente',
-      alerta: 'Ela está em 1/5 de energia para desenvolvimento. Qualquer PDI precisa ser leve, integrado à rotina e com prazo flexível.',
-    },
-    {
-      id: 1, nome: 'Ana Beatriz', disc: 'SC', cargo: 'Analista Contábil',
-      resumo: 'Metódica, prefere muito o individual, não conseguir resolver sozinha é o que mais drena. Precisa de autonomia construída com segurança.',
-      sim: [
-        'Processos documentados e diretrizes claras antes de delegar',
-        'Tempo para analisar antes de responder — nunca pressione por resposta imediata',
-        'Feedbacks escritos + orais: o escrito dá segurança para ela processar',
-        'Criar protocolo de resolução: "tente, consulte material, depois venha até mim"',
-        '1:1 quinzenal com pauta definida com antecedência',
-      ],
-      nao: [
-        'Dar feedback vago ou apenas verbal em reunião de grupo',
-        'Cobrar posicionamento imediato em reuniões',
-        'Centralizar resoluções — isso alimenta a dependência que ela quer superar',
-      ],
-      frequencia: '1:1 quinzenal · Resposta em até 24h para dúvidas técnicas (não imediata)',
-      alerta: 'Ela disse que o que a drena é não resolver sozinha. O melhor presente que você pode dar é um ambiente que a force (com segurança) a tentar primeiro.',
-    },
-    {
-      id: 2, nome: 'Mayggla', disc: 'IS', cargo: 'Auxiliar Fiscal',
-      resumo: 'Sente que usa 2/5 do potencial. Quer ser designada para algo importante. Reconhecimento público tem peso enorme para ela.',
-      sim: [
-        'Designar para uma tarefa relevante e anunciar para a equipe o motivo',
-        'Reconhecer publicamente cada avanço — "Mayggla foi responsável por isso"',
-        'Check-in quinzenal sobre o progresso: ela precisa sentir que está evoluindo',
-        'Abrir espaço para que ela proponha como quer crescer',
-      ],
-      nao: [
-        'Mantê-la no mesmo ciclo sem novidade ou responsabilidade crescente',
-        'Dar feedback só em situações de erro',
-        'Ignorar que ela sente subutilização — isso vira desmotivação silenciosa',
-      ],
-      frequencia: '1:1 quinzenal · Reconhecimento semanal quando merecido (informal está ok)',
-      alerta: 'A falta de constância travou aprendizados anteriores. Ajude-a a criar rituais pequenos e consistentes — não metas grandes que abandonam.',
-    },
-    {
-      id: 3, nome: 'Thais', disc: 'DI', cargo: 'Auxiliar Fiscal',
-      resumo: 'Energia altíssima, se sente realizada todos os dias, quer crescer. Maior desafio técnico: gerar NF. Precisa de parceria, não só de chefia.',
-      sim: [
-        'Resolver o gargalo de gerar NF rapidamente — isso desbloqueia a confiança dela',
-        'Desafios progressivos: cada mês uma responsabilidade nova',
-        'Postura de parceria nas conversas — "o que você acha que deveríamos fazer?"',
-        'Conectar cada tarefa ao impacto no resultado — ela é motivada por resultado',
-      ],
-      nao: [
-        'Limitar a tarefas repetitivas sem perspectiva de crescimento',
-        'Ignorar o entusiasmo — ela percebe quando não é reconhecida',
-        'Deixar o gargalo da NF sem solução: trava o PDI inteiro dela',
-      ],
-      frequencia: '1:1 mensal · Contato direto para celebrar conquistas quando acontecerem',
-      alerta: 'Ela admira quem domina todas as áreas. Seja esse modelo — mostre o caminho com exemplos concretos do que você já dominou.',
-    },
-    {
-      id: 4, nome: 'Karen', disc: 'SI', cargo: 'Auxiliar Contábil/Fiscal',
-      resumo: 'Maior insegurança: não estar atendendo as expectativas. Pediu feedback explicitamente. Comunicação em público a inibe (2/5 para opinar).',
-      sim: [
-        'Feedback estruturado a cada 15 dias: o que foi bom, o que melhorar, como melhorar',
-        'Critérios claros de desempenho por escrito — ela precisa saber onde está a régua',
-        'Reconhecer pequenas conquistas imediatamente quando acontecem',
-        'Conversar em particular, nunca expor dificuldades para a equipe',
-        'Incluir no processo de feedback o que ela acha do próprio desempenho',
-      ],
-      nao: [
-        'Dar feedback só quando há problema',
-        'Deixar semanas sem sinal de como ela está indo',
-        'Cobrar em reunião de equipe',
-        'Assumir que ela está bem porque não reclama',
-      ],
-      frequencia: '1:1 QUINZENAL OBRIGATÓRIO · Nunca saltar esta reunião com Karen',
-      alerta: 'Ela respondeu este formulário com 3/5 de conforto — a mais baixa da equipe. Crie segurança psicológica antes de cobrar resultado.',
-    },
-    {
-      id: 5, nome: 'Laisa', disc: 'SC', cargo: 'Analista Fiscal',
-      resumo: 'Energia 5/5, aspiração clara de liderança em 5 anos, formatura e CRC em 2026. Maior retorno de investimento da equipe.',
-      sim: [
-        'Desafios que vão além do cargo atual — ela aguenta e quer mais',
-        'Incluí-la em conversas de coordenação e decisões de processo',
-        'Investir ativamente na formatura e no CRC como meta oficial do PDI',
-        'Feedbacks sinceros sobre o caminho para liderança: o que falta, o que ela já tem',
-        'Ser mentora ativa — não só gestora',
-      ],
-      nao: [
-        'Manter só na rotina operacional',
-        'Dar feedbacks genéricos — ela pediu feedbacks sinceros',
-        'Subestimar a ambição: 5 anos para coordenação é realista se bem investido',
-      ],
-      frequencia: '1:1 quinzenal · Mentorar ativamente para liderança — ela está pronta para isso',
-      alerta: 'Ela disse que está muito feliz de ter entrado para o grupo. Não desperdice essa energia inicial — canalize rapidamente para desafios reais.',
-    },
-  ],
-
-  planoMeses: [
-    {
-      periodo: 'Julho 2026', cor: '#7C3AED',
-      foco: 'Realizar os 6 primeiros 1:1 e estabelecer cadência',
-      acoes: [
-        'Concluir o 1:1 com todas as 6 colaboradoras usando os relatórios PDF',
-        'Definir cadência de reuniões: quinzenal (Ana, Mayggla, Karen, Laisa) e mensal (Karolyne, Thais)',
-        'Criar critérios de desempenho claros para Karen por escrito',
-        'Designar Mayggla para primeira responsabilidade relevante',
-        'Resolver gargalo de geração de NF com Thais',
-      ],
-    },
-    {
-      periodo: 'Agosto 2026', cor: '#1565C0',
-      foco: 'Capacitação em bloco + mentoria estruturada',
-      acoes: [
-        'Organizar capacitação coletiva sobre Reforma Tributária (IBS/CBS)',
-        'Iniciar mentoria semanal: Karolyne/Ana → Mayggla/Thais/Karen',
-        'Primeiro feedback estruturado com Karen (15 dias após o 1:1)',
-        'Acompanhar primeiras ações do PDI de cada colaboradora',
-        'Trabalhar conscientemente o I adaptativo: manter calor mesmo sob pressão',
-      ],
-    },
-    {
-      periodo: 'Setembro 2026', cor: '#1B5E20',
-      foco: 'Avaliação de progresso e ajuste de rota',
-      acoes: [
-        'Avaliar progresso de cada PDI com as colaboradoras (não sozinha)',
-        'Celebrar conquistas do trimestre — publicamente para Mayggla e Thais',
-        'Revisar critérios de Karen: ela progrediu? O que ajustar?',
-        'Checar carga de Karolyne: precisa de ajuste ou está em equilíbrio?',
-        'Definir desafio de liderança para Laisa no próximo trimestre',
-        'Avaliar seu próprio desenvolvimento: consegui manter o I? Como estou no feedback?',
-      ],
-    },
-  ],
-};
-
-function renderMeuPlano() {
-  const el = document.getElementById('meu-plano-content');
-  const cor = '#9333EA';
-  const corL = '#F3E8FF';
-
-  // Perfil
-  let html = `
-  <div style="border-left:4px solid ${cor};background:${corL};border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:20px;">
-    <div style="font-size:16px;font-weight:700;color:${cor};margin-bottom:4px;">Ananda · DISC ${planoLideranca.perfil.disc}</div>
-    <div style="font-size:12px;color:var(--cinza-500);">Natural: I=${planoLideranca.perfil.natural.I} · C=${planoLideranca.perfil.natural.C} · D=${planoLideranca.perfil.natural.D} · S=${planoLideranca.perfil.natural.S}
-    &nbsp;|&nbsp; Adaptativo: C=${planoLideranca.perfil.adaptativo.C} · I=${planoLideranca.perfil.adaptativo.I} · D=${planoLideranca.perfil.adaptativo.D} · S=${planoLideranca.perfil.adaptativo.S}</div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
-    <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);">
-      <div style="font-size:11px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">💪 Suas Forças como Líder</div>
-      ${planoLideranca.perfil.forcas.map(f => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:6px;display:flex;gap:6px;"><span style="color:${cor};">✓</span>${f}</div>`).join('')}
-    </div>
-    <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);">
-      <div style="font-size:11px;font-weight:700;color:#C62828;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">🎯 O que Desenvolver</div>
-      ${planoLideranca.perfil.desenvolver.map(d => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:6px;display:flex;gap:6px;"><span style="color:#C62828;">→</span>${d}</div>`).join('')}
-    </div>
-  </div>
-
-  <div style="background:#FEF3C7;border:1.5px solid #F59E0B;border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
-    <span style="font-size:20px;flex-shrink:0;">⚠️</span>
-    <div style="font-size:13px;color:#92400E;line-height:1.6;">${planoLideranca.perfil.alerta}</div>
-  </div>
-
-  <!-- O que a equipe espera -->
-  <div style="background:#fff;border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:20px;">
-    <div style="font-size:12px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">💬 O que cada uma espera de mim como líder</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;">
-      ${planoLideranca.timeEspera.map(t => {
-        const c = colaboradoras.find(x => x.nome.startsWith(t.nome.split(' ')[0]));
-        const cor2 = c ? c.cor : '#666';
-        const corL2 = c ? c.corLight : '#eee';
-        return `<div style="background:${corL2};border-radius:8px;padding:10px 14px;border-left:3px solid ${cor2};">
-          <div style="font-size:11px;font-weight:700;color:${cor2};margin-bottom:4px;">${t.nome}</div>
-          <div style="font-size:12px;color:var(--cinza-600);line-height:1.5;">"${t.espera}"</div>
-        </div>`;
-      }).join('')}
-    </div>
-  </div>
-
-  <!-- Como agir com cada uma -->
-  <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
-    🎯 Como Agir com Cada Uma
-  </div>`;
-
-  planoLideranca.comoAgir.forEach(p => {
-    const c = colaboradoras[p.id];
-    const cor2 = c ? c.cor : '#666';
-    const corL2 = c ? c.corLight : '#f5f5f5';
-    html += `
-    <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:14px;">
-      <div style="background:${cor2};padding:12px 18px;display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <span style="font-size:14px;font-weight:700;color:#fff;">${p.nome}</span>
-          <span style="font-size:11px;color:rgba(255,255,255,.75);margin-left:8px;">${p.cargo} · DISC ${p.disc}</span>
-        </div>
-        <span style="font-size:11px;font-weight:600;background:rgba(255,255,255,.2);color:#fff;padding:3px 10px;border-radius:20px;">${p.frequencia}</span>
-      </div>
-      <div style="padding:14px 18px;">
-        <p style="font-size:12px;color:var(--cinza-500);font-style:italic;margin:0 0 12px;">${p.resumo}</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-          <div>
-            <div style="font-size:10px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">✅ FAÇA</div>
-            ${p.sim.map(s => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:5px;display:flex;gap:6px;line-height:1.4;"><span style="color:#16a34a;flex-shrink:0;">+</span>${s}</div>`).join('')}
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;color:#991B1B;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">❌ EVITE</div>
-            ${p.nao.map(n => `<div style="font-size:12px;color:var(--cinza-600);margin-bottom:5px;display:flex;gap:6px;line-height:1.4;"><span style="color:#dc2626;flex-shrink:0;">−</span>${n}</div>`).join('')}
-          </div>
-        </div>
-        <div style="background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;line-height:1.5;">
-          ⚡ <strong>Atenção:</strong> ${p.alerta}
-        </div>
-      </div>
-    </div>`;
-  });
-
-  // Plano de ação mensal
-  html += `<div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin:20px 0 14px;padding-bottom:6px;border-bottom:2px solid ${corL};">
-    📅 Plano de Ação — Jul a Set 2026
-  </div>`;
-
-  planoLideranca.planoMeses.forEach(m => {
-    html += `<div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1.5px solid var(--cinza-100);margin-bottom:14px;">
-      <div style="background:${m.cor};padding:12px 18px;">
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px;">${m.periodo}</div>
-        <div style="font-size:14px;font-weight:700;color:#fff;margin-top:2px;">${m.foco}</div>
-      </div>
-      <div style="padding:14px 18px;">
-        ${m.acoes.map((a,i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;">
-          <span style="background:${m.cor};color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">${i+1}</span>
-          <span style="font-size:13px;color:var(--cinza-700);line-height:1.5;">${a}</span>
-        </div>`).join('')}
-      </div>
-    </div>`;
-  });
-
-  el.innerHTML = html;
-}
-
-function gerarPdfPlano() {
-  const conteudo = document.getElementById('meu-plano-content').innerHTML;
-  const win = window.open('', '_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8">
-  <title>Plano de Liderança — Ananda</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 24px; color: #333; font-size: 13px; line-height: 1.6; }
-    @media print { body { margin: 16px; } button { display: none; } }
-    * { box-sizing: border-box; }
-    .shadow { box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-    :root {
-      --cinza-100: #f3f4f6; --cinza-200: #e5e7eb; --cinza-400: #9ca3af;
-      --cinza-500: #6b7280; --cinza-600: #4b5563; --cinza-700: #374151;
-      --shadow: 0 1px 4px rgba(0,0,0,.08);
-    }
-  </style>
-  </head><body>
-  <div style="margin-bottom:20px;padding-bottom:12px;border-bottom:3px solid #9333EA;">
-    <div style="font-size:20px;font-weight:700;color:#9333EA;">👩‍💼 Plano de Liderança — Ananda</div>
-    <div style="font-size:12px;color:#666;margin-top:4px;">Grupo Paraná · PDI 2026–2027 · Ciclo Jul–Set 2026</div>
-  </div>
-  ${conteudo}
-  <script>window.onload = function(){ window.print(); }<\/script>
-  </body></html>`);
-  win.document.close();
-}
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
-function getCorColab(id) {
-  const c = colaboradoras[id];
-  return c ? c.cor : '#666';
-}
-function getCorLightColab(id) {
-  const c = colaboradoras[id];
-  return c ? c.corLight : '#eee';
-}
-
-function populateSelect(selectId, placeholder) {
-  const sel = document.getElementById(selectId);
-  if (!sel || sel.options.length > 1) return;
-  dadosFormulario.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d.id;
-    opt.textContent = d.nome + ' — ' + d.cargo;
-    sel.appendChild(opt);
-  });
-}
-
-// ── ABA RESPOSTAS ─────────────────────────────────────────────────────────────
-function renderRespostas() {
-  populateSelect('resp-select');
-  const sel = document.getElementById('resp-select');
-  const container = document.getElementById('resp-content');
-  const idx = sel.value;
-  if (idx === '') { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para ver as respostas.</p>'; return; }
-  const d = dadosFormulario[parseInt(idx)];
-  const cor = getCorColab(d.id);
-  const corL = getCorLightColab(d.id);
-
-  let html = `<div style="border-left:4px solid ${cor};padding:12px 20px;background:${corL};border-radius:0 12px 12px 0;margin-bottom:24px;">
-    <div style="font-size:16px;font-weight:700;color:${cor};">${d.nome}</div>
-    <div style="font-size:13px;color:var(--cinza-500);">${d.cargo}</div>
-  </div>`;
-
-  d.respostas.forEach(cat => {
-    html += `<div style="margin-bottom:20px;">
-      <div style="font-size:13px;font-weight:700;color:${cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid ${corL};">${cat.cat}</div>`;
-    cat.itens.forEach(item => {
-      html += `<div style="margin-bottom:10px;padding:10px 14px;background:#fafafa;border-radius:8px;border:1px solid var(--cinza-100);">
-        <div style="font-size:11px;font-weight:600;color:var(--cinza-400);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">${item.p}</div>
-        <div style="font-size:13px;color:var(--cinza-700);line-height:1.6;">${item.r}</div>
-      </div>`;
-    });
-    html += '</div>';
-  });
-
-  container.innerHTML = html;
-}
-
-// ── ABA 1:1 ──────────────────────────────────────────────────────────────────
-function saveUmaUm(colabId) {
-  const data = {};
-  document.querySelectorAll('[data-um-field]').forEach(function(el) {
-    data[el.dataset.umField] = el.value;
-  });
-  try {
-    localStorage.setItem('um1_notas_' + colabId, JSON.stringify(data));
-  } catch(e) {}
-  // Show saved feedback
-  const btn = document.getElementById('btn-salvar-um');
-  if (btn) { btn.textContent = '✓ Salvo!'; btn.style.background = '#166534'; setTimeout(function(){ btn.textContent = '💾 Salvar anotações'; btn.style.background = '#1E8E3E'; }, 1800); }
-}
-
-function loadUmaUm(colabId) {
-  try {
-    const raw = localStorage.getItem('um1_notas_' + colabId);
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    Object.keys(data).forEach(function(k) {
-      const el = document.querySelector('[data-um-field="'+k+'"]');
-      if (el) el.value = data[k];
-    });
-  } catch(e) {}
-}
-
-function downloadUmaUm(colabId) {
-  const d = dadosFormulario[colabId];
-  let txt = 'ANOTACOES 1:1 - ' + d.nome.toUpperCase() + '\n\n';
-  document.querySelectorAll('[data-um-field]').forEach(function(el) {
-    if (el.value.trim()) {
-      txt += '[ ' + el.dataset.umField + ' ]\n' + el.value.trim() + '\n\n';
-    }
-  });
-  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = '1on1_' + d.nome + '.txt';
-  a.click();
-}
-function renderUmaUm() {
-  populateSelect('um-select');
-  const sel = document.getElementById('um-select');
-  const container = document.getElementById('um-content');
-  const idx = sel.value;
-  if (idx === '') { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para preparar o 1:1.</p>'; return; }
-  const d = dadosFormulario[parseInt(idx)];
-  const r = roteiroData[d.id];
-  const cor = getCorColab(d.id);
-  const corL = getCorLightColab(d.id);
-
-  function sec(icon, title) {
-    return '<div style="font-size:13px;font-weight:700;color:'+cor+';text-transform:uppercase;letter-spacing:.5px;margin:24px 0 12px;padding-bottom:6px;border-bottom:2px solid '+corL+';">'+icon+' '+title+'</div>';
-  }
-  function bulletList(items, bg) {
-    return items.map(function(it){ return '<div style="padding:8px 12px;background:'+bg+';border-radius:7px;font-size:13px;color:#374151;line-height:1.55;margin-bottom:6px;">• '+it+'</div>'; }).join('');
-  }
-
-  // ── HEADER ──
-  let html = '<div style="border-left:4px solid '+cor+';padding:14px 20px;background:'+corL+';border-radius:0 12px 12px 0;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">'
-    + '<div>'
-    + '<div style="font-size:17px;font-weight:700;color:'+cor+';">'+d.nome+'</div>'
-    + '<div style="font-size:13px;color:var(--cinza-500);">'+d.cargo+'</div>'
-    + '</div>'
-    + '<div style="text-align:right;">'
-    + '<div style="font-size:11px;font-weight:700;background:'+cor+';color:#fff;padding:3px 10px;border-radius:10px;margin-bottom:4px;">DISC: '+r.disc+'</div>'
-    + '<div style="font-size:11px;color:var(--cinza-500);">📅 '+r.umAUm+'</div>'
-    + '</div>'
-    + '</div>';
-  html += '<div style="font-size:12px;color:var(--cinza-500);font-style:italic;margin-bottom:20px;">'+r.discDesc+'</div>';
-
-  // ── COMO ABRIR ──
-  html += sec('🚪', 'Como Abrir o 1:1');
-  html += bulletList(r.comoAbrir, '#F8FAFC');
-
-  // ── FAÇA / EVITE ──
-  html += sec('✅❌', 'Faça / Evite');
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;">';
-  html += '<div>';
-  html += '<div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:6px;">✅ FAÇA</div>';
-  r.faca.forEach(function(it){ html += '<div style="padding:7px 10px;background:#F0FDF4;border-radius:7px;font-size:12.5px;color:#374151;line-height:1.5;margin-bottom:5px;">• '+it+'</div>'; });
-  html += '</div><div>';
-  html += '<div style="font-size:11px;font-weight:700;color:#991B1B;margin-bottom:6px;">❌ EVITE</div>';
-  r.evite.forEach(function(it){ html += '<div style="padding:7px 10px;background:#FEF2F2;border-radius:7px;font-size:12.5px;color:#374151;line-height:1.5;margin-bottom:5px;">• '+it+'</div>'; });
-  html += '</div></div>';
-
-  // ── ALERTA ──
-  html += '<div style="background:#FFFBEB;border-left:4px solid #D97706;padding:12px 16px;border-radius:0 8px 8px 0;font-size:13px;color:#92400E;font-style:italic;line-height:1.55;margin-top:20px;">'+r.alerta+'</div>';
-
-  // ── PERGUNTAS COM CAMPO DE ANOTAÇÃO ──
-  html += sec('❓', 'Perguntas para Fazer');
-  d.perguntas1a1.forEach(function(q, i) {
-    html += '<div style="margin-bottom:16px;">'
-      + '<div style="font-size:13px;font-weight:600;color:var(--cinza-700);margin-bottom:6px;">'+(i+1)+'. '+q+'</div>'
-      + '<textarea data-um-field="q_'+i+'" rows="2" placeholder="Anotações..." style="width:100%;padding:9px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>'
-      + '</div>';
-  });
-
-  // ── PRÓXIMOS PASSOS (checklist clicável) ──
-  html += sec('📋', 'Próximos Passos a Combinar');
-  r.proximosPassos.forEach(function(ps, i) {
-    html += '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:#F8FAFC;border-radius:7px;margin-bottom:6px;cursor:pointer;">'
-      + '<input type="checkbox" style="margin-top:2px;accent-color:'+cor+';cursor:pointer;">'
-      + '<span style="font-size:13px;color:#374151;line-height:1.5;">'+ps+'</span>'
-      + '</label>';
-  });
-
-  // ── ANOTAÇÕES LIVRES ──
-  html += sec('📝', 'Anotações da Reunião');
-  html += '<textarea data-um-field="notas" rows="5" placeholder="Pontos levantados, percepções, acordos..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
-
-  // ── COMBINADOS ──
-  html += sec('🤝', 'O Que Foi Combinado');
-  html += '<textarea data-um-field="combinados" rows="4" placeholder="Quem faz o quê e até quando..." style="width:100%;padding:10px 12px;border:1.5px solid var(--cinza-200);border-radius:8px;font-size:13px;color:var(--cinza-700);font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>';
-
-  // ── BOTÕES ──
-  html += '<div style="display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:2px solid var(--cinza-100);">'
-    + '<button id="btn-salvar-um" onclick="saveUmaUm('+d.id+')" style="flex:1;padding:11px 0;background:#1E8E3E;color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s;">💾 Salvar anotações</button>'
-    + '<button onclick="downloadUmaUm('+d.id+')" style="padding:11px 18px;background:var(--azul-50);color:var(--azul-800);border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;">⬇ Baixar .txt</button>'
-    + '</div>';
-
-  container.innerHTML = html;
-  loadUmaUm(d.id);
-}
-
-function printUmaUm() { window.print(); }
-
-// ── ABA PDI ───────────────────────────────────────────────────────────────────
-const statusCiclo = {};
-const checklistState = {};  // 'colabId_phaseIdx_itemIdx' → true/false
-
-function toggleChecklist(colabId, phaseIdx, itemIdx) {
-  const key = colabId + '_' + phaseIdx + '_' + itemIdx;
-  checklistState[key] = !checklistState[key];
-  // Auto-atualizar status da fase com base no progresso do checklist
-  const d = dadosFormulario[colabId];
-  if (d && d.pdi[phaseIdx] && d.pdi[phaseIdx].checklist) {
-    const total = d.pdi[phaseIdx].checklist.length;
-    const done = d.pdi[phaseIdx].checklist.filter((_,i) => checklistState[colabId+'_'+phaseIdx+'_'+i]).length;
-    const phKey = colabId + '_' + phaseIdx;
-    if (done === 0) statusCiclo[phKey] = 'pendente';
-    else if (done < total) statusCiclo[phKey] = 'em-andamento';
-    else statusCiclo[phKey] = 'concluido';
-  }
-  renderPdiView();
-}
-
-function toggleStatus(id, periodoIdx) {
-  const key = id + '_' + periodoIdx;
-  const estados = ['pendente', 'em-andamento', 'concluido'];
-  const atual = statusCiclo[key] || 'pendente';
-  const prox = estados[(estados.indexOf(atual) + 1) % estados.length];
-  statusCiclo[key] = prox;
-  renderPdiView();
-}
-
-// ── ROTEIRO DE 1:1 ──────────────────────────────────────────────────────────
-const roteiroData = [
-  { // 0 - Karolyne
-    disc: 'DC', discDesc: 'Dominância + Conformidade — direta, orientada a resultados e qualidade técnica',
-    umAUm: '26/06/2026 · 14h–15h',
-    comoAbrir: [
-      'Seja direta: "Karol, hoje quero apresentar seu PDI oficial e ouvir o que você precisa de mim."',
-      'Evite longas introduções — ela aprecia ir logo ao ponto.',
-      'Reconheça a entrega técnica que ela já faz antes de falar de desenvolvimento.',
-    ],
-    faca: [
-      'Apresente o PDI com lógica clara: fase → entregável → impacto',
-      'Conecte cada fase ao crescimento de cargo/salário que ela quer',
-      'Pergunte o que ela precisa de suporte técnico (sistemas, materiais)',
-      'Valide que ela entendeu o relatório de 30/06 como a primeira entrega real',
-      'Deixe espaço para questionar e ajustar o que não fizer sentido',
-    ],
-    evite: [
-      'Não rodeie com elogios genéricos — ela não valoriza isso',
-      'Não apresente o PDI como algo que você decidiu por ela: co-construa',
-      'Não ignore as lacunas que ela mesma apontou (Excel, energia baixa)',
-    ],
-    alerta: '⚠️ Energia para desenvolvimento muito baixa (1/5). Mantenha o PDI enxuto e integrado à rotina — não acrescente tarefas além do que está planejado.',
-    proximosPassos: [
-      'Confirmar acesso ao CISSPoder e ao portal de EFDs',
-      'Alinhar formato do relatório de 30/06 (o que deve conter)',
-      'Definir frequência do check-in quinzenal durante a Fase 1 (julho)',
-    ],
-  },
-  { // 1 - Ana Beatriz
-    disc: 'SC', discDesc: 'Estabilidade + Conformidade — reservada, valoriza processos claros e segurança',
-    umAUm: '02/07 · A definir',
-    comoAbrir: [
-      'Comece com reconhecimento genuíno: o que ela faz bem e o que você observa nela.',
-      'Crie um ambiente seguro: "Esse é um espaço sem julgamento — quero entender como você está."',
-      'SC tende a não falar primeiro. Faça perguntas abertas e aguarde a resposta.',
-    ],
-    faca: [
-      'Apresente o PDI com clareza de processo: o que é esperado em cada mês',
-      'Explique o porquê de cada fase antes de pedir comprometimento',
-      'Pergunte como ela prefere receber feedback (escrito? ao vivo?)',
-      'Dê espaço para ela processar — não exija resposta imediata sobre tudo',
-      'Valide que ela sabe a quem recorrer em caso de dúvida técnica',
-    ],
-    evite: [
-      'Não pressione por respostas imediatas sobre mudanças no PDI',
-      'Não compare com outras colaboradoras',
-      'Não abra muitas frentes de desenvolvimento de uma vez — ela precisa de foco',
-    ],
-    alerta: '⚠️ SC tende a concordar sem questionar por medo de desagradar. Encoraje ela a dar opinião real sobre o PDI — isso é sinal de confiança, não de desafio.',
-    proximosPassos: [
-      'Validar o PDI com Ana Beatriz e ajustar o que ela considerar irreal',
-      'Definir um entregável inicial pequeno para ela começar com segurança',
-      'Combinar forma de check-in que ela se sinta confortável',
-    ],
-  },
-  { // 2 - Mayggla
-    disc: 'IS', discDesc: 'Influência + Estabilidade — extrovertida, relacional, aprecia reconhecimento e harmonia',
-    umAUm: '01/07 · A definir',
-    comoAbrir: [
-      'Comece descontraída: ela responde bem a um ambiente caloroso e informal.',
-      '"Mayggla, quero te apresentar o seu PDI — e mais do que apresentar, quero ouvir o que você pensa."',
-      'IS valoriza muito a relação pessoal: mostre que você está ali por ela, não só pelo resultado.',
-    ],
-    faca: [
-      'Apresente o PDI como uma oportunidade de brilhar, não como cobrança',
-      'Conecte as metas ao reconhecimento que ela quer (visibilidade, aprovação)',
-      'Use linguagem positiva e entusiasta — ela abraça o que sente energia',
-      'Peça opinião sincera: IS costuma ter muitas ideias, aproveite',
-      'Reforce o vínculo: "Estou aqui para te apoiar, não apenas cobrar"',
-    ],
-    evite: [
-      'Não seja fria ou muito formal — ela vai se fechar',
-      'Não foque apenas em lacunas sem equilibrar com pontos fortes',
-      'Não deixe a reunião ser monólogo seu — ela precisa falar e sentir que foi ouvida',
-    ],
-    alerta: '⚠️ IS pode comprometer-se com entusiasmo mas ter dificuldade de manter foco. Combine entregas pequenas e frequentes — celebre cada avanço para manter o engajamento.',
-    proximosPassos: [
-      'Ajustar o PDI com base no que Mayggla priorizar na conversa',
-      'Combinar uma entrega inicial pequena que ela possa se orgulhar de cumprir',
-      'Definir como ela quer ser reconhecida ao atingir cada fase',
-    ],
-  },
-  { // 3 - Thais
-    disc: 'DI', discDesc: 'Dominância + Influência — assertiva, rápida, gosta de autonomia e desafios',
-    umAUm: '02/07 · A definir',
-    comoAbrir: [
-      '"Thais, vou direto ao ponto: trouxe seu PDI e quero ouvir sua opinião sobre ele."',
-      'DI aprecia velocidade e autonomia — não prolongue com rituais: vá à substância.',
-      'Deixe claro que o PDI foi pensado para ela crescer, não para limitá-la.',
-    ],
-    faca: [
-      'Apresente o PDI com foco em autonomia e impacto — o que ela vai conquistar',
-      'Dê espaço para ela ajustar e questionar — DI precisa sentir que tem voz',
-      'Conecte as metas ao crescimento de cargo e visibilidade dentro do grupo',
-      'Seja direta sobre o que é esperado — sem ambiguidade',
-      'Valorize iniciativa e proatividade que ela já demonstra',
-    ],
-    evite: [
-      'Não micro-gerencie — ela vai resistir a controle excessivo',
-      'Não apresente o PDI como algo engessado que não pode mudar',
-      'Não prolongue a reunião com muita teoria — vá ao que é prático',
-    ],
-    alerta: '⚠️ DI pode tomar iniciativa além do combinado por impaciência. Alinhe o escopo claramente — o que é dela para decidir e o que precisa de validação sua.',
-    proximosPassos: [
-      'Validar o PDI com Thais e definir o que ela quer ajustar',
-      'Combinar grau de autonomia no acompanhamento — ela prefere menos check-in',
-      'Definir uma meta de impacto que ela possa mostrar ao grupo em breve',
-    ],
-  },
-  { // 4 - Karen
-    disc: 'SI', discDesc: 'Estabilidade + Influência — calorosa, colaborativa, evita conflito, valoriza harmonia',
-    umAUm: '01/07 · A definir',
-    comoAbrir: [
-      'Comece com genuíno interesse pessoal: "Como você está? Como tem sido a rotina?"',
-      '"Karen, estou aqui porque me importo com o seu crescimento — quero que você saia dessa reunião com clareza."',
-      'SI evita conflito — crie um ambiente onde ela se sinta segura para ser honesta.',
-    ],
-    faca: [
-      'Apresente o PDI como apoio, não cobrança',
-      'Pergunte como ela está se sentindo antes de ir ao PDI',
-      'Reforce que ela pode falar o que pensa sem risco de julgamento',
-      'Valorize a colaboração e o cuidado com o time que ela naturalmente demonstra',
-      'Combine próximos passos concretos e pequenos — SI executa melhor com clareza',
-    ],
-    evite: [
-      'Não crie pressão por respostas imediatas',
-      'Não ignore sinais de desconforto — se ela hesitar, pause e pergunte',
-      'Não apresente o PDI com tom de cobrança ou avaliação crítica',
-    ],
-    alerta: '⚠️ SI tende a carregar peso em silêncio. Pergunte diretamente se há algo difícil — ela pode não trazer por conta própria para não parecer queixa.',
-    proximosPassos: [
-      'Validar o PDI com Karen e ajustar conforme o que fizer mais sentido para ela',
-      'Combinar formato de acompanhamento que não gere ansiedade',
-      'Identificar algo que ela já faz bem e conectar ao PDI como ponto de partida',
-    ],
-  },
-  { // 5 - Laisa
-    disc: 'SC', discDesc: 'Estabilidade + Conformidade — metódica, valoriza estrutura, quer crescer tecnicamente',
-    umAUm: '26/06/2026 · 15h–16h',
-    comoAbrir: [
-      '"Laisa, montei um PDI estruturado para você — quero apresentar, ouvir o que você pensa e ajustar o que precisar."',
-      'SC valoriza processo e clareza: apresente o PDI com lógica de fase → entregável → prazo.',
-      'Ela vai querer entender o porquê de cada fase antes de aceitar — isso é positivo.',
-    ],
-    faca: [
-      'Apresente o PDI em ordem cronológica — ela pensa em processos',
-      'Explique que agosto será solo (você estará de férias) e que ela tem capacidade',
-      'Reforce que cada relatório mensal é uma forma de mostrar crescimento técnico',
-      'Pergunte sobre dúvidas técnicas específicas do fechamento fiscal',
-      'Conecte o Manual de Fechamento (novembro) ao legado que ela vai deixar',
-    ],
-    evite: [
-      'Não apresente o PDI de forma vaga — SC precisa de clareza de expectativas',
-      'Não minimize o peso do fechamento solo em agosto: reconheça e prepare',
-      'Não pule a explicação do processo — ela vai sentir que algo ficou solto',
-    ],
-    alerta: '⚠️ Agosto: fechamento SOLO — você estará de férias. Valida ao retornar. Confirme que ela sabe a quem recorrer em caso de dúvida urgente.',
-    proximosPassos: [
-      'Validar que Laisa entendeu o passo a passo do fechamento da Prep (15–30/jun)',
-      'Alinhar o que ela deve fazer se tiver dúvida em agosto (quem recorrer)',
-      'Combinar formato dos relatórios mensais — o que deve conter',
-      'Confirmar acesso aos sistemas necessários antes de julho',
     ],
   },
   {
-    id: 6, nome: 'Murilo', cargo: 'Assistente Administrativo',
+    id: 6, nome: 'Murilo', cargo: 'Assistente Fiscal/Contábil',
     respostas: [],
     perguntas1a1: [],
-    objetivo: 'Em processo de integração — PDI será definido após onboarding.',
-    pdi: [],
+    objetivo: 'Integrar-se ao departamento e dominar os processos de fechamento contábil, lançamentos e análises fiscais — tornando-se um profissional técnico sólido, atualizado com a legislação e autônomo em sua rotina.',
+    pdi: [
+      {
+        periodo: 'F1 · Julho',
+        foco: 'Onboarding: conhecer sistemas, processos e equipe',
+        nota: 'Julho é o mês de entender como o departamento funciona: quem faz o quê, quais sistemas são usados, como é o fluxo de fechamento. Murilo não executa sozinho ainda — observa, pergunta e documenta.',
+        acoes: [
+          'Conhecer cada colaboradora e sua função no departamento',
+          'Mapear os sistemas utilizados: ERP, Protheus, planilhas',
+          'Acompanhar Ananda no fechamento contábil de julho',
+          'Documentar o processo de fechamento conforme aprende',
+        ],
+        checklist: [
+          'Reunião de onboarding com Ananda: estrutura, expectativas e escopo',
+          'Conhecer cada membro da equipe e entender suas funções',
+          'Mapear sistemas utilizados pelo departamento',
+          'Acompanhar Ananda: fechamento contábil de julho (observação)',
+          'Documentar processo de fechamento: passo a passo aprendido',
+          'Acompanhar 1 análise fiscal com Ananda ou Laisa',
+          '📄 Entregar documentação do processo de fechamento até 31/07/2026',
+        ],
+        kpis: ['Processo de fechamento documentado', 'Sistemas mapeados', 'Integração com a equipe realizada'],
+        entregavel: 'Documentação do processo de fechamento contábil — até 31/07/2026',
+      },
+      {
+        periodo: 'F2 · Agosto',
+        foco: 'Fechamentos contábeis com supervisão',
+        nota: 'Agosto: Murilo executa parte do fechamento ao lado de Ananda. Lançamentos básicos sob supervisão. Começa a entender a lógica fiscal da rotina.',
+        acoes: [
+          'Co-executar fechamento contábil de agosto com Ananda',
+          'Executar lançamentos básicos supervisionados',
+          'Pesquisar 1 atualização de legislação relevante para a rotina',
+        ],
+        checklist: [
+          'Co-executar fechamento de agosto com Ananda: lançamentos de depreciação',
+          'Co-executar: provisões do período',
+          'Co-executar: apuração de resultado',
+          'Executar lançamentos básicos supervisionados',
+          'Pesquisar e apresentar 1 atualização de legislação para Ananda',
+          '📄 Entregar log de fechamento + pesquisa de legislação até 31/08/2026',
+        ],
+        kpis: ['Fechamento co-executado', 'Lançamentos básicos realizados', 'Legislação pesquisada'],
+        entregavel: 'Log de fechamento de agosto + pesquisa de legislação — até 31/08/2026',
+      },
+      {
+        periodo: 'F3 · Setembro',
+        foco: 'Lançamentos e análise fiscal básica',
+        nota: 'Setembro: Murilo amplia os lançamentos e começa análises fiscais básicas. Fechamento com mais participação.',
+        acoes: [
+          'Executar lançamentos contábeis com mais autonomia',
+          'Realizar análise fiscal básica de 1 entidade',
+          'Participar do fechamento com responsabilidade maior',
+          'Pesquisar e apresentar atualização de legislação mensal',
+        ],
+        checklist: [
+          'Executar lançamentos de setembro com mais autonomia',
+          'Análise fiscal básica: conferir débitos e créditos de 1 entidade',
+          'Participar do fechamento de setembro com Ananda',
+          'Pesquisar e apresentar 1 atualização de legislação',
+          '📄 Entregar log de lançamentos + análise fiscal até 30/09/2026',
+        ],
+        kpis: ['Lançamentos autônomos crescentes', 'Análise fiscal básica realizada', 'Legislação atualizada'],
+        entregavel: 'Log de lançamentos + análise fiscal de setembro — até 30/09/2026',
+      },
+      {
+        periodo: 'F4 · Outubro',
+        foco: 'Autonomia em fechamentos e lançamentos',
+        nota: 'Outubro: Murilo conduz o fechamento de 1 entidade com Ananda como apoio pontual. Análises fiscais com mais profundidade.',
+        acoes: [
+          'Conduzir fechamento contábil de 1 entidade com autonomia',
+          'Executar lançamentos sem supervisão ativa',
+          'Realizar análise fiscal de 2 entidades',
+          'Pesquisar legislação mensal e apresentar para equipe',
+        ],
+        checklist: [
+          'Conduzir fechamento de 1 entidade — depreciação, provisões, resultado',
+          'Executar lançamentos de outubro com autonomia',
+          'Análise fiscal de 2 entidades: conferir e identificar inconsistências',
+          'Pesquisar e apresentar atualização de legislação',
+          'Registrar consultas a Ananda: o que foi, como resolveu',
+          '📄 Entregar log de fechamento + análises fiscais até 31/10/2026',
+        ],
+        kpis: ['Fechamento de 1 entidade conduzido', 'Lançamentos autônomos', 'Análises fiscais entregues'],
+        entregavel: 'Log de fechamento autônomo + análises fiscais — até 31/10/2026',
+      },
+      {
+        periodo: 'F5 · Novembro',
+        foco: 'Técnico consolidado + legislação em dia',
+        nota: 'Novembro: Murilo já executa a rotina com autonomia. Apresenta o ciclo de aprendizado e propõe rotina de atualização legislativa para 2027.',
+        acoes: [
+          'Executar fechamento e lançamentos de novembro com autonomia',
+          'Preparar apresentação: evolução jul–nov',
+          'Propor rotina de atualização de legislação para 2027',
+        ],
+        checklist: [
+          'Fechamento e lançamentos de novembro — autônomo',
+          'Análises fiscais do mês entregues',
+          'Preparar apresentação: trajetória jul–nov com dados',
+          'Apresentar para Ananda: evolução técnica',
+          'Propor rotina de legislação 2027',
+          '📄 Entregar apresentação + proposta de rotina até 30/11/2026',
+        ],
+        kpis: ['Rotina autônoma consolidada', 'Apresentação realizada', 'Proposta de rotina 2027 entregue'],
+        entregavel: 'Apresentação de evolução + proposta de rotina de legislação — até 30/11/2026',
+      },
+      {
+        periodo: 'F6 · Dezembro',
+        foco: 'Avaliação + PDI 2027',
+        nota: 'Dezembro: avaliação do ciclo de integração. PDI 2027 define o próximo passo — aprofundamento fiscal, IRPJ/CSLL, obrigações acessórias ou análise contábil avançada.',
+        acoes: [
+          'Receber avaliação de desempenho de Ananda',
+          'Apresentar Antes x Depois do ciclo',
+          'Definir PDI 2027: próxima competência técnica',
+        ],
+        checklist: [
+          'Receber avaliação de desempenho',
+          'Preparar e apresentar Antes x Depois: jul→dez',
+          'Definir PDI 2027 com Ananda',
+          'Executar fechamento e lançamentos de dezembro',
+          '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
+        ],
+        kpis: ['Avaliação recebida', 'PDI 2027 definido', 'Integração completa'],
+        entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
+      },
+    ],
   },
   {
     id: 7, nome: 'Indianara', cargo: 'Auxiliar Financeiro',
     respostas: [],
     perguntas1a1: [],
-    objetivo: 'Em processo de integração — assumirá rotinas financeiras (contas a receber, contas a pagar e DDA). PDI será definido após onboarding.',
-    pdi: [],
+    objetivo: 'Assumir com excelência todo o financeiro do Grupo Paraná — contas a pagar, contas a receber, DDA e boletos — tornando-se a referência do departamento nessa área e garantindo comunicação fluida com o setor financeiro.',
+    pdi: [
+      {
+        periodo: 'F1 · Julho',
+        foco: 'Onboarding financeiro: receber o processo de Karen',
+        nota: 'Julho é o mês da passagem de bastão. Karen documenta e repassa tudo; Indianara absorve e começa a executar com supervisão. O objetivo é nenhuma perda de informação na transição.',
+        acoes: [
+          'Receber documentação completa do processo financeiro de Karen',
+          'Conhecer os sistemas utilizados no financeiro',
+          'Executar primeiros lançamentos de contas a pagar e a receber com supervisão',
+          'Conhecer os contatos do setor financeiro e como se comunicar',
+        ],
+        checklist: [
+          'Receber e estudar documentação de contas a pagar (de Karen)',
+          'Receber e estudar documentação de contas a receber (de Karen)',
+          'Receber e estudar documentação de DDA e boletos (de Karen)',
+          'Conhecer sistemas utilizados no financeiro',
+          'Executar primeiros lançamentos de contas a pagar — supervisionados',
+          'Executar primeiros lançamentos de contas a receber — supervisionados',
+          'Conhecer contatos do setor financeiro e como se comunica',
+          '📄 Entregar confirmação de recebimento e entendimento do processo até 31/07/2026',
+        ],
+        kpis: ['Processo financeiro recebido e documentado', 'Primeiros lançamentos realizados', 'Contatos do financeiro mapeados'],
+        entregavel: 'Confirmação de absorção do processo financeiro — até 31/07/2026',
+      },
+      {
+        periodo: 'F2 · Agosto',
+        foco: 'Contas a pagar e receber com autonomia crescente',
+        nota: 'Agosto: Indianara executa o dia a dia do financeiro com Ananda ou Karen disponíveis para dúvidas pontuais. Foco em não deixar nada em aberto.',
+        acoes: [
+          'Executar contas a pagar com autonomia',
+          'Executar contas a receber com autonomia',
+          'Registrar dúvidas e como resolveu',
+          'Manter comunicação com o setor financeiro',
+        ],
+        checklist: [
+          'Executar contas a pagar de agosto — registrar lançamentos',
+          'Executar contas a receber de agosto — registrar lançamentos',
+          'Registrar dúvidas do mês e como resolveu',
+          'Manter contato com setor financeiro sem atrasos',
+          '📄 Entregar log de lançamentos do mês até 31/08/2026',
+        ],
+        kpis: ['Contas a pagar executadas sem atrasos', 'Contas a receber executadas', 'Comunicação com financeiro fluindo'],
+        entregavel: 'Log de lançamentos financeiros de agosto — até 31/08/2026',
+      },
+      {
+        periodo: 'F3 · Setembro',
+        foco: 'DDA e boletos dominados',
+        nota: 'Setembro adiciona DDA e boletos ao escopo autônomo. Indianara passa a ter o financeiro completo sob controle.',
+        acoes: [
+          'Executar DDA com autonomia',
+          'Processar boletos sem supervisão',
+          'Contas a pagar e receber: rotina consolidada',
+          'Atender demandas pontuais do financeiro com agilidade',
+        ],
+        checklist: [
+          'Executar DDA de setembro com autonomia',
+          'Processar boletos de setembro sem supervisão',
+          'Contas a pagar e receber de setembro — sem atrasos',
+          'Registrar dúvidas e como resolveu',
+          'Atender demandas do setor financeiro no prazo',
+          '📄 Entregar log completo do financeiro até 30/09/2026',
+        ],
+        kpis: ['DDA executada com autonomia', 'Boletos processados no prazo', 'Financeiro completo sem supervisão'],
+        entregavel: 'Log completo do financeiro (C/P, C/R, DDA, boletos) — até 30/09/2026',
+      },
+      {
+        periodo: 'F4 · Outubro',
+        foco: 'Financeiro autônomo + comunicação com o setor',
+        nota: 'Outubro: Indianara executa o financeiro completo com total autonomia. Comunicação direta e fluida com o setor financeiro, sem intermediários.',
+        acoes: [
+          'Executar financeiro completo de forma autônoma',
+          'Ser o ponto de contato direto com o setor financeiro',
+          'Propor melhorias de processo se identificar oportunidades',
+        ],
+        checklist: [
+          'Financeiro completo de outubro executado com autonomia',
+          'Comunicação direta com setor financeiro — sem atrasos',
+          'Registrar e propor pelo menos 1 melhoria de processo identificada',
+          '📄 Entregar log do mês + proposta de melhoria até 31/10/2026',
+        ],
+        kpis: ['Financeiro autônomo', 'Comunicação direta com financeiro consolidada', 'Melhoria de processo proposta'],
+        entregavel: 'Log do mês + proposta de melhoria — até 31/10/2026',
+      },
+      {
+        periodo: 'F5 · Novembro',
+        foco: 'Referência no financeiro do departamento',
+        nota: 'Novembro é o marco: Indianara é a referência financeira do departamento. Apresenta a evolução do ciclo para Ananda.',
+        acoes: [
+          'Executar financeiro completo com autonomia e qualidade',
+          'Preparar apresentação: evolução jul–nov',
+          'Apresentar para Ananda: resultados e propostas',
+        ],
+        checklist: [
+          'Financeiro de novembro executado com autonomia',
+          'Preparar apresentação: trajetória jul–nov com dados concretos',
+          'Apresentar para Ananda: evolução e impacto no departamento',
+          '📄 Entregar apresentação de evolução até 30/11/2026',
+        ],
+        kpis: ['Financeiro autônomo e na qualidade', 'Apresentação realizada', 'Posição de referência confirmada'],
+        entregavel: 'Apresentação de evolução do ciclo financeiro — até 30/11/2026',
+      },
+      {
+        periodo: 'F6 · Dezembro',
+        foco: 'Avaliação + PDI 2027',
+        nota: 'Dezembro: avaliação do ciclo de integração. PDI 2027 com próximo desenvolvimento — conciliações, obrigações acessórias ou aprofundamento técnico.',
+        acoes: [
+          'Receber avaliação de desempenho de Ananda',
+          'Apresentar Antes x Depois do ciclo',
+          'Definir PDI 2027',
+        ],
+        checklist: [
+          'Receber avaliação de desempenho',
+          'Preparar e apresentar Antes x Depois: jul→dez',
+          'Definir PDI 2027 com Ananda',
+          'Executar financeiro de dezembro',
+          '📄 Entregar Antes x Depois + PDI 2027 até 31/12/2026',
+        ],
+        kpis: ['Avaliação recebida', 'PDI 2027 definido', 'Integração completa'],
+        entregavel: 'Apresentação Antes x Depois + PDI 2027 — até 31/12/2026',
+      },
+    ],
   },
 ];
 
@@ -5216,6 +4775,183 @@ function renderPdiView() {
 }
 
 // ── Init ──
+
+// ── Helpers de seleção e cor ──
+function getCorColab(id) {
+  const c = colaboradoras.find(function(x){ return x.id === id; });
+  return c ? c.cor : '#6B7280';
+}
+function getCorLightColab(id) {
+  const c = colaboradoras.find(function(x){ return x.id === id; });
+  return c ? c.corLight : '#F3F4F6';
+}
+function populateSelect(selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Selecione uma colaboradora...</option>';
+  dadosFormulario.forEach(function(d) {
+    if (isDesligada(d.id)) return;
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.nome + ' · ' + d.cargo;
+    sel.appendChild(opt);
+  });
+  if (cur !== '') sel.value = cur;
+}
+
+// ── Aba Respostas ──
+function renderRespostas() {
+  populateSelect('resp-select');
+  const sel = document.getElementById('resp-select');
+  const container = document.getElementById('respostas-content');
+  const id = parseInt(sel.value);
+  if (isNaN(id)) { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para ver as respostas.</p>'; return; }
+  const d = dadosFormulario[id];
+  const cor = getCorColab(id);
+  let html = '<div style="display:flex;flex-direction:column;gap:20px;">';
+  (d.respostas || []).forEach(function(cat) {
+    html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:20px;">';
+    html += '<div style="font-weight:700;font-size:15px;color:' + cor + ';margin-bottom:12px;">' + cat.cat + '</div>';
+    html += '<table style="width:100%;border-collapse:collapse;">';
+    cat.itens.forEach(function(item) {
+      html += '<tr style="border-bottom:1px solid var(--cinza-50);">';
+      html += '<td style="padding:8px 12px 8px 0;font-size:13px;color:var(--cinza-500);width:40%;vertical-align:top;">' + item.p + '</td>';
+      html += '<td style="padding:8px 0;font-size:13px;color:var(--azul-900);font-weight:500;">' + item.r + '</td>';
+      html += '</tr>';
+    });
+    html += '</table></div>';
+  });
+  if (d.perguntas1a1 && d.perguntas1a1.length) {
+    html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:20px;">';
+    html += '<div style="font-weight:700;font-size:15px;color:' + cor + ';margin-bottom:12px;">❓ Perguntas sugeridas para o 1:1</div>';
+    d.perguntas1a1.forEach(function(q, i) {
+      html += '<div style="padding:8px 0;border-bottom:1px solid var(--cinza-50);font-size:13px;color:var(--azul-900);">' + (i+1) + '. ' + q + '</div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── Aba 1:1 ──
+function renderUmaUm(keepNotes) {
+  populateSelect('um-select');
+  const sel = document.getElementById('um-select');
+  const container = document.getElementById('um-content');
+  const id = parseInt(sel.value);
+  if (isNaN(id)) { container.innerHTML = '<p style="color:var(--cinza-400);font-size:14px;padding:24px 0;">Selecione uma colaboradora para iniciar o 1:1.</p>'; return; }
+  const d = dadosFormulario[id];
+  const c = colaboradoras.find(function(x){ return x.id === id; });
+  const cor = getCorColab(id);
+  const disc = getDiscData(id);
+
+  const fields = [
+    { key: 'abertura',    label: '🟢 Como ela chegou hoje?',            ph: 'Emoção, energia, como está...' },
+    { key: 'destaque',    label: '⭐ Destaque da quinzena/mês',         ph: 'O que ela tem se orgulhado?' },
+    { key: 'desafio',     label: '🔶 Desafio ou dificuldade',           ph: 'O que está travando ou pesando?' },
+    { key: 'pdi',        label: '📋 Checagem do PDI',                   ph: 'O que avançou, o que não avançou?' },
+    { key: 'suporte',     label: '🤝 O que ela precisa de mim?',        ph: 'Apoio, recurso, decisão...' },
+    { key: 'proximos',    label: '🎯 Próximos passos',                   ph: 'Compromissos até o próximo 1:1' },
+    { key: 'feedback',    label: '💬 Feedback para ela',                ph: 'O que quero dizer, positivo ou a melhorar' },
+    { key: 'observacoes', label: '📝 Observações livres',               ph: 'Qualquer nota importante...' },
+  ];
+
+  let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">';
+
+  // Left: roteiro
+  html += '<div style="display:flex;flex-direction:column;gap:14px;">';
+  html += '<div style="background:' + cor + ';border-radius:12px;padding:16px 20px;color:#fff;">';
+  html += '<div style="font-size:16px;font-weight:700;">' + d.nome + '</div>';
+  html += '<div style="font-size:13px;opacity:0.85;">' + d.cargo + '</div>';
+  if (c && c.umAUm) html += '<div style="font-size:12px;margin-top:6px;opacity:0.8;">📅 ' + c.umAUm + '</div>';
+  if (disc && disc.estilo) html += '<div style="font-size:12px;margin-top:4px;opacity:0.8;">🧠 DISC: ' + disc.estilo + ' · ' + disc.estiloLabel + '</div>';
+  html += '</div>';
+
+  // Perguntas sugeridas
+  if (d.perguntas1a1 && d.perguntas1a1.length) {
+    html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--cinza-100);padding:16px;">';
+    html += '<div style="font-weight:700;font-size:13px;color:' + cor + ';margin-bottom:10px;">❓ Perguntas sugeridas</div>';
+    d.perguntas1a1.forEach(function(q, i) {
+      html += '<div style="padding:6px 0;border-bottom:1px solid var(--cinza-50);font-size:12px;color:var(--azul-900);">' + (i+1) + '. ' + q + '</div>';
+    });
+    html += '</div>';
+  }
+
+  // DISC comunicar
+  if (disc && disc.comunicar) {
+    html += '<div style="background:var(--azul-50);border-radius:12px;padding:14px 16px;">';
+    html += '<div style="font-weight:700;font-size:12px;color:var(--azul-700);margin-bottom:6px;">🧠 Como comunicar com ' + d.nome + '</div>';
+    html += '<div style="font-size:12px;color:var(--azul-900);line-height:1.5;">' + disc.comunicar + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Right: anotações
+  html += '<div style="display:flex;flex-direction:column;gap:12px;">';
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+  html += '<button id="btn-salvar-um" onclick="saveUmaUm(' + id + ')" style="padding:8px 16px;background:#1E8E3E;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">💾 Salvar anotações</button>';
+  html += '<button onclick="downloadUmaUm(' + id + ')" style="padding:8px 16px;background:var(--azul-700);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">⬇ Baixar .txt</button>';
+  html += '</div>';
+  fields.forEach(function(f) {
+    html += '<div style="background:#fff;border-radius:10px;border:1px solid var(--cinza-100);padding:14px;">';
+    html += '<div style="font-size:12px;font-weight:700;color:' + cor + ';margin-bottom:6px;">' + f.label + '</div>';
+    html += '<textarea data-um-field="' + f.key + '" placeholder="' + f.ph + '" rows="3" style="width:100%;border:1px solid var(--cinza-200);border-radius:6px;padding:8px;font-size:13px;resize:vertical;font-family:inherit;box-sizing:border-box;"></textarea>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  container.innerHTML = html;
+  if (!keepNotes) loadUmaUm(id);
+}
+function saveUmaUm(colabId) {
+  const data = {};
+  document.querySelectorAll('[data-um-field]').forEach(function(el) { data[el.dataset.umField] = el.value; });
+  try { localStorage.setItem('um1_notas_' + colabId, JSON.stringify(data)); } catch(e) {}
+  const btn = document.getElementById('btn-salvar-um');
+  if (btn) { btn.textContent = '✓ Salvo!'; btn.style.background = '#166534'; setTimeout(function(){ btn.textContent = '💾 Salvar anotações'; btn.style.background = '#1E8E3E'; }, 1800); }
+}
+function loadUmaUm(colabId) {
+  try {
+    const raw = localStorage.getItem('um1_notas_' + colabId);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.keys(data).forEach(function(k) {
+      const el = document.querySelector('[data-um-field="' + k + '"]');
+      if (el) el.value = data[k];
+    });
+  } catch(e) {}
+}
+function downloadUmaUm(colabId) {
+  const d = dadosFormulario[colabId];
+  const labels = { abertura:'Como ela chegou', destaque:'Destaque', desafio:'Desafio', pdi:'PDI', suporte:'Suporte', proximos:'Próximos passos', feedback:'Feedback', observacoes:'Observações' };
+  let txt = 'ANOTACOES 1:1 - ' + d.nome.toUpperCase() + '
+' + new Date().toLocaleDateString('pt-BR') + '
+
+';
+  document.querySelectorAll('[data-um-field]').forEach(function(el) {
+    if (el.value.trim()) {
+      txt += '[ ' + (labels[el.dataset.umField] || el.dataset.umField) + ' ]
+' + el.value.trim() + '
+
+';
+    }
+  });
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '1on1_' + d.nome + '_' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click();
+}
+function printUmaUm() {
+  window.print();
+}
+
+// ── Aba Estrutura ──
+function renderEstrutura() {
+  // static — nothing to init
+}
+
 try { renderEquipe(); } catch(e) { console.error('renderEquipe:', e); }
 try { updateStatCards(); } catch(e) { console.error('updateStatCards:', e); }
 try { initRadarEquipe(); } catch(e) { console.error('initRadarEquipe:', e); }
