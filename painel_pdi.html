@@ -1208,6 +1208,13 @@ function togglePwdVis() {
 
 <!-- DISC -->
 <div id="view-disc" class="main" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div style="font-size:13px;font-weight:600;color:var(--azul-900);">🧠 Perfis DISC da equipe</div>
+    <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--cinza-600);cursor:pointer;background:var(--cinza-50);padding:6px 12px;border-radius:20px;border:1px solid var(--cinza-200);">
+      <input type="checkbox" id="toggle-desligados-disc" onchange="renderDiscPills();initDiscTeamCharts();renderDiscTable();">
+      Mostrar desligados
+    </label>
+  </div>
   <div class="disc-person-pills" id="disc-pills"></div>
   <div id="disc-individual-section"></div>
 
@@ -1224,7 +1231,7 @@ function togglePwdVis() {
     <table class="disc-team-table">
       <thead>
         <tr>
-          <th>Colaboradora</th>
+          <th>Colaborador(a)</th>
           <th style="text-align:center">D</th>
           <th style="text-align:center">I</th>
           <th style="text-align:center">S</th>
@@ -2030,6 +2037,7 @@ const discEquipe = [
 // ── Charts globais ──
 let radarEquipeChart, radarIndivChart, barIndivChart;
 let discTeamChartObj, valuesTeamChartObj;
+const checklistState = {};
 
 function perfilClass(p) {
   return { lider:'badge-lider', analista:'badge-analista', tecnica:'badge-tecnica', multi:'badge-multi', integra:'badge-integra' }[p] || '';
@@ -2525,9 +2533,10 @@ const discDimColors = {
 
 function renderDiscPills() {
   const container = document.getElementById('disc-pills');
+  const mostrarDeslig = document.getElementById('toggle-desligados-disc') && document.getElementById('toggle-desligados-disc').checked;
   const pessoas = [discLider, ...discEquipe.map((d,i) => ({
     ...d, nome: colaboradoras[d.colabId].nome, iniciais: colaboradoras[d.colabId].iniciais, cor: colaboradoras[d.colabId].cor, corLight: colaboradoras[d.colabId].corLight, _idx: i
-  }))];
+  })).filter(p => mostrarDeslig || !isDesligada(p.colabId))];
 
   container.innerHTML = pessoas.map((p, idx) => {
     const isLider = idx === 0;
@@ -2663,7 +2672,8 @@ function renderDiscIndividual(id) {
 
 function initDiscTeamCharts() {
   // Grouped bar — Natural DISC
-  const pessoas = [discLider, ...discEquipe.filter(d => d.estilo).map((d,i) => ({
+  const mostrarDesligDisc2 = document.getElementById('toggle-desligados-disc') && document.getElementById('toggle-desligados-disc').checked;
+  const pessoas = [discLider, ...discEquipe.filter(d => d.estilo && (mostrarDesligDisc2 || !isDesligada(d.colabId))).map((d,i) => ({
     ...d, nome: colaboradoras[d.colabId].nome, cor: colaboradoras[d.colabId].cor
   }))];
 
@@ -2692,7 +2702,7 @@ function initDiscTeamCharts() {
   });
 
   // Values Index team chart
-  const pessoasComVal = [discLider, ...discEquipe.filter(d => d.valores).map(d => ({
+  const pessoasComVal = [discLider, ...discEquipe.filter(d => d.valores && Object.keys(d.valores).length > 0 && d.estilo && (mostrarDesligDisc2 || !isDesligada(d.colabId))).map(d => ({
     ...d, nome: colaboradoras[d.colabId].nome
   }))];
   const nomesVal = pessoasComVal.map(p => p.nome);
@@ -2725,9 +2735,10 @@ function initDiscTeamCharts() {
 
 function renderDiscTable() {
   const tbody = document.getElementById('disc-table-body');
+  const mostrarDesligTable = document.getElementById('toggle-desligados-disc') && document.getElementById('toggle-desligados-disc').checked;
   const rows = [
     { nome: 'Ananda (Líder)', d: discLider, cor: discLider.cor, corLight: discLider.corLight },
-    ...discEquipe.map(d => ({
+    ...discEquipe.filter(d => mostrarDesligTable || !isDesligada(d.colabId)).map(d => ({
       nome: colaboradoras[d.colabId].nome,
       d,
       cor: colaboradoras[d.colabId].cor,
@@ -3114,6 +3125,7 @@ function showTab(tab) {
   if (tab === 'individual') {
     document.getElementById('tab-individual').style.display = 'inline-block';
   }
+  if (tab === 'equipe') { renderEquipe(); updateStatCards(); }
   if (tab === 'visao-geral') { initRadarEquipe(); initRadarDiscEquipe(); }
   if (tab === 'disc') {
     renderDiscPills();
