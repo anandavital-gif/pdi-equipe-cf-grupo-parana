@@ -1199,9 +1199,18 @@ function togglePwdVis() {
 
   <div class="section-title">Comparativo da equipe — DISC natural</div>
   <div class="chart-card" style="margin-bottom:20px;">
-    <h3>D · I · S · C por colaboradora</h3>
+    <h3>D · I · S · C por colaborador(a) — como a pessoa é no natural (autêntica, sem observação)</h3>
     <div style="position:relative;height:320px;">
       <canvas id="discTeamChart"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Comparativo da equipe — DISC adaptável</div>
+  <div class="chart-card" style="margin-bottom:20px;">
+    <h3>D · I · S · C por colaborador(a) — como a pessoa se comporta sob observação, pressão ou estresse</h3>
+    <p style="font-size:12px;color:var(--cinza-400);margin:-4px 0 14px;">Compare com o gráfico natural acima: quanto maior a diferença entre as barras de uma mesma pessoa nos dois gráficos, maior a tensão entre como ela é de verdade e como ela se sente obrigada a agir no trabalho.</p>
+    <div style="position:relative;height:320px;">
+      <canvas id="discTeamChartAdapt"></canvas>
     </div>
   </div>
 
@@ -2023,7 +2032,7 @@ const discEquipe = [
 
 // ── Charts globais ──
 let radarEquipeChart, radarIndivChart, barIndivChart;
-let discTeamChartObj, valuesTeamChartObj;
+let discTeamChartObj, discTeamChartAdaptObj, valuesTeamChartObj;
 const checklistState = {};
 
 function perfilClass(p) {
@@ -2681,6 +2690,29 @@ function initDiscTeamCharts() {
         { label: 'I · Influente',    data: pessoas.map(p => p.natural.I), backgroundColor: discDimColors.I.bg + 'cc', borderRadius: 4 },
         { label: 'S · Estabilidade', data: pessoas.map(p => p.natural.S), backgroundColor: discDimColors.S.bg + 'cc', borderRadius: 4 },
         { label: 'C · Conformidade', data: pessoas.map(p => p.natural.C), backgroundColor: discDimColors.C.bg + 'cc', borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { stacked: false, ticks: { font: { size: 12 } } },
+        y: { min: 0, max: 100, ticks: { stepSize: 20 } }
+      },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 14, usePointStyle: true } } }
+    }
+  });
+
+  // Grouped bar — Adaptável DISC (mesmo conjunto de pessoas do gráfico natural)
+  if (discTeamChartAdaptObj) discTeamChartAdaptObj.destroy();
+  discTeamChartAdaptObj = new Chart(document.getElementById('discTeamChartAdapt'), {
+    type: 'bar',
+    data: {
+      labels: nomes,
+      datasets: [
+        { label: 'D · Dominante',    data: pessoas.map(p => p.adaptativo.D), backgroundColor: discDimColors.D.bg + 'cc', borderRadius: 4 },
+        { label: 'I · Influente',    data: pessoas.map(p => p.adaptativo.I), backgroundColor: discDimColors.I.bg + 'cc', borderRadius: 4 },
+        { label: 'S · Estabilidade', data: pessoas.map(p => p.adaptativo.S), backgroundColor: discDimColors.S.bg + 'cc', borderRadius: 4 },
+        { label: 'C · Conformidade', data: pessoas.map(p => p.adaptativo.C), backgroundColor: discDimColors.C.bg + 'cc', borderRadius: 4 },
       ]
     },
     options: {
