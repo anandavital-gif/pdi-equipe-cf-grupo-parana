@@ -1755,6 +1755,38 @@ const colaboradoras = [
       ]},
     ]
   },
+  {
+    id: 6,
+    nome: "Murilo",
+    cargo: "Assistente Administrativo",
+    iniciais: "MU",
+    cor: "#0891B2",
+    corLight: "#ECFEFF",
+    perfil: "integração",
+    perfilLabel: "Em integração",
+    status: "em-andamento",
+    umAUm: "A definir",
+    competencias: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
+    comportamental: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
+    motivadores: [],
+    disc: null,
+  },
+  {
+    id: 7,
+    nome: "Indianara",
+    cargo: "Auxiliar Financeiro",
+    iniciais: "IN",
+    cor: "#D97706",
+    corLight: "#FFFBEB",
+    perfil: "integração",
+    perfilLabel: "Em integração",
+    status: "em-andamento",
+    umAUm: "A definir",
+    competencias: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
+    comportamental: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
+    motivadores: [],
+    disc: null,
+  },
 ];
 
 const labelsRadar = ['Técnico fiscal', 'Técnico contábil', 'Obrig. acessórias', 'Tributos', 'Tecnologia', 'Pesquisa'];
@@ -2061,6 +2093,8 @@ const _ls = {
 };
 
 function isDesligada(id) {
+  const c = colaboradoras.find(function(x){ return x.id === id; });
+  if (c && c.desligada) return true;
   return _ls.getItem('desligada_' + id) === '1';
 }
 
@@ -3210,7 +3244,7 @@ const dadosFormulario = [
     ],
   },
   {
-    id: 1, nome: 'Ana Beatriz', cargo: 'Analista Contábil',
+    id: 1, nome: 'Ana Beatriz', cargo: 'Analista Contábil', desligada: true,
     respostas: [
       { cat: 'Perfil e Motivações', itens: [
         { p: 'Trabalho ideal', r: 'Um lugar colaborativo, com aprendizado contínuo, valorização, processos estruturados e equipe alinhada.' },
@@ -3416,7 +3450,7 @@ const dadosFormulario = [
     ],
   },
   {
-    id: 2, nome: 'Mayggla', cargo: 'Auxiliar Fiscal',
+    id: 2, nome: 'Mayggla', cargo: 'Auxiliar Fiscal', desligada: true,
     respostas: [
       { cat: 'Perfil e Motivações', itens: [
         { p: 'Trabalho ideal', r: '"Plante esforço, colha reconhecimento."' },
@@ -5012,6 +5046,20 @@ const roteiroData = [
       'Combinar formato dos relatórios mensais — o que deve conter',
       'Confirmar acesso aos sistemas necessários antes de julho',
     ],
+  },
+  {
+    id: 6, nome: 'Murilo', cargo: 'Assistente Administrativo',
+    respostas: [],
+    perguntas1a1: [],
+    objetivo: 'Em processo de integração — PDI será definido após onboarding.',
+    pdi: [],
+  },
+  {
+    id: 7, nome: 'Indianara', cargo: 'Auxiliar Financeiro',
+    respostas: [],
+    perguntas1a1: [],
+    objetivo: 'Em processo de integração — assumirá rotinas financeiras (contas a receber, contas a pagar e DDA). PDI será definido após onboarding.',
+    pdi: [],
   },
 ];
 
